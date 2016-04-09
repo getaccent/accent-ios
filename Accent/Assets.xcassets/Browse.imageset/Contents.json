@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconmonstr-globe-5 copy.png",
+      "filename" : "iconmonstr-newspaper-3-32.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "iconmonstr-globe-5 copy 2.png",
+      "filename" : "iconmonstr-newspaper-3-64.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "iconmonstr-globe-5.png",
+      "filename" : "iconmonstr-newspaper-3-96.png",
       "scale" : "3x"
     }
   ],

@@ -10,7 +10,9 @@ import UIKit
 
 class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var topBar: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bottomBar: AccentTabBar!
     
     private var articles = [Article]()
     private var articleToSend: Article!
@@ -18,7 +20,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBarHidden = false
+        navigationController?.navigationBarHidden = true
         
         Accent.sharedInstance.retrieveArticles { (articles) in
             guard let articles = articles else {
@@ -32,8 +34,29 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             })
         }
         
+        let tabs = [AccentTab(name: "Home", image: UIImage(named: "Home")!), AccentTab(name: "Browse", image: UIImage(named: "Browse")!)]
+        bottomBar.updateTabs(tabs)
+        
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let topShadowPath = UIBezierPath(rect: topBar.bounds)
+        topBar.layer.masksToBounds = false
+        topBar.layer.shadowColor = UIColor.blackColor().CGColor
+        topBar.layer.shadowOffset = CGSizeMake(0, 1)
+        topBar.layer.shadowOpacity = 0.15
+        topBar.layer.shadowPath = topShadowPath.CGPath
+        
+        let bottomShadowPath = UIBezierPath(rect: bottomBar.bounds)
+        bottomBar.layer.masksToBounds = false
+        bottomBar.layer.shadowColor = UIColor.blackColor().CGColor
+        bottomBar.layer.shadowOffset = CGSizeMake(0, -1)
+        bottomBar.layer.shadowOpacity = 0.15
+        bottomBar.layer.shadowPath = bottomShadowPath.CGPath
     }
     
     @IBAction func quizletButton(sender: UIBarButtonItem) {

@@ -92,24 +92,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w1y-aM-IOp">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Erp-b1-34q">
+                                <rect key="frame" x="0.0" y="64" width="375" height="539"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqh-dc-cYR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Articles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoR-FA-0hc">
+                                        <rect key="frame" x="157" y="32" width="61" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="H7r-8S-I4h"/>
+                                    <constraint firstItem="IoR-FA-0hc" firstAttribute="centerY" secondItem="qqh-dc-cYR" secondAttribute="centerY" constant="10" id="J6g-5P-dYV"/>
+                                    <constraint firstItem="IoR-FA-0hc" firstAttribute="centerX" secondItem="qqh-dc-cYR" secondAttribute="centerX" id="ura-9b-MkY"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phs-bR-sUf" customClass="AccentTabBar" customModule="Accent" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="603" width="375" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="jNB-41-jl1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="w1y-aM-IOp" secondAttribute="bottom" id="Be9-Xv-dvz"/>
-                            <constraint firstItem="w1y-aM-IOp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="EDS-1C-5v9"/>
-                            <constraint firstItem="w1y-aM-IOp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="g4H-0v-Ppb"/>
-                            <constraint firstItem="w1y-aM-IOp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xvw-FS-o59"/>
-                            <constraint firstAttribute="trailing" secondItem="w1y-aM-IOp" secondAttribute="trailing" id="z8U-yP-xcB"/>
+                            <constraint firstItem="Erp-b1-34q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2Im-lu-RG2"/>
+                            <constraint firstItem="qqh-dc-cYR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4eZ-lO-oM8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="phs-bR-sUf" secondAttribute="bottom" id="9r3-ew-hxV"/>
+                            <constraint firstAttribute="trailing" secondItem="phs-bR-sUf" secondAttribute="trailing" id="H8U-ff-vH7"/>
+                            <constraint firstItem="phs-bR-sUf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JW1-6E-MEw"/>
+                            <constraint firstItem="Erp-b1-34q" firstAttribute="top" secondItem="qqh-dc-cYR" secondAttribute="bottom" id="Vdk-Im-vDE"/>
+                            <constraint firstAttribute="trailing" secondItem="Erp-b1-34q" secondAttribute="trailing" id="Vvw-5P-sER"/>
+                            <constraint firstItem="phs-bR-sUf" firstAttribute="top" secondItem="Erp-b1-34q" secondAttribute="bottom" id="YTr-XO-FaO"/>
+                            <constraint firstAttribute="trailing" secondItem="qqh-dc-cYR" secondAttribute="trailing" id="a38-UB-83g"/>
+                            <constraint firstItem="qqh-dc-cYR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bjx-UQ-bjR"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="g4H-0v-Ppb"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Articles" id="Q5q-k3-a5C">
                         <barButtonItem key="leftBarButtonItem" image="Quizlet" id="L7g-JJ-qqB">
@@ -120,7 +144,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="w1y-aM-IOp" id="UIQ-aO-50y"/>
+                        <outlet property="bottomBar" destination="phs-bR-sUf" id="bqT-ZE-nmp"/>
+                        <outlet property="tableView" destination="Erp-b1-34q" id="H1W-T7-h4e"/>
+                        <outlet property="topBar" destination="qqh-dc-cYR" id="W8y-bW-05l"/>
                         <segue destination="EaD-Ei-YQ3" kind="show" identifier="articleSegue" id="vHj-yD-wzU"/>
                     </connections>
                 </viewController>
