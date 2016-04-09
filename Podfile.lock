@@ -1,10 +1,25 @@
 PODS:
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
+  - Digits (2.0.2):
+    - TwitterCore (= 2.0.2)
+  - Fabric (1.6.7)
   - SwiftyJSON (2.3.2)
+  - TwitterCore (2.0.2):
+    - Fabric
 
 DEPENDENCIES:
+  - Crashlytics
+  - Digits
+  - Fabric
   - SwiftyJSON (~> 2.3)
+  - TwitterCore
 
 SPEC CHECKSUMS:
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Digits: a5c8ddfed18d5e0496e9b6f459f0bca44de588db
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  TwitterCore: 0f44d8980a6879d5205dcb4e010d15e643e56fa0
 
 COCOAPODS: 0.39.0
