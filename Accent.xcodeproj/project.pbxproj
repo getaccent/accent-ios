@@ -16,6 +16,9 @@
 		EB037BCF1CB98DED00CDB13E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BCE1CB98DED00CDB13E /* Language.swift */; };
 		EB037BD11CB9A03300CDB13E /* AccentTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BD01CB9A03300CDB13E /* AccentTabBar.swift */; };
 		EB037BD31CB9B09500CDB13E /* AccentTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BD21CB9B09500CDB13E /* AccentTabView.swift */; };
+		EB037BDB1CB9B8A200CDB13E /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BDA1CB9B8A200CDB13E /* ShareViewController.swift */; };
+		EB037BDE1CB9B8A200CDB13E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB037BDC1CB9B8A200CDB13E /* MainInterface.storyboard */; };
+		EB037BE21CB9B8A200CDB13E /* Add to Accent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EB037BD81CB9B8A100CDB13E /* Add to Accent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EB334FAF1CB96434009A3985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB334FAE1CB96434009A3985 /* AppDelegate.swift */; };
 		EB334FB41CB96434009A3985 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB21CB96434009A3985 /* Main.storyboard */; };
 		EB334FB61CB96434009A3985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB51CB96434009A3985 /* Assets.xcassets */; };
@@ -29,6 +32,30 @@
 		EBBA55AA1CB9656C0082642D /* Accent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA55A91CB9656C0082642D /* Accent.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EB037BE01CB9B8A200CDB13E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB334FA31CB96434009A3985 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB037BD71CB9B8A100CDB13E;
+			remoteInfo = "Add to Accent";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EB037BE61CB9B8A200CDB13E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EB037BE21CB9B8A200CDB13E /* Add to Accent.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		041EEF364B27E3387B94BFB5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B040039E3633DC711F645CF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -41,6 +68,10 @@
 		EB037BCE1CB98DED00CDB13E /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		EB037BD01CB9A03300CDB13E /* AccentTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccentTabBar.swift; sourceTree = "<group>"; };
 		EB037BD21CB9B09500CDB13E /* AccentTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccentTabView.swift; sourceTree = "<group>"; };
+		EB037BD81CB9B8A100CDB13E /* Add to Accent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Add to Accent.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB037BDA1CB9B8A200CDB13E /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		EB037BDD1CB9B8A200CDB13E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		EB037BDF1CB9B8A200CDB13E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB334FAB1CB96434009A3985 /* Accent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB334FAE1CB96434009A3985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB334FB31CB96434009A3985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,6 +88,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EB037BD51CB9B8A100CDB13E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB334FA81CB96434009A3985 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,10 +123,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EB037BD91CB9B8A200CDB13E /* Add to Accent */ = {
+			isa = PBXGroup;
+			children = (
+				EB037BDA1CB9B8A200CDB13E /* ShareViewController.swift */,
+				EB037BDC1CB9B8A200CDB13E /* MainInterface.storyboard */,
+				EB037BDF1CB9B8A200CDB13E /* Info.plist */,
+			);
+			path = "Add to Accent";
+			sourceTree = "<group>";
+		};
 		EB334FA21CB96434009A3985 = {
 			isa = PBXGroup;
 			children = (
 				EB334FAD1CB96434009A3985 /* Accent */,
+				EB037BD91CB9B8A200CDB13E /* Add to Accent */,
 				EB334FAC1CB96434009A3985 /* Products */,
 				DAD4ED663E9531F1C53DD4EA /* Pods */,
 				881E50FDB7FD245F4EDA5895 /* Frameworks */,
@@ -99,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				EB334FAB1CB96434009A3985 /* Accent.app */,
+				EB037BD81CB9B8A100CDB13E /* Add to Accent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +199,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EB037BD71CB9B8A100CDB13E /* Add to Accent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB037BE31CB9B8A200CDB13E /* Build configuration list for PBXNativeTarget "Add to Accent" */;
+			buildPhases = (
+				EB037BD41CB9B8A100CDB13E /* Sources */,
+				EB037BD51CB9B8A100CDB13E /* Frameworks */,
+				EB037BD61CB9B8A100CDB13E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Add to Accent";
+			productName = "Add to Accent";
+			productReference = EB037BD81CB9B8A100CDB13E /* Add to Accent.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EB334FAA1CB96434009A3985 /* Accent */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB334FBD1CB96434009A3985 /* Build configuration list for PBXNativeTarget "Accent" */;
@@ -160,10 +227,12 @@
 				5246495F718E3BD29039E2CF /* Embed Pods Frameworks */,
 				F8B897C6E88FC88117661C87 /* Copy Pods Resources */,
 				EB037BC91CB976FF00CDB13E /* ShellScript */,
+				EB037BE61CB9B8A200CDB13E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EB037BE11CB9B8A200CDB13E /* PBXTargetDependency */,
 			);
 			name = Accent;
 			productName = Accent;
@@ -180,6 +249,9 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Tiny Pixels";
 				TargetAttributes = {
+					EB037BD71CB9B8A100CDB13E = {
+						CreatedOnToolsVersion = 7.3;
+					};
 					EB334FAA1CB96434009A3985 = {
 						CreatedOnToolsVersion = 7.3;
 					};
@@ -199,11 +271,20 @@
 			projectRoot = "";
 			targets = (
 				EB334FAA1CB96434009A3985 /* Accent */,
+				EB037BD71CB9B8A100CDB13E /* Add to Accent */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EB037BD61CB9B8A100CDB13E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB037BDE1CB9B8A200CDB13E /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB334FA91CB96434009A3985 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -281,6 +362,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EB037BD41CB9B8A100CDB13E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB037BDB1CB9B8A200CDB13E /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB334FA71CB96434009A3985 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -303,7 +392,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EB037BE11CB9B8A200CDB13E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB037BD71CB9B8A100CDB13E /* Add to Accent */;
+			targetProxy = EB037BE01CB9B8A200CDB13E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		EB037BDC1CB9B8A200CDB13E /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB037BDD1CB9B8A200CDB13E /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		EB334FB21CB96434009A3985 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -323,6 +428,28 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EB037BE41CB9B8A200CDB13E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Add to Accent/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.tinypixels.Accent.Add-to-Accent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EB037BE51CB9B8A200CDB13E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Add to Accent/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.tinypixels.Accent.Add-to-Accent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		EB334FBB1CB96434009A3985 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -413,6 +540,7 @@
 			baseConfigurationReference = 041EEF364B27E3387B94BFB5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Accent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.tinypixels.Accent;
@@ -425,6 +553,7 @@
 			baseConfigurationReference = B040039E3633DC711F645CF4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Accent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.tinypixels.Accent;
@@ -435,6 +564,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EB037BE31CB9B8A200CDB13E /* Build configuration list for PBXNativeTarget "Add to Accent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB037BE41CB9B8A200CDB13E /* Debug */,
+				EB037BE51CB9B8A200CDB13E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		EB334FA61CB96434009A3985 /* Build configuration list for PBXProject "Accent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
