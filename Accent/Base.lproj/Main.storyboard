@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="b34-Ns-GKV">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -10,7 +11,7 @@
         <!--Language View Controller-->
         <scene sceneID="HcA-z0-bHO">
             <objects>
-                <viewController id="43V-dd-A5i" customClass="LanguageViewController" customModule="Interface" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="43V-dd-A5i" customClass="LanguageViewController" customModule="Accent" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ncm-so-keb"/>
                         <viewControllerLayoutGuide type="bottom" id="pns-mi-cuy"/>
@@ -94,7 +95,7 @@
         <!--Articles-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ArticlesViewController" id="BYZ-38-t0r" customClass="ArticlesViewController" customModule="Interface" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArticlesViewController" id="BYZ-38-t0r" customClass="ArticlesViewController" customModule="Accent" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -142,7 +143,7 @@
         <!--Article View Controller-->
         <scene sceneID="Sig-sI-wJr">
             <objects>
-                <viewController id="EaD-Ei-YQ3" customClass="ArticleViewController" customModule="Interface" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="EaD-Ei-YQ3" customClass="ArticleViewController" customModule="Accent" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MiA-2H-GZt"/>
                         <viewControllerLayoutGuide type="bottom" id="ycr-Zj-qCf"/>
@@ -182,12 +183,101 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="43V-dd-A5i" kind="relationship" relationship="rootViewController" id="QAW-NT-XKg"/>
+                        <segue destination="dQR-e8-hEh" kind="relationship" relationship="rootViewController" id="mCf-CS-VTx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Fr-TU-doP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-556" y="387"/>
+            <point key="canvasLocation" x="-1266" y="387"/>
+        </scene>
+        <!--Onboarding View Controller-->
+        <scene sceneID="16O-us-f8w">
+            <objects>
+                <viewController id="dQR-e8-hEh" customClass="OnboardingViewController" customModule="Accent" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DzG-k1-9KQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="jVf-1y-lat"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5Eo-ne-dmo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azN-vT-g5m">
+                                <rect key="frame" x="48" y="476" width="504" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="Zrt-MB-uXU"/>
+                                </constraints>
+                                <state key="normal" title="Sign In with Phone Number"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Zrt-MB-uXU"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="digitsButtonPressed:" destination="dQR-e8-hEh" eventType="touchUpInside" id="GEs-ul-yAC"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="À" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euj-VF-rkk">
+                                <rect key="frame" x="252" y="186" width="97" height="164"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="144"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your global news source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOi-Bi-r5H">
+                                <rect key="frame" x="205" y="358" width="191" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72X-D1-OAK">
+                                <rect key="frame" x="48" y="526" width="504" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="yWA-b9-GGu"/>
+                                </constraints>
+                                <state key="normal" title="Continue Without Login"/>
+                                <connections>
+                                    <action selector="skipButtonPressed:" destination="dQR-e8-hEh" eventType="touchUpInside" id="Cac-w5-Ipx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="azN-vT-g5m" firstAttribute="trailing" secondItem="72X-D1-OAK" secondAttribute="trailing" id="1VB-7b-adk"/>
+                            <constraint firstItem="euj-VF-rkk" firstAttribute="centerY" secondItem="5Eo-ne-dmo" secondAttribute="centerY" constant="-32" id="2ev-bW-uUs"/>
+                            <constraint firstItem="jVf-1y-lat" firstAttribute="top" secondItem="72X-D1-OAK" secondAttribute="bottom" constant="32" id="7cT-4j-D2L"/>
+                            <constraint firstItem="azN-vT-g5m" firstAttribute="leading" secondItem="5Eo-ne-dmo" secondAttribute="leadingMargin" constant="32" id="Fbd-ei-alW"/>
+                            <constraint firstItem="euj-VF-rkk" firstAttribute="centerX" secondItem="5Eo-ne-dmo" secondAttribute="centerX" id="IS6-Mv-wom"/>
+                            <constraint firstItem="azN-vT-g5m" firstAttribute="height" secondItem="72X-D1-OAK" secondAttribute="height" id="Ih1-bz-Ybh"/>
+                            <constraint firstItem="72X-D1-OAK" firstAttribute="leading" secondItem="5Eo-ne-dmo" secondAttribute="leadingMargin" constant="28" id="ME9-nd-57Z"/>
+                            <constraint firstItem="jOi-Bi-r5H" firstAttribute="centerX" secondItem="5Eo-ne-dmo" secondAttribute="centerX" id="PPg-eg-PAU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="72X-D1-OAK" secondAttribute="trailing" constant="28" id="ePr-kc-kYr"/>
+                            <constraint firstItem="jOi-Bi-r5H" firstAttribute="top" secondItem="euj-VF-rkk" secondAttribute="bottom" constant="8" id="jKd-ar-Oyw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="azN-vT-g5m" secondAttribute="trailing" constant="32" id="sVb-aF-3vc"/>
+                            <constraint firstItem="72X-D1-OAK" firstAttribute="centerX" secondItem="5Eo-ne-dmo" secondAttribute="centerX" id="uRX-MO-xXX"/>
+                            <constraint firstItem="azN-vT-g5m" firstAttribute="leading" secondItem="72X-D1-OAK" secondAttribute="leading" id="vbX-I3-I0x"/>
+                            <constraint firstItem="72X-D1-OAK" firstAttribute="top" secondItem="azN-vT-g5m" secondAttribute="bottom" constant="8" id="wal-QJ-DuF"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Fbd-ei-alW"/>
+                                <exclude reference="sVb-aF-3vc"/>
+                                <exclude reference="uRX-MO-xXX"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="Xvg-0l-Axh"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="jOi-Bi-r5H" id="Ibj-qy-WRU"/>
+                        <outlet property="digitsButton" destination="azN-vT-g5m" id="YhZ-xW-gEN"/>
+                        <outlet property="logoLabel" destination="euj-VF-rkk" id="oFA-zP-eSa"/>
+                        <outlet property="skipButton" destination="72X-D1-OAK" id="RhZ-Dv-Kjc"/>
+                        <segue destination="43V-dd-A5i" kind="show" identifier="languageSegue" id="UJa-sb-CRK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kQR-gi-VHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-497" y="387"/>
         </scene>
     </scenes>
     <resources>
