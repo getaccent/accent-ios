@@ -61,7 +61,7 @@ public class Accent {
     }
     
     func retrieveArticles(completion: (articles: [Article]?) -> Void) {
-        guard let language = language, url = NSURL(string: "\(baseUrl)/articles?lang=\(language)") else {
+        guard let language = Language.savedLanguage(), url = NSURL(string: "\(baseUrl)/articles?lang=\(language.getCode())") else {
             return
         }
         
@@ -103,11 +103,11 @@ public class Accent {
             return
         }
         
-        guard !requestsMade.contains(term) else {
+        guard !requestsMade.contains(term), let language = Language.savedLanguage() else {
             return
         }
         
-        guard let urlString = "\(baseUrl)/translate?term=\(term)&lang=\(lang)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let urlString = "\(baseUrl)/translate?term=\(term)&lang=\(language.getCode())".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             completion(translation: nil)
             return
         }

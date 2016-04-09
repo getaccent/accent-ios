@@ -13,6 +13,7 @@
 		EB037BB51CB9664400CDB13E /* NoImageArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB037BB21CB9664400CDB13E /* NoImageArticleCell.xib */; };
 		EB037BCB1CB9794000CDB13E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BCA1CB9794000CDB13E /* OnboardingViewController.swift */; };
 		EB037BCD1CB97AB200CDB13E /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BCC1CB97AB200CDB13E /* ColorConstants.swift */; };
+		EB037BCF1CB98DED00CDB13E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BCE1CB98DED00CDB13E /* Language.swift */; };
 		EB334FAF1CB96434009A3985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB334FAE1CB96434009A3985 /* AppDelegate.swift */; };
 		EB334FB41CB96434009A3985 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB21CB96434009A3985 /* Main.storyboard */; };
 		EB334FB61CB96434009A3985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB51CB96434009A3985 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		EB037BB21CB9664400CDB13E /* NoImageArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoImageArticleCell.xib; sourceTree = "<group>"; };
 		EB037BCA1CB9794000CDB13E /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		EB037BCC1CB97AB200CDB13E /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		EB037BCE1CB98DED00CDB13E /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		EB334FAB1CB96434009A3985 /* Accent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB334FAE1CB96434009A3985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB334FB31CB96434009A3985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				EB334FAE1CB96434009A3985 /* AppDelegate.swift */,
 				EBBA55A71CB9655C0082642D /* Quizlet.swift */,
 				EB037BCC1CB97AB200CDB13E /* ColorConstants.swift */,
+				EB037BCE1CB98DED00CDB13E /* Language.swift */,
 				EBBA55A91CB9656C0082642D /* Accent.swift */,
 				EBBA55A21CB965230082642D /* Views */,
 				EBBA559A1CB964B00082642D /* View Controllers */,
@@ -286,6 +289,7 @@
 				EBBA559C1CB964EC0082642D /* ArticlesViewController.swift in Sources */,
 				EB037BCB1CB9794000CDB13E /* OnboardingViewController.swift in Sources */,
 				EBBA55A41CB9652B0082642D /* ArticleTextView.swift in Sources */,
+				EB037BCF1CB98DED00CDB13E /* Language.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

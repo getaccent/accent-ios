@@ -32,19 +32,11 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
         }
         
         if Quizlet.sharedInstance.setId == 0 {
-            guard let language = language else {
+            guard let language = Language.savedLanguage() else {
                 return
             }
             
             var terms = [String: String]()
-            
-            switch language {
-            case "zh-CN": terms = ["家": "family", "我": "i"]
-            case "es-ES": terms = ["hola": "hello", "qué": "what"]
-            case "sv-SE": terms = ["äpple": "apple", "injenjör": "engineer"]
-            default: terms = ["lait": "milk", "chaise": "chair"]
-            }
-            
             Quizlet.sharedInstance.createSet(terms, completion: { (url) in })
         }
     }
