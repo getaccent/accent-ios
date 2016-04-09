@@ -51,6 +51,7 @@ public class Accent {
             }
             
             let image = UIImage(data: data)
+            imageCache[imgurl] = image
             
             dispatch_async(dispatch_get_main_queue(), {
                 completion(image: image)

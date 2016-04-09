@@ -24,6 +24,8 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBarHidden = false
+        
         imageView = UIImageView()
         scrollView.addSubview(imageView)
         

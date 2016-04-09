@@ -8,13 +8,18 @@
 
 import UIKit
 
-class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AccentTabBarDelegate {
     
     @IBOutlet weak var topBar: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomBar: AccentTabBar!
     
-    private var articles = [Article]()
+    private var articles: [Article] {
+        return bottomBar.selectedTab == 0 ? savedArticles : browseArticles
+    }
+    
+    private var browseArticles = [Article]()
+    private var savedArticles = [Article]()
     private var articleToSend: Article!
     
     override func viewDidLoad() {
@@ -27,12 +32,14 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 return
             }
             
-            self.articles = articles
+            self.browseArticles = articles
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             })
         }
+        
+        bottomBar.delegate = self
         
         let tabs = [AccentTab(name: "Home", image: UIImage(named: "Home")!), AccentTab(name: "Browse", image: UIImage(named: "Browse")!)]
         bottomBar.updateTabs(tabs)
@@ -105,5 +112,9 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         articleToSend = articles[indexPath.row]
         performSegueWithIdentifier("articleSegue", sender: nil)
+    }
+    
+    func updatedSelectedTab(index: Int) {
+        tableView.reloadData()
     }
 }

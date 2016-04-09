@@ -10,6 +10,9 @@ import UIKit
 
 class AccentTabBar: UIView {
     
+    var delegate: AccentTabBarDelegate?
+    var selectedTab = 0
+    
     private var tabViews = [AccentTabView]()
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,6 +54,9 @@ class AccentTabBar: UIView {
         
         tabViews[idx].imageView.tintColor = UIColor.accentDarkColor()
         tabViews[idx].nameLabel.textColor = UIColor.accentDarkColor()
+        
+        selectedTab = idx
+        delegate?.updatedSelectedTab(idx)
     }
     
     func updateTabs(tabs: [AccentTab]) {
@@ -64,48 +70,13 @@ class AccentTabBar: UIView {
             addSubview(tabView)
             tabViews.append(tabView)
         }
+        
+        selectTab(0)
     }
 }
 
-class AccentTabView: UIView {
-    
-    var imageView: UIImageView!
-    var nameLabel: UILabel!
-    
-    var tab: AccentTab!
-    
-    init(tab: AccentTab) {
-        self.tab = tab
-        
-        super.init(frame: CGRectZero)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if nameLabel == nil {
-            nameLabel = UILabel()
-            nameLabel.font = UIFont.systemFontOfSize(12, weight: UIFontWeightMedium)
-            nameLabel.text = tab.name
-            nameLabel.textColor = UIColor.accentDarkColor()
-            addSubview(nameLabel)
-        }
-        nameLabel.sizeToFit()
-        nameLabel.frame = CGRectMake((bounds.width - nameLabel.bounds.width) / 2, bounds.height - nameLabel.bounds.height - 8, nameLabel.bounds.width, nameLabel.bounds.height)
-        
-        let imageWidth = nameLabel.frame.origin.y - 14
-        if imageView == nil {
-            imageView = UIImageView(image: tab.image)
-            imageView.image = tab.image.imageWithRenderingMode(.AlwaysTemplate)
-            imageView.tintColor = UIColor.accentDarkColor()
-            addSubview(imageView)
-        }
-        imageView.frame = CGRectMake((bounds.width - imageWidth) / 2, 10, imageWidth, imageWidth)
-    }
+protocol AccentTabBarDelegate {
+    func updatedSelectedTab(index: Int)
 }
 
 struct AccentTab {
