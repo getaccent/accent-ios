@@ -6,11 +6,14 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
+import MGSwipeTableCell
 import UIKit
 
 var imageCache = [String: UIImage]()
 
-class ArticleCell: UITableViewCell {
+class ArticleCell: MGSwipeTableCell {
+    
+    var article: Article?
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var firstLineLabel: UILabel?
@@ -31,6 +34,8 @@ class ArticleCell: UITableViewCell {
     }
     
     func configure(article: Article) {
+        self.article = article
+        
         titleLabel.text = article.title
         firstLineLabel?.text = article.text
         

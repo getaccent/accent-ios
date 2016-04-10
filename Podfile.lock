@@ -4,6 +4,7 @@ PODS:
   - Digits (2.0.2):
     - TwitterCore (= 2.0.2)
   - Fabric (1.6.7)
+  - MGSwipeTableCell (1.5.5)
   - Realm (0.98.6):
     - Realm/Headers (= 0.98.6)
   - Realm/Headers (0.98.6)
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - Crashlytics
   - Digits
   - Fabric
+  - MGSwipeTableCell (~> 1.5)
   - RealmSwift (~> 0.98)
   - SwiftyJSON (~> 2.3)
   - TwitterCore
@@ -25,6 +27,7 @@ SPEC CHECKSUMS:
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Digits: a5c8ddfed18d5e0496e9b6f459f0bca44de588db
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  MGSwipeTableCell: bafeb5f351124544c9364ecbdf24c7b06a37d340
   Realm: 44803f35418c5d89b27825a564247fcd190de37e
   RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a

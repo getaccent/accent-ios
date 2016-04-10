@@ -6,10 +6,11 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
+import MGSwipeTableCell
 import RealmSwift
 import UIKit
 
-class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AccentTabBarDelegate {
+class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AccentTabBarDelegate, MGSwipeTableCellDelegate {
     
     @IBOutlet weak var topBar: UIView!
     @IBOutlet weak var quizletButton: UIButton!
@@ -166,6 +167,38 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let cell = NSBundle.mainBundle().loadNibNamed(indexPath.row % 5 == 0 ? (article.imageUrl == nil ? "NoImageArticleCell" : "LargeArticleCell") : (article.imageUrl == nil ? "NoImageArticleCell" : "ArticleCell"), owner: self, options: nil)[0] as! ArticleCell
         cell.configure(articles[indexPath.row])
+        cell.delegate = self
+        
+        var buttons = [MGSwipeButton]()
+        
+        func createButton(imageName: String, callback: MGSwipeButtonCallback) -> MGSwipeButton {
+            let button = MGSwipeButton(title: "", icon: iconize(UIImage(named: imageName)!), backgroundColor: UIColor.whiteColor(), callback: callback)
+            button.buttonWidth = UIScreen.mainScreen().bounds.width / 3
+            
+            buttons.append(button)
+            return button
+        }
+        
+        createButton("Share") { (cell) -> Bool in
+            guard let articleUrl = (cell as? ArticleCell)?.article?.articleUrl else {
+                return true
+            }
+            
+            let activityController = UIActivityViewController(activityItems: [articleUrl], applicationActivities: nil)
+            self.presentViewController(activityController, animated: true, completion: nil)
+            
+            return true
+        }
+        
+        createButton("Delete") { (cell) -> Bool in
+            return true
+        }
+        
+        createButton("Archive") { (cell) -> Bool in
+            return true
+        }
+        
+        cell.rightButtons = buttons
         
         return cell
     }
@@ -179,5 +212,26 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func updatedSelectedTab(index: Int) {
         tableView.reloadData()
+    }
+    
+    func iconize(image: UIImage) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        
+        let context = UIGraphicsGetCurrentContext()
+        UIColor.accentDarkColor().setFill()
+        
+        CGContextTranslateCTM(context, 0, image.size.height)
+        CGContextScaleCTM(context, 1, -1)
+        CGContextClipToMask(context, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage)
+        CGContextFillRect(context, CGRectMake(0, 0, image.size.width, image.size.height))
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
+    func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+        return true
     }
 }
