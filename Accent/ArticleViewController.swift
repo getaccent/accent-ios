@@ -10,6 +10,7 @@ import UIKit
 
 class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     
+    @IBOutlet weak var topBar: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     var article: Article!
@@ -24,7 +25,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBarHidden = false
+        navigationController?.navigationBarHidden = true
         
         imageView = UIImageView()
         scrollView.addSubview(imageView)
@@ -46,11 +47,12 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if scrollView == nil {
-            scrollView = UIScrollView()
-            view.addSubview(scrollView)
-        }
-        scrollView.frame = view.bounds
+        let topShadowPath = UIBezierPath(rect: topBar.bounds)
+        topBar.layer.masksToBounds = false
+        topBar.layer.shadowColor = UIColor.blackColor().CGColor
+        topBar.layer.shadowOffset = CGSizeMake(0, 1)
+        topBar.layer.shadowOpacity = 0.15
+        topBar.layer.shadowPath = topShadowPath.CGPath
         
         if articleTitle == nil {
             articleTitle = UILabel()
@@ -146,6 +148,10 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
         default:
             break
         }
+    }
+    
+    @IBAction func backButtonPressed(sender: UIButton) {
+        navigationController?.popViewControllerAnimated(true)
     }
     
     override func canBecomeFirstResponder() -> Bool {

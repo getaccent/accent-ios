@@ -6,6 +6,7 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
+import RealmSwift
 import UIKit
 
 class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AccentTabBarDelegate {
@@ -28,6 +29,13 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         
         navigationController?.navigationBarHidden = true
+        
+        let realm = try! Realm()
+        let articles = realm.objects(Article)
+        
+        for article in articles {
+            savedArticles.append(article)
+        }
         
         Accent.sharedInstance.retrieveArticles { (articles) in
             guard let articles = articles else {
@@ -54,11 +62,12 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        updateSavedArticles()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateSavedArticles), name: AccentApplicationWillEnterForeground, object: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func updateSavedArticles() {
         guard let toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") else {
             return
         }

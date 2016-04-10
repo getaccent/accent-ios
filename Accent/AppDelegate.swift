@@ -11,6 +11,8 @@ import DigitsKit
 import Fabric
 import UIKit
 
+let AccentApplicationWillEnterForeground = "AccentApplicationWillEnterForeground"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -32,6 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    func applicationWillEnterForeground(application: UIApplication) {
+        NSNotificationCenter.defaultCenter().postNotificationName(AccentApplicationWillEnterForeground, object: nil)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

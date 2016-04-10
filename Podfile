@@ -6,4 +6,5 @@ pod 'Crashlytics'
 pod 'Digits'
 pod 'TwitterCore'
 
+pod 'RealmSwift', '~> 0.98'
 pod 'SwiftyJSON', '~> 2.3'

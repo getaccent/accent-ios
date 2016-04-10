@@ -6,6 +6,7 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
+import RealmSwift
 import SwiftyJSON
 
 public class Accent {
@@ -83,8 +84,20 @@ public class Accent {
                 title = json["title"].string,
                 text = json["text"].string {
                     let image = json["image"].string
-                    let article = Article(articleUrl: url, imageUrl: image, text: text, title: title)
+                    let article = Article()
+                    article.articleUrl = url
+                    article.imageUrl = image
+                    article.text = text
+                    article.title = title
+                
                     completion(article: article)
+                
+                    dispatch_async(dispatch_get_main_queue(), { 
+                        let realm = try! Realm()
+                        try! realm.write {
+                            realm.add(article)
+                        }
+                    })
             }
         }
         
@@ -116,8 +129,13 @@ public class Accent {
                         title = article["title"].string,
                         text = article["text"].string {
                             let image = article["image"].string
-                            let articleObject = Article(articleUrl: url, imageUrl: image, text: text, title: title)
-                            retrievedArticles.append(articleObject)
+                            let article = Article()
+                            article.articleUrl = url
+                            article.imageUrl = image
+                            article.text = text
+                            article.title = title
+                        
+                            retrievedArticles.append(article)
                     }
                 }
             }
@@ -171,11 +189,4 @@ public class Accent {
         
         task.resume()
     }
-}
-
-struct Article {
-    let articleUrl: String
-    let imageUrl: String?
-    let text: String
-    let title: String
 }
