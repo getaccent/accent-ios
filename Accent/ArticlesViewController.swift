@@ -127,12 +127,16 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             let setId = Quizlet.sharedInstance.setId
             
-            guard setId > 0 else {
-                return
+            if setId > 0 {
+                let url = NSURL(string: "https://quizlet.com/\(setId)/")!
+                Quizlet.sharedInstance.openSetWithURL(self, url: url)
+            } else {
+                let controller = UIAlertController(title: "No Set", message: "No sets have been created on your Quizlet account. Translate some words to create one automatically!", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                
+                controller.addAction(action)
+                presentViewController(controller, animated: true, completion: nil)
             }
-            
-            let url = NSURL(string: "https://quizlet.com/\(setId)/")!
-            UIApplication.sharedApplication().openURL(url)
         }
     }
     

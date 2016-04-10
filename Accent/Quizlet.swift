@@ -44,7 +44,7 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
     
     private var addedTerms = [String]()
     
-    private var safariViewController: SFSafariViewController?
+    private var safariViewController: UIViewController?
     private var state: String?
     
     func addTermToSet(term: String, translation: String) {
@@ -117,8 +117,12 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
             return
         }
         
-        safariViewController = SFSafariViewController(URL: url)
-        viewController.presentViewController(safariViewController!, animated: true, completion: nil)
+        if #available(iOS 9.0, *) {
+            safariViewController = SFSafariViewController(URL: url)
+            viewController.presentViewController(safariViewController!, animated: true, completion: nil)
+        } else {
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
     
     func createSet(words: [String: String], completion: (url: NSURL?) -> Void) {
@@ -211,8 +215,12 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
     }
     
     func openSetWithURL(viewController: UIViewController, url: NSURL) {
-        let svc = SFSafariViewController(URL: url)
-        viewController.presentViewController(svc, animated: true, completion: nil)
+        if #available(iOS 9.0, *) {
+            let svc = SFSafariViewController(URL: url)
+            viewController.presentViewController(svc, animated: true, completion: nil)
+        } else {
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
     
     func requestTokenWithCode(code: String) {
