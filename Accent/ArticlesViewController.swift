@@ -169,37 +169,6 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.configure(articles[indexPath.row])
         cell.delegate = self
         
-        var buttons = [MGSwipeButton]()
-        
-        func createButton(imageName: String, callback: MGSwipeButtonCallback) -> MGSwipeButton {
-            let button = MGSwipeButton(title: "", icon: iconize(UIImage(named: imageName)!), backgroundColor: UIColor.whiteColor(), callback: callback)
-            button.buttonWidth = UIScreen.mainScreen().bounds.width / 3
-            
-            buttons.append(button)
-            return button
-        }
-        
-        createButton("Share") { (cell) -> Bool in
-            guard let articleUrl = (cell as? ArticleCell)?.article?.articleUrl else {
-                return true
-            }
-            
-            let activityController = UIActivityViewController(activityItems: [articleUrl], applicationActivities: nil)
-            self.presentViewController(activityController, animated: true, completion: nil)
-            
-            return true
-        }
-        
-        createButton("Delete") { (cell) -> Bool in
-            return true
-        }
-        
-        createButton("Archive") { (cell) -> Bool in
-            return true
-        }
-        
-        cell.rightButtons = buttons
-        
         return cell
     }
     
@@ -232,6 +201,85 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+        return true
+    }
+    
+    func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
+        var buttons = [MGSwipeButton]()
+        
+        func createButton(imageName: String) -> MGSwipeButton {
+            let button = MGSwipeButton(title: "", icon: iconize(UIImage(named: imageName)!), backgroundColor: UIColor.whiteColor())
+            buttons.append(button)
+            return button
+        }
+        
+        if bottomBar.selectedTab == 0 {
+            createButton("Share")
+            createButton("Delete")
+            createButton("Archive")
+        } else {
+            createButton("Share")
+            createButton("Save")
+        }
+        
+        for button in buttons {
+            button.buttonWidth = UIScreen.mainScreen().bounds.width / CGFloat(buttons.count)
+        }
+        
+        cell.rightButtons = buttons
+        
+        return buttons
+    }
+    
+    func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+        func shareButton() {
+            guard let articleUrl = (cell as? ArticleCell)?.article?.articleUrl else {
+                return
+            }
+            
+            let activityController = UIActivityViewController(activityItems: [articleUrl], applicationActivities: nil)
+            self.presentViewController(activityController, animated: true, completion: nil)
+        }
+        
+        if bottomBar.selectedTab == 0 {
+            switch index {
+            case 0: // share button
+                shareButton()
+            case 1: // delete button
+                guard let indexPath = tableView.indexPathForCell(cell) else {
+                    return true
+                }
+                
+                tableView.beginUpdates()
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+                
+                if bottomBar.selectedTab == 0 {
+                    savedArticles.removeAtIndex(indexPath.row)
+                } else {
+                    browseArticles.removeAtIndex(indexPath.row)
+                }
+                
+                tableView.endUpdates()
+            case 2: // archive button
+                break
+            default:
+                break
+            }
+        } else {
+            switch index {
+            case 0: // share button
+                shareButton()
+            case 1: // save button
+                guard let indexPath = tableView.indexPathForCell(cell) else {
+                    return true
+                }
+                
+                savedArticles.append(browseArticles[indexPath.row])
+            default:
+                break
+            }
+        }
+        
         return true
     }
 }
