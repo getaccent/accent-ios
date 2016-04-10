@@ -22,6 +22,8 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     private var translateView: UIView!
     private var translateLabel: UILabel!
     
+    private var terms = [String: String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,13 +35,16 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
         Accent.sharedInstance.getArticleThumbnail(article) { (image) in
             self.imageView.image = image
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        if Quizlet.sharedInstance.setId == 0 {
-            guard let language = Language.savedLanguage() else {
+        if Quizlet.sharedInstance.setId == 0 && terms.count > 2 {
+            guard let _ = Language.savedLanguage() else {
                 return
             }
             
-            var terms = [String: String]()
             Quizlet.sharedInstance.createSet(terms, completion: { (url) in })
         }
     }
@@ -126,7 +131,11 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
                     self.translateLabel.text = translation
                 })
                 
-                Quizlet.sharedInstance.addTermToSet(text, translation: translation)
+                if Quizlet.sharedInstance.setId > 0 {
+                    Quizlet.sharedInstance.addTermToSet(text, translation: translation)
+                } else {
+                    self.terms[text] = translation
+                }
             }
         }
         
