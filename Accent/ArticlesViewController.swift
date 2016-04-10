@@ -11,6 +11,8 @@ import UIKit
 class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AccentTabBarDelegate {
     
     @IBOutlet weak var topBar: UIView!
+    @IBOutlet weak var quizletButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomBar: AccentTabBar!
     
@@ -39,6 +41,12 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             })
         }
         
+        quizletButton.setImage(quizletButton.imageForState(.Normal)?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        quizletButton.tintColor = UIColor.accentDarkColor()
+        
+        settingsButton.setImage(settingsButton.imageForState(.Normal)?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        settingsButton.tintColor = UIColor.accentDarkColor()
+        
         bottomBar.delegate = self
         
         let tabs = [AccentTab(name: "Home", image: UIImage(named: "Home")!), AccentTab(name: "Browse", image: UIImage(named: "Browse")!)]
@@ -66,7 +74,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         bottomBar.layer.shadowPath = bottomShadowPath.CGPath
     }
     
-    @IBAction func quizletButton(sender: UIBarButtonItem) {
+    @IBAction func quizletButtonPressed(sender: UIButton) {
         if Quizlet.sharedInstance.accessToken == nil {
             Quizlet.sharedInstance.beginAuthorization(self)
         } else {
@@ -79,6 +87,10 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             let url = NSURL(string: "https://quizlet.com/\(setId)/")!
             UIApplication.sharedApplication().openURL(url)
         }
+    }
+    
+    @IBAction func settingsButtonPressed(sender: UIButton) {
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

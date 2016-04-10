@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -80,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="193.5" y="386.5"/>
         </scene>
-        <!--Articles-->
+        <!--Articles View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ArticlesViewController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ArticlesViewController" customModule="Accent" customModuleProvider="target" sceneMemberID="viewController">
@@ -105,11 +106,45 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya2-an-QDw">
+                                        <rect key="frame" x="11" y="25" width="36" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="2wC-KP-YM1"/>
+                                            <constraint firstAttribute="width" secondItem="ya2-an-QDw" secondAttribute="height" multiplier="1:1" id="7fw-96-MxK"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="9" minY="6" maxX="9" maxY="6"/>
+                                        <state key="normal" image="Quizlet"/>
+                                        <connections>
+                                            <action selector="quizletButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jVz-cP-YoQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fu-96-8CV">
+                                        <rect key="frame" x="325" y="25" width="36" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="4Fu-96-8CV" secondAttribute="height" multiplier="1:1" id="P97-E8-NJ0"/>
+                                            <constraint firstAttribute="height" constant="36" id="xTK-5B-SSU"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
+                                        <state key="normal" image="Settings"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="P97-E8-NJ0"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="settingsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f5u-65-emQ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="ya2-an-QDw" firstAttribute="centerY" secondItem="IoR-FA-0hc" secondAttribute="centerY" id="3gL-bB-vug"/>
+                                    <constraint firstItem="4Fu-96-8CV" firstAttribute="centerY" secondItem="IoR-FA-0hc" secondAttribute="centerY" id="EaU-UM-e6B"/>
                                     <constraint firstAttribute="height" constant="64" id="H7r-8S-I4h"/>
                                     <constraint firstItem="IoR-FA-0hc" firstAttribute="centerY" secondItem="qqh-dc-cYR" secondAttribute="centerY" constant="10" id="J6g-5P-dYV"/>
+                                    <constraint firstItem="ya2-an-QDw" firstAttribute="leading" secondItem="qqh-dc-cYR" secondAttribute="leading" constant="11" id="La8-Uo-vw1"/>
+                                    <constraint firstAttribute="trailing" secondItem="4Fu-96-8CV" secondAttribute="trailing" constant="14" id="YMC-r3-Cpf"/>
+                                    <constraint firstItem="4Fu-96-8CV" firstAttribute="width" secondItem="4Fu-96-8CV" secondAttribute="height" multiplier="1:1" id="jTV-tC-tra"/>
                                     <constraint firstItem="IoR-FA-0hc" firstAttribute="centerX" secondItem="qqh-dc-cYR" secondAttribute="centerX" id="ura-9b-MkY"/>
                                 </constraints>
                             </view>
@@ -135,16 +170,10 @@
                             <constraint firstItem="qqh-dc-cYR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bjx-UQ-bjR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Articles" id="Q5q-k3-a5C">
-                        <barButtonItem key="leftBarButtonItem" image="Quizlet" id="L7g-JJ-qqB">
-                            <inset key="imageInsets" minX="6" minY="8" maxX="6" maxY="8"/>
-                            <connections>
-                                <action selector="quizletButton:" destination="BYZ-38-t0r" id="5uW-jB-dgZ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="bottomBar" destination="phs-bR-sUf" id="bqT-ZE-nmp"/>
+                        <outlet property="quizletButton" destination="ya2-an-QDw" id="vTY-OY-AIV"/>
+                        <outlet property="settingsButton" destination="4Fu-96-8CV" id="tDp-XO-pQ4"/>
                         <outlet property="tableView" destination="Erp-b1-34q" id="H1W-T7-h4e"/>
                         <outlet property="topBar" destination="qqh-dc-cYR" id="W8y-bW-05l"/>
                         <segue destination="EaD-Ei-YQ3" kind="show" identifier="articleSegue" id="vHj-yD-wzU"/>
@@ -296,5 +325,6 @@
     </scenes>
     <resources>
         <image name="Quizlet" width="37" height="48"/>
+        <image name="Settings" width="32" height="32"/>
     </resources>
 </document>
