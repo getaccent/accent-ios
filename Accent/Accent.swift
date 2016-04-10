@@ -147,14 +147,19 @@ public class Accent {
     }
     
     func translateTerm(term: String, completion: (translation: String?) -> Void) {
-        if let translation = savedTranslations[term] {
-            completion(translation: translation)
-            return
-        }
-        
         guard !requestsMade.contains(term), let language = Language.savedLanguage() else {
             return
         }
+        
+        do {
+            let predicateTerm = term.stringByReplacingOccurrencesOfString("\n", withString: " ").stringByReplacingOccurrencesOfString("'", withString: "")
+            
+            let realm = try Realm()
+            for term in realm.objects(Translation).filter("term = '\(predicateTerm)' AND target = '\(language.getCode())'") {
+                completion(translation: term.translation)
+                return
+            }
+        } catch {}
         
         guard let urlString = "\(baseUrl)/translate?term=\(term)&lang=\(language.getCode())".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             completion(translation: nil)
@@ -184,7 +189,17 @@ public class Accent {
                 return
             }
             
-            self.savedTranslations[term] = translatedTerm
+            dispatch_async(dispatch_get_main_queue(), {
+                let translation = Translation()
+                translation.term = term
+                translation.translation = translatedTerm
+                translation.target = language.getCode()
+                
+                let realm = try! Realm()
+                try! realm.write { 
+                    realm.add(translation)
+                }
+            })
         }
         
         task.resume()

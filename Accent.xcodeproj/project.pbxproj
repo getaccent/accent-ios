@@ -20,6 +20,7 @@
 		EB037BDE1CB9B8A200CDB13E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB037BDC1CB9B8A200CDB13E /* MainInterface.storyboard */; };
 		EB037BE21CB9B8A200CDB13E /* Add to Accent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EB037BD81CB9B8A100CDB13E /* Add to Accent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EB037BEA1CB9E64F00CDB13E /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BE91CB9E64F00CDB13E /* Article.swift */; };
+		EB037BEC1CB9F0F500CDB13E /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BEB1CB9F0F500CDB13E /* Translation.swift */; };
 		EB334FAF1CB96434009A3985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB334FAE1CB96434009A3985 /* AppDelegate.swift */; };
 		EB334FB41CB96434009A3985 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB21CB96434009A3985 /* Main.storyboard */; };
 		EB334FB61CB96434009A3985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB51CB96434009A3985 /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		EB037BE71CB9DE7F00CDB13E /* Accent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Accent.entitlements; sourceTree = "<group>"; };
 		EB037BE81CB9E0D400CDB13E /* Add to Accent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Add to Accent.entitlements"; sourceTree = "<group>"; };
 		EB037BE91CB9E64F00CDB13E /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		EB037BEB1CB9F0F500CDB13E /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		EB334FAB1CB96434009A3985 /* Accent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB334FAE1CB96434009A3985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB334FB31CB96434009A3985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				EB037BCE1CB98DED00CDB13E /* Language.swift */,
 				EBBA55A91CB9656C0082642D /* Accent.swift */,
 				EB037BE91CB9E64F00CDB13E /* Article.swift */,
+				EB037BEB1CB9F0F500CDB13E /* Translation.swift */,
 				EBBA55A21CB965230082642D /* Views */,
 				EBBA559A1CB964B00082642D /* View Controllers */,
 				EB334FB21CB96434009A3985 /* Main.storyboard */,
@@ -395,6 +398,7 @@
 			files = (
 				EB037BEA1CB9E64F00CDB13E /* Article.swift in Sources */,
 				EB037BD31CB9B09500CDB13E /* AccentTabView.swift in Sources */,
+				EB037BEC1CB9F0F500CDB13E /* Translation.swift in Sources */,
 				EBBA55A81CB9655C0082642D /* Quizlet.swift in Sources */,
 				EB334FAF1CB96434009A3985 /* AppDelegate.swift in Sources */,
 				EBBA559E1CB964FD0082642D /* ArticleViewController.swift in Sources */,
