@@ -56,6 +56,44 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") else {
+            return
+        }
+        
+        for urlString in toRetrieve {
+            if let url = NSURL(string: urlString) {
+                Accent.sharedInstance.parseArticle(url, completion: { (article) in
+                    guard let article = article else {
+                        return
+                    }
+                    
+                    self.savedArticles.append(article)
+                    
+                    dispatch_async(dispatch_get_main_queue(), { 
+                        self.tableView.reloadData()
+                    })
+                    
+                    guard var toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") else {
+                        return
+                    }
+                    
+                    var idx = 0
+                    
+                    for (i, articleUrl) in toRetrieve.enumerate() where articleUrl == url.absoluteString {
+                        idx = i
+                        break
+                    }
+                    
+                    toRetrieve.removeAtIndex(idx)
+                    NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.setObject(toRetrieve, forKey: "AccentArticlesToRetrieve")
+                })
+            }
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

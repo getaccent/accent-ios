@@ -61,6 +61,36 @@ public class Accent {
         task.resume()
     }
     
+    func parseArticle(url: NSURL, completion: (article: Article?) -> Void) {
+        guard let urlString = "\(baseUrl)/parse?url=\(url.absoluteString)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+            return
+        }
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "GET"
+        
+        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: sessionConfig)
+        
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            
+            let json = JSON(data: data, error: nil)
+            
+            if let url = json["url"].string,
+                title = json["title"].string,
+                text = json["text"].string {
+                    let image = json["image"].string
+                    let article = Article(articleUrl: url, imageUrl: image, text: text, title: title)
+                    completion(article: article)
+            }
+        }
+        
+        task.resume()
+    }
+    
     func retrieveArticles(completion: (articles: [Article]?) -> Void) {
         guard let language = Language.savedLanguage(), url = NSURL(string: "\(baseUrl)/articles?lang=\(language.getCode())") else {
             return
@@ -77,17 +107,17 @@ public class Accent {
                 return
             }
             
+            let json = JSON(data: data, error: nil)
             var retrievedArticles = [Article]()
             
-            let json = JSON(data: data, error: nil)
             if let articles = json["articles"].array {
                 for article in articles {
                     if let url = article["url"].string,
                         title = article["title"].string,
                         text = article["text"].string {
-                        let image = article["image"].string
-                        let articleObject = Article(articleUrl: url, imageUrl: image, text: text, title: title)
-                        retrievedArticles.append(articleObject)
+                            let image = article["image"].string
+                            let articleObject = Article(articleUrl: url, imageUrl: image, text: text, title: title)
+                            retrievedArticles.append(articleObject)
                     }
                 }
             }

@@ -65,9 +65,10 @@ class ShareViewController: UIViewController {
                     return
                 }
                 
-                var toRetrieve = NSUserDefaults.standardUserDefaults().stringArrayForKey("AccentArticlesToRetrieve")
+                var toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve")
                 toRetrieve?.append(url.absoluteString)
-                NSUserDefaults.standardUserDefaults().setObject(toRetrieve, forKey: "AccentArticlesToRetrieve")
+                NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.setObject(toRetrieve, forKey: "AccentArticlesToRetrieve")
+                NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.synchronize()
             })
         }
     }

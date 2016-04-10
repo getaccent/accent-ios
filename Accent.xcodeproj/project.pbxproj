@@ -72,6 +72,8 @@
 		EB037BDA1CB9B8A200CDB13E /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		EB037BDD1CB9B8A200CDB13E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		EB037BDF1CB9B8A200CDB13E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB037BE71CB9DE7F00CDB13E /* Accent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Accent.entitlements; sourceTree = "<group>"; };
+		EB037BE81CB9E0D400CDB13E /* Add to Accent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Add to Accent.entitlements"; sourceTree = "<group>"; };
 		EB334FAB1CB96434009A3985 /* Accent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB334FAE1CB96434009A3985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB334FB31CB96434009A3985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		EB037BD91CB9B8A200CDB13E /* Add to Accent */ = {
 			isa = PBXGroup;
 			children = (
+				EB037BE81CB9E0D400CDB13E /* Add to Accent.entitlements */,
 				EB037BDA1CB9B8A200CDB13E /* ShareViewController.swift */,
 				EB037BDC1CB9B8A200CDB13E /* MainInterface.storyboard */,
 				EB037BDF1CB9B8A200CDB13E /* Info.plist */,
@@ -156,6 +159,7 @@
 		EB334FAD1CB96434009A3985 /* Accent */ = {
 			isa = PBXGroup;
 			children = (
+				EB037BE71CB9DE7F00CDB13E /* Accent.entitlements */,
 				EB334FAE1CB96434009A3985 /* AppDelegate.swift */,
 				EBBA55A71CB9655C0082642D /* Quizlet.swift */,
 				EB037BCC1CB97AB200CDB13E /* ColorConstants.swift */,
@@ -251,9 +255,21 @@
 				TargetAttributes = {
 					EB037BD71CB9B8A100CDB13E = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = JDJKS788L2;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					EB334FAA1CB96434009A3985 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = JDJKS788L2;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -431,6 +447,7 @@
 		EB037BE41CB9B8A200CDB13E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Add to Accent/Add to Accent.entitlements";
 				INFOPLIST_FILE = "Add to Accent/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.tinypixels.Accent.Add-to-Accent";
@@ -442,6 +459,7 @@
 		EB037BE51CB9B8A200CDB13E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Add to Accent/Add to Accent.entitlements";
 				INFOPLIST_FILE = "Add to Accent/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.tinypixels.Accent.Add-to-Accent";
@@ -540,6 +558,8 @@
 			baseConfigurationReference = 041EEF364B27E3387B94BFB5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Accent/Accent.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Accent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -553,6 +573,8 @@
 			baseConfigurationReference = B040039E3633DC711F645CF4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Accent/Accent.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Accent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

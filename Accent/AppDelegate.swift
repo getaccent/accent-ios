@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self, Digits.self])
         
+        NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.setObject(NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") ?? [String](), forKey: "AccentArticlesToRetrieve")
+        
         if Language.savedLanguage() != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let avc = storyboard.instantiateViewControllerWithIdentifier("ArticlesViewController") as! ArticlesViewController
