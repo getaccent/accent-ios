@@ -219,7 +219,14 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             createButton("Archive")
         } else {
             createButton("Share")
-            createButton("Save")
+            
+            if let article = (cell as? ArticleCell)?.article {
+                if savedArticles.indexOf({ $0 == article }) == nil {
+                    createButton("Save")
+                }
+            } else {
+                createButton("Save")
+            }
         }
         
         for button in buttons {
@@ -275,6 +282,8 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
                 
                 savedArticles.append(browseArticles[indexPath.row])
+                
+                cell.refreshButtons(true)
             default:
                 break
             }
