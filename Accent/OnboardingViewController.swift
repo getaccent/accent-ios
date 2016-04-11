@@ -51,6 +51,12 @@ class OnboardingViewController: UIViewController {
                 return
             }
             
+            print(session.phoneNumber)
+            
+            Accent.sharedInstance.getSavedArticles(session.phoneNumber.stringByReplacingOccurrencesOfString("+", withString: ""), completion: { (articles) in
+                print("retrieved saved articles")
+            })
+            
             self.performSegueWithIdentifier("languageSegue", sender: self)
         }
     }

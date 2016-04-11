@@ -6,6 +6,7 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
+import DigitsKit
 import MGSwipeTableCell
 import RealmSwift
 import UIKit
@@ -281,9 +282,16 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                     return true
                 }
                 
-                savedArticles.append(browseArticles[indexPath.row])
+                let article = browseArticles[indexPath.row]
+                savedArticles.append(article)
                 
                 cell.refreshButtons(true)
+                
+                if let phoneNumber = Digits.sharedInstance().session()?.phoneNumber {
+                    Accent.sharedInstance.saveArticle(phoneNumber, url: article.articleUrl, completion: { (success) in
+                        print("saved")
+                    })
+                }
             default:
                 break
             }

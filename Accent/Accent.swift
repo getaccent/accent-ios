@@ -62,6 +62,41 @@ public class Accent {
         task.resume()
     }
     
+    func getSavedArticles(phoneNumber: String, completion: (articles: [Article]) -> Void) {
+        guard let url = NSURL(string: "\(baseUrl)/saved?num=\(phoneNumber)") else {
+            return
+        }
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "GET"
+        
+        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: sessionConfig)
+        
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            
+            let json = JSON(data: data, error: nil)
+            
+            if let urls = json["entries"].array {
+                var toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve")
+                
+                for url in urls {
+                    if let url = url["url"].string {
+                        toRetrieve?.append(url)
+                    }
+                }
+                
+                NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.setObject(toRetrieve, forKey: "AccentArticlesToRetrieve")
+                NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.synchronize()
+            }
+        }
+        
+        task.resume()
+    }
+    
     func parseArticle(url: NSURL, completion: (article: Article?) -> Void) {
         guard let urlString = "\(baseUrl)/parse?url=\(url.absoluteString)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             return
@@ -141,6 +176,29 @@ public class Accent {
             }
             
             completion(articles: retrievedArticles)
+        }
+        
+        task.resume()
+    }
+    
+    func saveArticle(phoneNumber: String, url: String, completion: (success: Bool) -> Void) {
+        guard let urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(url)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+            return
+        }
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        
+        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: sessionConfig)
+        
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            
+            let json = JSON(data: data, error: nil)
+            completion(success: json["success"].bool ?? false)
         }
         
         task.resume()
