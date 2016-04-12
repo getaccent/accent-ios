@@ -6,11 +6,13 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     
     @IBOutlet weak var topBar: UIView!
+    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
     var article: Article!
@@ -21,6 +23,9 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     
     private var translateView: UIView!
     private var translateLabel: UILabel!
+    
+    var synthesizer: AVSpeechSynthesizer!
+    var playing = false
     
     private var terms = [String: String]()
     
@@ -35,6 +40,8 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
         Accent.sharedInstance.getArticleThumbnail(article) { (image) in
             self.imageView.image = image
         }
+        
+        synthesizer = AVSpeechSynthesizer()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -115,6 +122,28 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
             translateView.addSubview(translateLabel)
         }
         translateLabel.frame = CGRectMake(16, 4, translateView.frame.size.width - 32, 28)
+    }
+    
+    @IBAction func playButtonPressed(sender: UIButton) {
+        playing = !playing
+        
+        if playing {
+            playButton.setImage(UIImage(named: "Pause"), forState: .Normal)
+            
+            if synthesizer.paused {
+                synthesizer.continueSpeaking()
+            } else {
+                let utterance = AVSpeechUtterance(string: article.text)
+                utterance.rate = 0.35
+                utterance.voice = AVSpeechSynthesisVoice(language: Language.savedLanguage()?.getCode())
+                
+                synthesizer.speakUtterance(utterance)
+                synthesizer.pauseSpeakingAtBoundary(.Immediate)
+            }
+        } else {
+            playButton.setImage(UIImage(named: "Play"), forState: .Normal)
+            synthesizer.pauseSpeakingAtBoundary(.Immediate)
+        }
     }
     
     func longTouchReceived(point: CGPoint, state: UIGestureRecognizerState, text: String) {
