@@ -25,6 +25,9 @@
 		EB334FB41CB96434009A3985 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB21CB96434009A3985 /* Main.storyboard */; };
 		EB334FB61CB96434009A3985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB51CB96434009A3985 /* Assets.xcassets */; };
 		EB334FB91CB96434009A3985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB71CB96434009A3985 /* LaunchScreen.storyboard */; };
+		EB4A422E1CBC7E0B004EF565 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4A422D1CBC7E0B004EF565 /* SettingsViewController.swift */; };
+		EB4A42301CBC8CE5004EF565 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4A422F1CBC8CE5004EF565 /* DeviceInfo.swift */; };
+		EB4A42321CBC8D59004EF565 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4A42311CBC8D59004EF565 /* Reachability.swift */; };
 		EBBA559C1CB964EC0082642D /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA559B1CB964EC0082642D /* ArticlesViewController.swift */; };
 		EBBA559E1CB964FD0082642D /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA559D1CB964FD0082642D /* ArticleViewController.swift */; };
 		EBBA55A01CB965140082642D /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA559F1CB965140082642D /* LanguageViewController.swift */; };
@@ -85,6 +88,9 @@
 		EB334FB51CB96434009A3985 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB334FB81CB96434009A3985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB334FBA1CB96434009A3985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB4A422D1CBC7E0B004EF565 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		EB4A422F1CBC8CE5004EF565 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
+		EB4A42311CBC8D59004EF565 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		EBBA559B1CB964EC0082642D /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
 		EBBA559D1CB964FD0082642D /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		EBBA559F1CB965140082642D /* LanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +180,8 @@
 				EBBA55A91CB9656C0082642D /* Accent.swift */,
 				EB037BE91CB9E64F00CDB13E /* Article.swift */,
 				EB037BEB1CB9F0F500CDB13E /* Translation.swift */,
+				EB4A422F1CBC8CE5004EF565 /* DeviceInfo.swift */,
+				EB4A42311CBC8D59004EF565 /* Reachability.swift */,
 				EBBA55A21CB965230082642D /* Views */,
 				EBBA559A1CB964B00082642D /* View Controllers */,
 				EB334FB21CB96434009A3985 /* Main.storyboard */,
@@ -191,6 +199,7 @@
 				EBBA559D1CB964FD0082642D /* ArticleViewController.swift */,
 				EBBA559F1CB965140082642D /* LanguageViewController.swift */,
 				EB037BCA1CB9794000CDB13E /* OnboardingViewController.swift */,
+				EB4A422D1CBC7E0B004EF565 /* SettingsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -405,13 +414,16 @@
 				EB037BEC1CB9F0F500CDB13E /* Translation.swift in Sources */,
 				EBBA55A81CB9655C0082642D /* Quizlet.swift in Sources */,
 				EB334FAF1CB96434009A3985 /* AppDelegate.swift in Sources */,
+				EB4A42301CBC8CE5004EF565 /* DeviceInfo.swift in Sources */,
 				EBBA559E1CB964FD0082642D /* ArticleViewController.swift in Sources */,
 				EB037BCD1CB97AB200CDB13E /* ColorConstants.swift in Sources */,
+				EB4A422E1CBC7E0B004EF565 /* SettingsViewController.swift in Sources */,
 				EBBA55A61CB965470082642D /* ArticleCell.swift in Sources */,
 				EBBA55A01CB965140082642D /* LanguageViewController.swift in Sources */,
 				EBBA55AA1CB9656C0082642D /* Accent.swift in Sources */,
 				EBBA559C1CB964EC0082642D /* ArticlesViewController.swift in Sources */,
 				EB037BCB1CB9794000CDB13E /* OnboardingViewController.swift in Sources */,
+				EB4A42321CBC8D59004EF565 /* Reachability.swift in Sources */,
 				EBBA55A41CB9652B0082642D /* ArticleTextView.swift in Sources */,
 				EB037BCF1CB98DED00CDB13E /* Language.swift in Sources */,
 				EB037BD11CB9A03300CDB13E /* AccentTabBar.swift in Sources */,

@@ -143,12 +143,13 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @IBAction func settingsButtonPressed(sender: UIButton) {
-        
+        performSegueWithIdentifier("settingsSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let avc = segue.destinationViewController as! ArticleViewController
-        avc.article = articleToSend
+        if let avc = segue.destinationViewController as? ArticleViewController {
+            avc.article = articleToSend
+        }
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

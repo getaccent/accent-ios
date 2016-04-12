@@ -12,6 +12,7 @@ class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var noticeLabel: UILabel!
     
     private var selectedLanguage = Language.Spanish
     
@@ -29,9 +30,22 @@ class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPicker
         pickerView.delegate = self
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if presentingViewController is SettingsViewController {
+            noticeLabel.alpha = 0
+        }
+    }
+    
     @IBAction func continueButtonPressed(sender: UIButton) {
         Language.saveLanguage(selectedLanguage)
-        performSegueWithIdentifier("articlesSegue", sender: self)
+        
+        if presentingViewController is SettingsViewController {
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            performSegueWithIdentifier("articlesSegue", sender: self)
+        }
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
