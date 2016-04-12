@@ -24,21 +24,17 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LeMonde" translatesAutoresizingMaskIntoConstraints="NO" id="KYI-M6-FhO">
-                    <rect key="frame" x="16" y="432" width="52" height="12"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="12" id="Ub0-qN-oqf"/>
-                        <constraint firstAttribute="width" secondItem="KYI-M6-FhO" secondAttribute="height" multiplier="13:3" id="VFF-sJ-eAF"/>
-                        <constraint firstAttribute="width" secondItem="KYI-M6-FhO" secondAttribute="height" multiplier="810:187" id="s1g-ZM-90C"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="VFF-sJ-eAF"/>
-                        </mask>
-                    </variation>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6R-80-qVW">
                     <rect key="frame" x="575" y="432" width="14" height="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lemonde.fr – by Jack Cook" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjH-8N-dZt">
+                    <rect key="frame" x="16" y="432" width="139" height="12"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="12" id="Jre-6t-o0F"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -46,37 +42,27 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="KYI-M6-FhO" firstAttribute="width" secondItem="KYI-M6-FhO" secondAttribute="height" multiplier="810:187" id="10h-uJ-nPw"/>
-                <constraint firstItem="KYI-M6-FhO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NhX-Fq-U7t" secondAttribute="bottom" constant="12" id="7JS-xo-uCs"/>
                 <constraint firstAttribute="trailing" secondItem="RcM-Uf-fq9" secondAttribute="trailing" constant="16" id="82L-sd-hzZ"/>
                 <constraint firstAttribute="trailing" secondItem="NhX-Fq-U7t" secondAttribute="trailing" constant="16" id="8tn-7c-kgK"/>
+                <constraint firstItem="U6R-80-qVW" firstAttribute="height" secondItem="JjH-8N-dZt" secondAttribute="height" id="9nk-XJ-0ul"/>
                 <constraint firstAttribute="trailing" secondItem="U6R-80-qVW" secondAttribute="trailing" constant="16" id="JXr-2c-CRj"/>
                 <constraint firstItem="NhX-Fq-U7t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="JuL-rW-1ee"/>
-                <constraint firstAttribute="bottom" secondItem="KYI-M6-FhO" secondAttribute="bottom" constant="16" id="Qxt-li-3By"/>
                 <constraint firstItem="NhX-Fq-U7t" firstAttribute="top" secondItem="RcM-Uf-fq9" secondAttribute="bottom" constant="8" id="SOg-XV-kl5"/>
                 <constraint firstAttribute="bottom" secondItem="U6R-80-qVW" secondAttribute="bottom" constant="16" id="aaW-ke-xob"/>
                 <constraint firstItem="RcM-Uf-fq9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="ahs-55-32o"/>
-                <constraint firstItem="KYI-M6-FhO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="f8l-Xt-Lkx"/>
+                <constraint firstItem="JjH-8N-dZt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="bAC-Cr-f9g"/>
+                <constraint firstAttribute="bottom" secondItem="JjH-8N-dZt" secondAttribute="bottom" constant="16" id="fwW-pM-UdL"/>
                 <constraint firstItem="RcM-Uf-fq9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="nS3-6v-nS9"/>
-                <constraint firstItem="U6R-80-qVW" firstAttribute="height" secondItem="KYI-M6-FhO" secondAttribute="height" id="yWm-lO-z2r"/>
+                <constraint firstItem="JjH-8N-dZt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NhX-Fq-U7t" secondAttribute="bottom" constant="8" id="toY-nQ-si8"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="10h-uJ-nPw"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="articleImage" destination="RcM-Uf-fq9" id="VII-7Z-Gfl"/>
-                <outlet property="sourceImage" destination="KYI-M6-FhO" id="29a-dI-hDm"/>
                 <outlet property="timeLabel" destination="U6R-80-qVW" id="8ee-Jc-JYI"/>
                 <outlet property="titleLabel" destination="NhX-Fq-U7t" id="Gss-5P-Iqo"/>
             </connections>
             <point key="canvasLocation" x="435.5" y="320"/>
         </view>
     </objects>
-    <resources>
-        <image name="LeMonde" width="139" height="32"/>
-    </resources>
 </document>

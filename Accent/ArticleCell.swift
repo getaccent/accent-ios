@@ -17,17 +17,11 @@ class ArticleCell: MGSwipeTableCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var firstLineLabel: UILabel?
-    @IBOutlet weak var sourceImage: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var articleImage: UIImageView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        sourceImage.image = sourceImage.image?.imageWithRenderingMode(.AlwaysTemplate)
-        sourceImage.tintColor = UIColor(white: 0, alpha: 0.75)
-        
-        sourceImage.alpha = 0
         
         let hour = Int(arc4random_uniform(9)) + 1
         timeLabel.text = "\(hour)h"
