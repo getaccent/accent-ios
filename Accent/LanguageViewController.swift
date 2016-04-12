@@ -10,6 +10,7 @@ import UIKit
 
 class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var noticeLabel: UILabel!
@@ -35,7 +36,14 @@ class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         if presentingViewController is SettingsViewController {
             noticeLabel.alpha = 0
+        } else {
+            closeButton.alpha = 0
+            closeButton.userInteractionEnabled = false
         }
+    }
+    
+    @IBAction func closeButtonPressed(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func continueButtonPressed(sender: UIButton) {
