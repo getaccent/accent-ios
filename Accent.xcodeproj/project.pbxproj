@@ -36,6 +36,7 @@
 		EBBA55A81CB9655C0082642D /* Quizlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA55A71CB9655C0082642D /* Quizlet.swift */; };
 		EBBA55AA1CB9656C0082642D /* Accent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBA55A91CB9656C0082642D /* Accent.swift */; };
 		EBBF22611CBA91CB00CDA5BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBBF22601CBA91CB00CDA5BB /* Images.xcassets */; };
+		EBF868DA1CBEE9AE00C9A15E /* AudioBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF868D91CBEE9AE00C9A15E /* AudioBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		EBBA55A71CB9655C0082642D /* Quizlet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quizlet.swift; sourceTree = "<group>"; };
 		EBBA55A91CB9656C0082642D /* Accent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accent.swift; sourceTree = "<group>"; };
 		EBBF22601CBA91CB00CDA5BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EBF868D91CBEE9AE00C9A15E /* AudioBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 				EB037BB21CB9664400CDB13E /* NoImageArticleCell.xib */,
 				EB037BD01CB9A03300CDB13E /* AccentTabBar.swift */,
 				EB037BD21CB9B09500CDB13E /* AccentTabView.swift */,
+				EBF868D91CBEE9AE00C9A15E /* AudioBar.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				EB4A422E1CBC7E0B004EF565 /* SettingsViewController.swift in Sources */,
 				EBBA55A61CB965470082642D /* ArticleCell.swift in Sources */,
 				EBBA55A01CB965140082642D /* LanguageViewController.swift in Sources */,
+				EBF868DA1CBEE9AE00C9A15E /* AudioBar.swift in Sources */,
 				EBBA55AA1CB9656C0082642D /* Accent.swift in Sources */,
 				EBBA559C1CB964EC0082642D /* ArticlesViewController.swift in Sources */,
 				EB037BCB1CB9794000CDB13E /* OnboardingViewController.swift in Sources */,

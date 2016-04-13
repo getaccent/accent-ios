@@ -9,11 +9,12 @@
 import AVFoundation
 import UIKit
 
-class ArticleViewController: UIViewController, ArticleTextViewDelegate {
+class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBarDelegate {
     
     @IBOutlet weak var topBar: UIView!
-    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var bottomBar: AudioBar!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var article: Article!
     
@@ -24,8 +25,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     private var translateView: UIView!
     private var translateLabel: UILabel!
     
-    var synthesizer: AVSpeechSynthesizer!
-    var playing = false
+    private var audio = false
     
     private var terms = [String: String]()
     
@@ -37,11 +37,12 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
         imageView = UIImageView()
         scrollView.addSubview(imageView)
         
+        bottomBar.article = article
+        bottomBar.delegate = self
+        
         Accent.sharedInstance.getArticleThumbnail(article) { (image) in
             self.imageView.image = image
         }
-        
-        synthesizer = AVSpeechSynthesizer()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -65,6 +66,13 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
         topBar.layer.shadowOffset = CGSizeMake(0, 1)
         topBar.layer.shadowOpacity = 0.15
         topBar.layer.shadowPath = topShadowPath.CGPath
+        
+        let bottomShadowPath = UIBezierPath(rect: bottomBar.bounds)
+        bottomBar.layer.masksToBounds = false
+        bottomBar.layer.shadowColor = UIColor.blackColor().CGColor
+        bottomBar.layer.shadowOffset = CGSizeMake(0, -1)
+        bottomBar.layer.shadowOpacity = 0.15
+        bottomBar.layer.shadowPath = bottomShadowPath.CGPath
         
         if articleTitle == nil {
             articleTitle = UILabel()
@@ -124,28 +132,6 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
         translateLabel.frame = CGRectMake(16, 4, translateView.frame.size.width - 32, 28)
     }
     
-    @IBAction func playButtonPressed(sender: UIButton) {
-        playing = !playing
-        
-        if playing {
-            playButton.setImage(UIImage(named: "Pause"), forState: .Normal)
-            
-            if synthesizer.paused {
-                synthesizer.continueSpeaking()
-            } else {
-                let utterance = AVSpeechUtterance(string: article.text)
-                utterance.rate = 0.35
-                utterance.voice = AVSpeechSynthesisVoice(language: Language.savedLanguage()?.getCode())
-                
-                synthesizer.speakUtterance(utterance)
-                synthesizer.pauseSpeakingAtBoundary(.Immediate)
-            }
-        } else {
-            playButton.setImage(UIImage(named: "Play"), forState: .Normal)
-            synthesizer.pauseSpeakingAtBoundary(.Immediate)
-        }
-    }
-    
     func longTouchReceived(point: CGPoint, state: UIGestureRecognizerState, text: String) {
         func moveTranslationView() {
             translateView.frame = CGRectMake(16, point.y - 96 - translateView.frame.size.height, translateView.frame.size.width, translateView.frame.size.height)
@@ -190,6 +176,33 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate {
     
     @IBAction func backButtonPressed(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func speechButtonPressed(sender: UIButton?) {
+        audio = !audio
+        
+        bottomConstraint.constant = audio ? 0 : -56
+        
+        UIView.animateWithDuration(0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func hiding() {
+        speechButtonPressed(nil)
+    }
+    
+    func updatedSpeechRange(range: NSRange) {
+        let attributedString = NSMutableAttributedString(string: textView.text)
+        
+        attributedString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.accentBlueColor(), range: range)
+        attributedString.addAttribute(NSFontAttributeName, value: textView.font!, range: NSMakeRange(0, attributedString.length))
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        
+        textView.attributedText = attributedString
     }
     
     override func canBecomeFirstResponder() -> Bool {

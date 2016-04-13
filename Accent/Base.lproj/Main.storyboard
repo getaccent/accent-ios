@@ -298,6 +298,13 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fF1-4w-vkb">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oX-Qb-1aL" customClass="AudioBar" customModule="Accent" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="600" width="600" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="zSj-Of-old"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXo-0E-MDS">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <subviews>
@@ -320,22 +327,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85W-gW-dzK">
-                                        <rect key="frame" x="556" y="25" width="36" height="36"/>
+                                        <rect key="frame" x="554" y="25" width="36" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="85W-gW-dzK" secondAttribute="height" multiplier="1:1" id="0eo-zS-1vl"/>
                                             <constraint firstAttribute="width" secondItem="85W-gW-dzK" secondAttribute="height" multiplier="1:1" id="EHu-fz-wyF"/>
                                             <constraint firstAttribute="height" constant="36" id="tIY-uk-Rk9"/>
                                         </constraints>
-                                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                                        <state key="normal" image="Play"/>
+                                        <inset key="contentEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
+                                        <state key="normal" image="Speech"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="0eo-zS-1vl"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="playButtonPressed:" destination="EaD-Ei-YQ3" eventType="touchUpInside" id="ZSy-j2-xnZ"/>
-                                            <action selector="settingsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gNa-NZ-8mf"/>
+                                            <action selector="speechButtonPressed:" destination="EaD-Ei-YQ3" eventType="touchUpInside" id="JlB-jN-TvQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -346,24 +352,34 @@
                                     <constraint firstItem="85W-gW-dzK" firstAttribute="centerY" secondItem="crW-c4-gNb" secondAttribute="centerY" id="8kn-O0-efM"/>
                                     <constraint firstItem="crW-c4-gNb" firstAttribute="centerX" secondItem="VXo-0E-MDS" secondAttribute="centerX" id="Rpd-5N-wxg"/>
                                     <constraint firstItem="eTT-3Y-7Yc" firstAttribute="centerY" secondItem="crW-c4-gNb" secondAttribute="centerY" id="h6L-dp-Xyq"/>
-                                    <constraint firstAttribute="trailing" secondItem="85W-gW-dzK" secondAttribute="trailing" constant="8" id="qC0-HO-EuX"/>
+                                    <constraint firstAttribute="trailing" secondItem="85W-gW-dzK" secondAttribute="trailing" constant="10" id="qC0-HO-EuX"/>
                                     <constraint firstAttribute="height" constant="64" id="xR6-UY-nkC"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2oX-Qb-1aL" firstAttribute="top" secondItem="fF1-4w-vkb" secondAttribute="bottom" id="1W7-Be-fGi"/>
+                            <constraint firstAttribute="trailing" secondItem="2oX-Qb-1aL" secondAttribute="trailing" id="4ZM-dc-ujD"/>
                             <constraint firstItem="ycr-Zj-qCf" firstAttribute="top" secondItem="fF1-4w-vkb" secondAttribute="bottom" id="7Ky-n8-NHr"/>
                             <constraint firstItem="VXo-0E-MDS" firstAttribute="leading" secondItem="2Rv-rT-gjs" secondAttribute="leading" id="TSL-iK-HRZ"/>
                             <constraint firstAttribute="trailing" secondItem="fF1-4w-vkb" secondAttribute="trailing" id="XGO-hA-jIV"/>
                             <constraint firstAttribute="trailing" secondItem="VXo-0E-MDS" secondAttribute="trailing" id="cg8-CP-oNU"/>
+                            <constraint firstItem="ycr-Zj-qCf" firstAttribute="top" secondItem="2oX-Qb-1aL" secondAttribute="bottom" constant="-56" id="iM4-Tr-pBO"/>
+                            <constraint firstItem="2oX-Qb-1aL" firstAttribute="leading" secondItem="2Rv-rT-gjs" secondAttribute="leading" id="iee-vc-KTS"/>
                             <constraint firstItem="fF1-4w-vkb" firstAttribute="top" secondItem="VXo-0E-MDS" secondAttribute="bottom" id="jc4-1q-6iP"/>
                             <constraint firstItem="fF1-4w-vkb" firstAttribute="leading" secondItem="2Rv-rT-gjs" secondAttribute="leading" id="oOh-FK-2aN"/>
                             <constraint firstItem="VXo-0E-MDS" firstAttribute="top" secondItem="2Rv-rT-gjs" secondAttribute="top" id="ulr-g1-Q25"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7Ky-n8-NHr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="playButton" destination="85W-gW-dzK" id="JgJ-u5-pgb"/>
+                        <outlet property="bottomBar" destination="2oX-Qb-1aL" id="hOA-7b-ji0"/>
+                        <outlet property="bottomConstraint" destination="iM4-Tr-pBO" id="oMJ-aR-E0C"/>
                         <outlet property="scrollView" destination="fF1-4w-vkb" id="vb3-UH-Ki1"/>
                         <outlet property="topBar" destination="VXo-0E-MDS" id="GHe-qP-UBy"/>
                     </connections>
@@ -483,9 +499,9 @@
     <resources>
         <image name="Back" width="24" height="24"/>
         <image name="Close" width="32" height="32"/>
-        <image name="Play" width="32" height="32"/>
         <image name="Quizlet" width="37" height="48"/>
         <image name="Settings" width="32" height="32"/>
+        <image name="Speech" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6fk-pA-prn"/>
