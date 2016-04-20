@@ -14,6 +14,7 @@ import UIKit
 class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AccentTabBarDelegate, MGSwipeTableCellDelegate {
     
     @IBOutlet weak var topBar: UIView!
+    @IBOutlet weak var topBarLabel: UILabel!
     @IBOutlet weak var quizletButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -59,7 +60,13 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         bottomBar.delegate = self
         
-        let tabs = [AccentTab(name: "Home", image: UIImage(named: "Home")!), AccentTab(name: "Browse", image: UIImage(named: "Browse")!)]
+        let articlesText = NSLocalizedString("Articles", comment: "news articles")
+        topBarLabel.text = articlesText
+        
+        let home = NSLocalizedString("Home", comment: "homepage")
+        let browse = NSLocalizedString("Browse", comment: "browse articles")
+        
+        let tabs = [AccentTab(name: home, image: UIImage(named: "Home")!), AccentTab(name: browse, image: UIImage(named: "Browse")!)]
         bottomBar.updateTabs(tabs)
         
         tableView.dataSource = self

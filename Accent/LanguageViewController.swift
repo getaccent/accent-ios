@@ -11,6 +11,7 @@ import UIKit
 class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var noticeLabel: UILabel!
@@ -21,6 +22,10 @@ class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPicker
         super.viewDidLoad()
         
         navigationController?.navigationBarHidden = true
+        
+        selectLabel.text = NSLocalizedString("Select a Language", comment: "")
+        continueButton.setTitle(NSLocalizedString("Continue", comment: ""), forState: .Normal)
+        noticeLabel.text = "(" + NSLocalizedString("Don't worry, you can change this later", comment: "the selected language can be changed later") + ")"
         
         continueButton.setTitleColor(UIColor.accentDarkColor(), forState: .Normal)
         continueButton.layer.borderColor = UIColor.accentDarkColor().CGColor

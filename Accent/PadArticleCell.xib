@@ -90,12 +90,12 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="KBQ-eo-KEo"/>
-                    <exclude reference="LK3-HU-hHP"/>
                     <exclude reference="AZg-Qv-0wu"/>
-                    <exclude reference="b9J-aW-ssW"/>
-                    <exclude reference="YYh-yX-kVo"/>
-                    <exclude reference="Xkg-9y-CU4"/>
                     <exclude reference="CCf-Hg-bQJ"/>
+                    <exclude reference="LK3-HU-hHP"/>
+                    <exclude reference="Xkg-9y-CU4"/>
+                    <exclude reference="YYh-yX-kVo"/>
+                    <exclude reference="b9J-aW-ssW"/>
                 </mask>
             </variation>
             <connections>

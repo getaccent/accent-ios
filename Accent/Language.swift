@@ -20,10 +20,10 @@ enum Language: Int {
     
     func getName() -> String {
         switch self {
-        case .Spanish: return "Spanish"
-        case .Chinese: return "Chinese"
-        case .French: return "French"
-        case .Swedish: return "Swedish"
+        case .Spanish: return NSLocalizedString("Spanish", comment: "")
+        case .Chinese: return NSLocalizedString("Chinese", comment: "")
+        case .French: return NSLocalizedString("French", comment: "")
+        case .Swedish: return NSLocalizedString("Swedish", comment: "")
         }
     }
     

@@ -36,6 +36,10 @@ class OnboardingViewController: UIViewController {
         skipButton.layer.borderColor = UIColor.accentDarkColor().CGColor
         skipButton.layer.borderWidth = 1
         skipButton.layer.cornerRadius = 4
+        
+        descriptionLabel.text = NSLocalizedString("Your global news source", comment: "")
+        digitsButton.setTitle(NSLocalizedString("Sign in with Phone Number", comment: ""), forState: .Normal)
+        skipButton.setTitle(NSLocalizedString("Continue Without Login", comment: ""), forState: .Normal)
     }
     
     @IBAction func digitsButtonPressed(sender: UIButton) {

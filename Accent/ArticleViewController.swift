@@ -12,6 +12,7 @@ import UIKit
 class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBarDelegate {
     
     @IBOutlet weak var topBar: UIView!
+    @IBOutlet weak var topBarLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomBar: AudioBar!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
@@ -43,6 +44,9 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         Accent.sharedInstance.getArticleThumbnail(article) { (image) in
             self.imageView.image = image
         }
+        
+        let articlesText = NSLocalizedString("Article", comment: "news article")
+        topBarLabel.text = articlesText
     }
     
     override func viewWillDisappear(animated: Bool) {

@@ -21,6 +21,7 @@
 		EB037BE21CB9B8A200CDB13E /* Add to Accent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EB037BD81CB9B8A100CDB13E /* Add to Accent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EB037BEA1CB9E64F00CDB13E /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BE91CB9E64F00CDB13E /* Article.swift */; };
 		EB037BEC1CB9F0F500CDB13E /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BEB1CB9F0F500CDB13E /* Translation.swift */; };
+		EB04BAB61CC8307E00D6B005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB04BAB81CC8307E00D6B005 /* Localizable.strings */; };
 		EB334FAF1CB96434009A3985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB334FAE1CB96434009A3985 /* AppDelegate.swift */; };
 		EB334FB41CB96434009A3985 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB21CB96434009A3985 /* Main.storyboard */; };
 		EB334FB61CB96434009A3985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB51CB96434009A3985 /* Assets.xcassets */; };
@@ -85,6 +86,8 @@
 		EB037BE81CB9E0D400CDB13E /* Add to Accent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Add to Accent.entitlements"; sourceTree = "<group>"; };
 		EB037BE91CB9E64F00CDB13E /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		EB037BEB1CB9F0F500CDB13E /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
+		EB04BAB71CC8307E00D6B005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EB04BAB91CC8308600D6B005 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EB334FAB1CB96434009A3985 /* Accent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB334FAE1CB96434009A3985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB334FB31CB96434009A3985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 				EB334FB51CB96434009A3985 /* Assets.xcassets */,
 				EB334FB71CB96434009A3985 /* LaunchScreen.storyboard */,
 				EB334FBA1CB96434009A3985 /* Info.plist */,
+				EB04BAB81CC8307E00D6B005 /* Localizable.strings */,
 			);
 			path = Accent;
 			sourceTree = "<group>";
@@ -307,6 +311,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = EB334FA21CB96434009A3985;
 			productRefGroup = EB334FAC1CB96434009A3985 /* Products */;
@@ -337,6 +342,7 @@
 				EB334FB91CB96434009A3985 /* LaunchScreen.storyboard in Resources */,
 				EB334FB61CB96434009A3985 /* Assets.xcassets in Resources */,
 				EB7901BD1CC71B1000A7186E /* PadNoImageArticleCell.xib in Resources */,
+				EB04BAB61CC8307E00D6B005 /* Localizable.strings in Resources */,
 				EB037BB41CB9664400CDB13E /* LargeArticleCell.xib in Resources */,
 				EB7901BB1CC719A200A7186E /* PadArticleCell.xib in Resources */,
 				EB334FB41CB96434009A3985 /* Main.storyboard in Resources */,
@@ -459,6 +465,15 @@
 				EB037BDD1CB9B8A200CDB13E /* Base */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		EB04BAB81CC8307E00D6B005 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB04BAB71CC8307E00D6B005 /* Base */,
+				EB04BAB91CC8308600D6B005 /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		EB334FB21CB96434009A3985 /* Main.storyboard */ = {

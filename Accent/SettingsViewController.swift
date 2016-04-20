@@ -12,6 +12,7 @@ import UIKit
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var topBar: UIView!
+    @IBOutlet weak var topBarLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -23,6 +24,9 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.delegate = self
         
         tableView.contentInset = UIEdgeInsetsMake(-8, 0, 0, 0)
+        
+        let settingsText = NSLocalizedString("Settings", comment: "application settings")
+        topBarLabel.text = settingsText
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -63,7 +67,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         case (0, 0):
             let cell = UITableViewCell(style: .Value1, reuseIdentifier: "LanguageCell")
             
-            cell.textLabel?.text = "Target Language"
+            cell.textLabel?.text = NSLocalizedString("Target Language", comment: "language being learned")
             cell.textLabel?.textColor = UIColor.accentDarkColor()
             cell.detailTextLabel?.text = Language.savedLanguage()?.getName()
             
@@ -73,7 +77,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         case (1, 0):
             let cell = UITableViewCell(style: .Default, reuseIdentifier: "FeedbackCell")
             
-            cell.textLabel?.text = "Send Feedback"
+            cell.textLabel?.text = NSLocalizedString("Send Feedback", comment: "send feedback")
             cell.textLabel?.textColor = UIColor.accentDarkColor()
             
             cell.accessoryType = .DisclosureIndicator
@@ -82,7 +86,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         case (1, 1):
             let cell = UITableViewCell(style: .Default, reuseIdentifier: "RateCell")
             
-            cell.textLabel?.text = "Rate Accent"
+            cell.textLabel?.text = NSLocalizedString("Rate Accent", comment: "rate accent on the app store")
             cell.textLabel?.textColor = UIColor.accentDarkColor()
             
             cell.accessoryType = .DisclosureIndicator
@@ -91,7 +95,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         case (1, 2):
             let cell = UITableViewCell(style: .Value1, reuseIdentifier: "VersionCell")
             
-            cell.textLabel?.text = "Version"
+            cell.textLabel?.text = NSLocalizedString("Version", comment: "app version")
             cell.textLabel?.textColor = UIColor.accentDarkColor()
             
             var versionString = ""
@@ -121,7 +125,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             controller.mailComposeDelegate = self
             
             controller.setToRecipients(["feedback@getaccent.io"])
-            controller.setSubject("Accent Feedback")
+            controller.setSubject(NSLocalizedString("Accent Feedback", comment: "feedback about accent"))
             
             if let data = DeviceInfo.deviceData() {
                 controller.addAttachmentData(data, mimeType: "text/plain", fileName: "device_information.txt")
