@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="mme-nY-cwC" customClass="ArticleCell" customModule="Accent" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="578" height="197"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTz-Op-1ZC">
+                    <rect key="frame" x="530" y="151" width="16" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="8dP-Fn-kyl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxC-Vy-qHJ">
+                    <rect key="frame" x="32" y="99" width="514" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="70j-k9-kBH"/>
+                        <constraint firstAttribute="height" constant="36" id="LnR-ng-nnA"/>
+                    </constraints>
+                    <string key="text">A la fin de l’année 2015, Anne-Marie Thierry a dû allonger ses permanences dans une antenne de France Bénévolat du 10e arrondissement de Paris. Ses trois heures hebdomadaires n’étaient plus suffisantes pour accueillir tous les volontaires la sollicitant pour entrer en contact avec des associations à la recherche de bénévoles.
+En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-publier-a-13h-vivreavec-attentats-crise-des-migrants-quand-l-actualite-booste-l-engagement-associatif_4893974_4809495.html#rsr6ODvKeq8J7zGJ.99</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="70j-k9-kBH"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lemonde.fr • by Jack Cook" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5L-eT-sGs">
+                    <rect key="frame" x="32" y="151" width="161" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="cHT-EP-MKD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#VivreAvec: Attentants, crise des migrants… quand l’actualité booste l’engagement associatif" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BH-bv-Zfd">
+                    <rect key="frame" x="32" y="32" width="514" height="55"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="NTz-Op-1ZC" secondAttribute="trailing" constant="32" id="5GW-ZG-MHK"/>
+                <constraint firstItem="3BH-bv-Zfd" firstAttribute="top" secondItem="mme-nY-cwC" secondAttribute="top" constant="32" id="Jd4-MU-UO6"/>
+                <constraint firstItem="NTz-Op-1ZC" firstAttribute="top" secondItem="LxC-Vy-qHJ" secondAttribute="bottom" constant="10" id="PVm-5U-XNn"/>
+                <constraint firstAttribute="trailing" secondItem="3BH-bv-Zfd" secondAttribute="trailing" constant="32" id="Zv7-tn-DFW"/>
+                <constraint firstItem="3BH-bv-Zfd" firstAttribute="leading" secondItem="mme-nY-cwC" secondAttribute="leading" constant="32" id="bR3-Jd-ISw"/>
+                <constraint firstAttribute="trailing" secondItem="LxC-Vy-qHJ" secondAttribute="trailing" constant="32" id="d8D-98-Lct"/>
+                <constraint firstAttribute="bottom" secondItem="N5L-eT-sGs" secondAttribute="bottom" constant="32" id="iWE-ke-2Dl"/>
+                <constraint firstItem="N5L-eT-sGs" firstAttribute="top" secondItem="LxC-Vy-qHJ" secondAttribute="bottom" constant="16" id="jVx-3G-yWr"/>
+                <constraint firstItem="N5L-eT-sGs" firstAttribute="leading" secondItem="mme-nY-cwC" secondAttribute="leading" constant="32" id="ldg-8B-Yca"/>
+                <constraint firstItem="LxC-Vy-qHJ" firstAttribute="top" secondItem="3BH-bv-Zfd" secondAttribute="bottom" constant="12" id="qUH-9T-aHO"/>
+                <constraint firstItem="LxC-Vy-qHJ" firstAttribute="leading" secondItem="mme-nY-cwC" secondAttribute="leading" constant="32" id="rDm-SW-1wc"/>
+                <constraint firstAttribute="bottom" secondItem="NTz-Op-1ZC" secondAttribute="bottom" constant="32" id="tYW-06-qjX"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="PVm-5U-XNn"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="firstLineLabel" destination="LxC-Vy-qHJ" id="Sun-z5-eFy"/>
+                <outlet property="timeLabel" destination="NTz-Op-1ZC" id="LPC-kE-Qge"/>
+                <outlet property="titleLabel" destination="3BH-bv-Zfd" id="RRO-z8-NI0"/>
+            </connections>
+            <point key="canvasLocation" x="282" y="261.5"/>
+        </view>
+    </objects>
+</document>

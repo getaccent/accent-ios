@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="7EO-T7-ahM" customClass="ArticleCell" customModule="Accent" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="578" height="197"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Izz-yi-7fO">
+                    <rect key="frame" x="434" y="43" width="112" height="112"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="112" id="V5c-Gu-alS"/>
+                        <constraint firstAttribute="width" secondItem="Izz-yi-7fO" secondAttribute="height" multiplier="1:1" id="cfT-Nt-CzL"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFx-Kj-dcy">
+                    <rect key="frame" x="386" y="151" width="16" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="WTG-42-yUW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spp-X1-BOh">
+                    <rect key="frame" x="32" y="99" width="370" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="570-bI-MnS"/>
+                        <constraint firstAttribute="height" constant="18" id="9xf-ha-w9M"/>
+                    </constraints>
+                    <string key="text">A la fin de l’année 2015, Anne-Marie Thierry a dû allonger ses permanences dans une antenne de France Bénévolat du 10e arrondissement de Paris. Ses trois heures hebdomadaires n’étaient plus suffisantes pour accueillir tous les volontaires la sollicitant pour entrer en contact avec des associations à la recherche de bénévoles.
+En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-publier-a-13h-vivreavec-attentats-crise-des-migrants-quand-l-actualite-booste-l-engagement-associatif_4893974_4809495.html#rsr6ODvKeq8J7zGJ.99</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="9xf-ha-w9M"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lemonde.fr • by Jack Cook" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KED-79-67K">
+                    <rect key="frame" x="32" y="151" width="161" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="ZDO-tE-edD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#VivreAvec: Attentants, crise des migrants… quand l’actualité booste l’engagement associatif" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-Tw-oc5">
+                    <rect key="frame" x="32" y="32" width="370" height="55"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Izz-yi-7fO" secondAttribute="bottom" constant="16" id="AZg-Qv-0wu"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="top" secondItem="7EO-T7-ahM" secondAttribute="top" constant="12" id="CCf-Hg-bQJ"/>
+                <constraint firstItem="J1Z-Tw-oc5" firstAttribute="top" secondItem="7EO-T7-ahM" secondAttribute="top" constant="32" id="DUc-En-AQ1"/>
+                <constraint firstItem="KED-79-67K" firstAttribute="leading" secondItem="7EO-T7-ahM" secondAttribute="leading" constant="32" id="I1y-Wv-k3m"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="leading" secondItem="zFx-Kj-dcy" secondAttribute="trailing" constant="32" id="JiU-oD-0Q5"/>
+                <constraint firstItem="zFx-Kj-dcy" firstAttribute="top" secondItem="spp-X1-BOh" secondAttribute="bottom" constant="10" id="KBQ-eo-KEo"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="width" secondItem="7EO-T7-ahM" secondAttribute="width" multiplier="0.333" id="LK3-HU-hHP"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="leading" secondItem="spp-X1-BOh" secondAttribute="trailing" constant="32" id="QI0-Q6-cKs"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="centerY" secondItem="7EO-T7-ahM" secondAttribute="centerY" id="Qof-0S-9d9"/>
+                <constraint firstAttribute="bottom" secondItem="KED-79-67K" secondAttribute="bottom" constant="32" id="RW6-PY-zKL"/>
+                <constraint firstAttribute="bottom" secondItem="zFx-Kj-dcy" secondAttribute="bottom" constant="32" id="TXH-F4-kl7"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="leading" secondItem="7EO-T7-ahM" secondAttribute="leading" constant="12" id="Xkg-9y-CU4"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="top" secondItem="7EO-T7-ahM" secondAttribute="top" constant="16" id="YYh-yX-kVo"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="centerY" secondItem="7EO-T7-ahM" secondAttribute="centerY" id="b9J-aW-ssW"/>
+                <constraint firstItem="spp-X1-BOh" firstAttribute="top" secondItem="J1Z-Tw-oc5" secondAttribute="bottom" constant="12" id="hkh-Oa-Se0"/>
+                <constraint firstItem="J1Z-Tw-oc5" firstAttribute="leading" secondItem="7EO-T7-ahM" secondAttribute="leading" constant="32" id="kCf-Ql-Vq5"/>
+                <constraint firstItem="Izz-yi-7fO" firstAttribute="leading" secondItem="J1Z-Tw-oc5" secondAttribute="trailing" constant="32" id="ltX-jM-VSS"/>
+                <constraint firstItem="KED-79-67K" firstAttribute="top" secondItem="spp-X1-BOh" secondAttribute="bottom" constant="16" id="nFB-tX-4Xk"/>
+                <constraint firstItem="spp-X1-BOh" firstAttribute="leading" secondItem="7EO-T7-ahM" secondAttribute="leading" constant="32" id="nrJ-eV-Pad"/>
+                <constraint firstAttribute="trailing" secondItem="Izz-yi-7fO" secondAttribute="trailing" constant="32" id="rFj-FF-uqV"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="KBQ-eo-KEo"/>
+                    <exclude reference="LK3-HU-hHP"/>
+                    <exclude reference="AZg-Qv-0wu"/>
+                    <exclude reference="b9J-aW-ssW"/>
+                    <exclude reference="YYh-yX-kVo"/>
+                    <exclude reference="Xkg-9y-CU4"/>
+                    <exclude reference="CCf-Hg-bQJ"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="articleImage" destination="Izz-yi-7fO" id="neM-Au-Nmd"/>
+                <outlet property="firstLineLabel" destination="spp-X1-BOh" id="KQ9-s3-9aa"/>
+                <outlet property="timeLabel" destination="zFx-Kj-dcy" id="HTq-dr-bGo"/>
+                <outlet property="titleLabel" destination="J1Z-Tw-oc5" id="TKS-e1-hNO"/>
+            </connections>
+            <point key="canvasLocation" x="402" y="203.5"/>
+        </view>
+    </objects>
+</document>

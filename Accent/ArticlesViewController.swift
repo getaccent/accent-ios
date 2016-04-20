@@ -153,7 +153,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.row % 5 == 0 ? 312 : 136
+        return UIDevice.currentDevice().userInterfaceIdiom == .Phone ? (indexPath.row % 5 == 0 ? 312 : 136) : 192
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -167,7 +167,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let article = articles[indexPath.row]
         
-        let cell = NSBundle.mainBundle().loadNibNamed(indexPath.row % 5 == 0 ? (article.imageUrl == nil ? "NoImageArticleCell" : "LargeArticleCell") : (article.imageUrl == nil ? "NoImageArticleCell" : "ArticleCell"), owner: self, options: nil)[0] as! ArticleCell
+        let cell = NSBundle.mainBundle().loadNibNamed(UIDevice.currentDevice().userInterfaceIdiom == .Phone ? (indexPath.row % 5 == 0 ? (article.imageUrl == nil ? "NoImageArticleCell" : "LargeArticleCell") : (article.imageUrl == nil ? "NoImageArticleCell" : "ArticleCell")) : (article.imageUrl == nil ? "PadNoImageArticleCell" : "PadArticleCell"), owner: self, options: nil)[0] as! ArticleCell
         cell.configure(articles[indexPath.row])
         cell.delegate = self
         
@@ -234,8 +234,6 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         for button in buttons {
             button.buttonWidth = UIScreen.mainScreen().bounds.width / CGFloat(buttons.count)
         }
-        
-        cell.rightButtons = buttons
         
         return buttons
     }
