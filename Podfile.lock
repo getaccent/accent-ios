@@ -5,11 +5,11 @@ PODS:
     - TwitterCore (= 2.0.2)
   - Fabric (1.6.7)
   - MGSwipeTableCell (1.5.5)
-  - Realm (0.98.6):
-    - Realm/Headers (= 0.98.6)
-  - Realm/Headers (0.98.6)
-  - RealmSwift (0.98.6):
-    - Realm (= 0.98.6)
+  - Realm (0.98.8):
+    - Realm/Headers (= 0.98.8)
+  - Realm/Headers (0.98.8)
+  - RealmSwift (0.98.8):
+    - Realm (= 0.98.8)
   - SwiftyJSON (2.3.2)
   - TwitterCore (2.0.2):
     - Fabric
@@ -28,8 +28,8 @@ SPEC CHECKSUMS:
   Digits: a5c8ddfed18d5e0496e9b6f459f0bca44de588db
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   MGSwipeTableCell: bafeb5f351124544c9364ecbdf24c7b06a37d340
-  Realm: 44803f35418c5d89b27825a564247fcd190de37e
-  RealmSwift: c7239c52c83f8c43525a5269ba7be1694da33afc
+  Realm: 0e293bb62999730599efc3048896bbd4f2e43bcd
+  RealmSwift: 064262d38113f23ff3508fb20a0a922e696bec01
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TwitterCore: 0f44d8980a6879d5205dcb4e010d15e643e56fa0
 
