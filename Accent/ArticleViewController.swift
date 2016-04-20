@@ -57,6 +57,8 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         }
     }
     
+    let margin: CGFloat = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 32 : 16
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -82,14 +84,14 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
             scrollView.addSubview(articleTitle)
         }
         
-        let articleTitleHeight = (articleTitle.text! as NSString).boundingRectWithSize(CGSizeMake(scrollView.bounds.width - 32, CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: articleTitle.font], context: nil).height
-        articleTitle.frame = CGRectMake(16, 16, scrollView.bounds.width - 32, articleTitleHeight)
+        let articleTitleHeight = (articleTitle.text! as NSString).boundingRectWithSize(CGSizeMake(scrollView.bounds.width - margin * 2, CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: articleTitle.font], context: nil).height
+        articleTitle.frame = CGRectMake(margin, margin, scrollView.bounds.width - margin * 2, articleTitleHeight)
         
-        let imageWidth = scrollView.bounds.width
+        let imageWidth = scrollView.bounds.width - (UIDevice.currentDevice().userInterfaceIdiom == .Pad ? margin * 6 : 0)
         if article.imageUrl == "" {
             imageView.frame = CGRectMake(0, articleTitle.frame.origin.y + articleTitle.frame.size.height, imageWidth, 0)
         } else {
-            imageView.frame = CGRectMake(0, articleTitle.frame.origin.y + articleTitle.frame.size.height + 16, imageWidth, imageWidth * (9/16))
+            imageView.frame = CGRectMake((scrollView.bounds.width - imageWidth) / 2, articleTitle.frame.origin.y + articleTitle.frame.size.height + margin,  imageWidth, imageWidth * (9/16))
         }
         
         if textView == nil {
@@ -107,10 +109,10 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
             textView.attributedText = NSAttributedString(string: textView.text, attributes: attributes)
         }
         
-        let textViewHeight = textView.sizeThatFits(CGSizeMake(scrollView.bounds.width - 32, CGFloat.max)).height
-        textView.frame = CGRectMake(16, imageView.frame.origin.y + imageView.frame.size.height + 10, scrollView.bounds.width - 32, textViewHeight)
+        let textViewHeight = textView.sizeThatFits(CGSizeMake(scrollView.bounds.width - margin * 2, CGFloat.max)).height
+        textView.frame = CGRectMake(margin, imageView.frame.origin.y + imageView.frame.size.height + margin * 0.625, scrollView.bounds.width - margin * 2, textViewHeight)
         
-        scrollView.contentSize = CGSizeMake(scrollView.bounds.width, textView.frame.origin.y + textView.frame.size.height + 16)
+        scrollView.contentSize = CGSizeMake(scrollView.bounds.width, textView.frame.origin.y + textView.frame.size.height + margin)
         
         if translateView == nil {
             translateView = UIView()
@@ -119,7 +121,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
             translateView.layer.cornerRadius = 8
             view.addSubview(translateView)
         }
-        translateView.frame = CGRectMake(16, 80, view.bounds.width - 32, 36)
+        translateView.frame = CGRectMake(margin, 80, view.bounds.width - margin * 2, 36)
         
         if translateLabel == nil {
             translateLabel = UILabel()
@@ -129,12 +131,12 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
             translateLabel.textColor = UIColor.whiteColor()
             translateView.addSubview(translateLabel)
         }
-        translateLabel.frame = CGRectMake(16, 4, translateView.frame.size.width - 32, 28)
+        translateLabel.frame = CGRectMake(margin, 4, translateView.frame.size.width - margin * 2, 28)
     }
     
     func longTouchReceived(point: CGPoint, state: UIGestureRecognizerState, text: String) {
         func moveTranslationView() {
-            translateView.frame = CGRectMake(16, point.y - 96 - translateView.frame.size.height, translateView.frame.size.width, translateView.frame.size.height)
+            translateView.frame = CGRectMake(margin, point.y - 96 - translateView.frame.size.height, translateView.frame.size.width, translateView.frame.size.height)
             
             let text = (textView.text as NSString).substringWithRange(textView.selectedRange)
             Accent.sharedInstance.translateTerm(text) { (translation) in
@@ -165,7 +167,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         case .Ended:
             UIView.animateWithDuration(0.25, animations: {
                 self.translateView.alpha = 0
-                self.translateView.frame = CGRectMake(16, 80, self.view.bounds.width - 32, 36)
+                self.translateView.frame = CGRectMake(self.margin, 80, self.view.bounds.width - self.margin * 2, 36)
             })
             
             becomeFirstResponder()
