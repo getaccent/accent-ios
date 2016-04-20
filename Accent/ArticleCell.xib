@@ -22,15 +22,18 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpZ-Yf-ckH">
                     <rect key="frame" x="436" y="124" width="14" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="McF-37-Kg3"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8g-zd-mUk">
-                    <rect key="frame" x="16" y="100" width="434" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8g-zd-mUk">
+                    <rect key="frame" x="16" y="82" width="434" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="6Ux-nD-TGd"/>
-                        <constraint firstAttribute="height" constant="18" id="FDX-Wu-OOY"/>
+                        <constraint firstAttribute="height" constant="36" id="FDX-Wu-OOY"/>
                     </constraints>
                     <string key="text">A la fin de l’année 2015, Anne-Marie Thierry a dû allonger ses permanences dans une antenne de France Bénévolat du 10e arrondissement de Paris. Ses trois heures hebdomadaires n’étaient plus suffisantes pour accueillir tous les volontaires la sollicitant pour entrer en contact avec des associations à la recherche de bénévoles.
 En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-publier-a-13h-vivreavec-attentats-crise-des-migrants-quand-l-actualite-booste-l-engagement-associatif_4893974_4809495.html#rsr6ODvKeq8J7zGJ.99</string>
@@ -43,17 +46,17 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lemonde.fr – by Jack Cook" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkf-RG-xpY">
-                    <rect key="frame" x="16" y="126" width="139" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lemonde.fr • by Jack Cook" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkf-RG-xpY">
+                    <rect key="frame" x="16" y="124" width="139" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="12" id="sbZ-mp-jmk"/>
+                        <constraint firstAttribute="height" constant="14" id="sbZ-mp-jmk"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#VivreAvec: Attentants, crise des migrants… quand l’actualité booste l’engagement associatif" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVm-CX-d8k">
-                    <rect key="frame" x="16" y="16" width="434" height="78"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#VivreAvec: Attentants, crise des migrants… quand l’actualité booste l’engagement associatif" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVm-CX-d8k">
+                    <rect key="frame" x="16" y="16" width="434" height="62"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -73,9 +76,9 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="leading" secondItem="DVm-CX-d8k" secondAttribute="trailing" constant="16" id="cZ9-Ww-pTq"/>
                 <constraint firstItem="DVm-CX-d8k" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="dKE-5n-gJh"/>
                 <constraint firstAttribute="bottom" secondItem="cpZ-Yf-ckH" secondAttribute="bottom" constant="16" id="g4v-6U-ZeX"/>
-                <constraint firstItem="s8g-zd-mUk" firstAttribute="top" secondItem="DVm-CX-d8k" secondAttribute="bottom" constant="6" id="iGR-YP-MOG"/>
+                <constraint firstItem="s8g-zd-mUk" firstAttribute="top" secondItem="DVm-CX-d8k" secondAttribute="bottom" constant="4" id="iGR-YP-MOG"/>
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="m0U-cy-W9b"/>
-                <constraint firstItem="Mkf-RG-xpY" firstAttribute="top" secondItem="s8g-zd-mUk" secondAttribute="bottom" constant="8" id="mBq-Qq-rAo"/>
+                <constraint firstItem="Mkf-RG-xpY" firstAttribute="top" secondItem="s8g-zd-mUk" secondAttribute="bottom" constant="6" id="mBq-Qq-rAo"/>
                 <constraint firstItem="s8g-zd-mUk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="mRT-TO-vMj"/>
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="nNi-JI-ZHL"/>
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="o92-Bb-EO3"/>

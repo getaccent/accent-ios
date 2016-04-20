@@ -19,21 +19,24 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#VivreAvec: Attentants, crise des migrants… quand l’actualité booste l’engagement associatif" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhX-Fq-U7t">
-                    <rect key="frame" x="16" y="346" width="573" height="36"/>
+                    <rect key="frame" x="16" y="348" width="573" height="74"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6R-80-qVW">
-                    <rect key="frame" x="575" y="432" width="14" height="12"/>
+                    <rect key="frame" x="575" y="430" width="14" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="2XO-i8-jm0"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lemonde.fr – by Jack Cook" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjH-8N-dZt">
-                    <rect key="frame" x="16" y="432" width="139" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lemonde.fr • by Jack Cook" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjH-8N-dZt">
+                    <rect key="frame" x="16" y="430" width="139" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="12" id="Jre-6t-o0F"/>
+                        <constraint firstAttribute="height" constant="14" id="Jre-6t-o0F"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
@@ -47,16 +50,21 @@
                 <constraint firstItem="U6R-80-qVW" firstAttribute="height" secondItem="JjH-8N-dZt" secondAttribute="height" id="9nk-XJ-0ul"/>
                 <constraint firstAttribute="trailing" secondItem="U6R-80-qVW" secondAttribute="trailing" constant="16" id="JXr-2c-CRj"/>
                 <constraint firstItem="NhX-Fq-U7t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="JuL-rW-1ee"/>
-                <constraint firstItem="NhX-Fq-U7t" firstAttribute="top" secondItem="RcM-Uf-fq9" secondAttribute="bottom" constant="8" id="SOg-XV-kl5"/>
+                <constraint firstItem="NhX-Fq-U7t" firstAttribute="top" secondItem="RcM-Uf-fq9" secondAttribute="bottom" constant="10" id="SOg-XV-kl5"/>
                 <constraint firstAttribute="bottom" secondItem="U6R-80-qVW" secondAttribute="bottom" constant="16" id="aaW-ke-xob"/>
                 <constraint firstItem="RcM-Uf-fq9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="ahs-55-32o"/>
                 <constraint firstItem="JjH-8N-dZt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="bAC-Cr-f9g"/>
                 <constraint firstAttribute="bottom" secondItem="JjH-8N-dZt" secondAttribute="bottom" constant="16" id="fwW-pM-UdL"/>
                 <constraint firstItem="RcM-Uf-fq9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="nS3-6v-nS9"/>
-                <constraint firstItem="JjH-8N-dZt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NhX-Fq-U7t" secondAttribute="bottom" constant="8" id="toY-nQ-si8"/>
+                <constraint firstItem="JjH-8N-dZt" firstAttribute="top" secondItem="NhX-Fq-U7t" secondAttribute="bottom" constant="8" id="toY-nQ-si8"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="9nk-XJ-0ul"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="articleImage" destination="RcM-Uf-fq9" id="VII-7Z-Gfl"/>
                 <outlet property="timeLabel" destination="U6R-80-qVW" id="8ee-Jc-JYI"/>
