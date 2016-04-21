@@ -241,7 +241,9 @@
                     </view>
                     <connections>
                         <outlet property="bottomBar" destination="phs-bR-sUf" id="bqT-ZE-nmp"/>
-                        <outlet property="defaultView" destination="K88-yh-kWi" id="ylq-h7-hGG"/>
+                        <outlet property="overlayImage" destination="Hgc-2T-HJx" id="nlO-1x-81F"/>
+                        <outlet property="overlayText" destination="WNS-zb-7Yf" id="mCR-NZ-L6E"/>
+                        <outlet property="overlayView" destination="K88-yh-kWi" id="c3V-mm-o6Y"/>
                         <outlet property="quizletButton" destination="ya2-an-QDw" id="vTY-OY-AIV"/>
                         <outlet property="settingsButton" destination="4Fu-96-8CV" id="tDp-XO-pQ4"/>
                         <outlet property="tableView" destination="Erp-b1-34q" id="H1W-T7-h4e"/>

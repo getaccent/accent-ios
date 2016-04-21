@@ -18,7 +18,9 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var quizletButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var defaultView: UIView!
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var overlayImage: UIImageView!
+    @IBOutlet weak var overlayText: UILabel!
     @IBOutlet weak var bottomBar: AccentTabBar!
     
     private var articles: [Article] {
@@ -112,7 +114,8 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
         
-        defaultView.alpha = bottomBar.selectedTab == 0 && savedArticles.count == 0 ? 1 : 0
+        overlayView.alpha = bottomBar.selectedTab == 0 && savedArticles.count == 0 ? 1 : 0
+        overlayText.text = NSLocalizedString("When you save an article to Accent, it will be listed here.", comment: "")
     }
     
     override func viewDidLayoutSubviews() {
@@ -192,7 +195,9 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func updatedSelectedTab(index: Int) {
-        defaultView.alpha = index == 0 && savedArticles.count == 0 ? 1 : 0
+        overlayView.alpha = (index == 0 && savedArticles.count == 0) || (index == 1 && browseArticles.count == 0) ? 1 : 0
+        overlayImage.image = UIImage(named: index == 0 ? "Home Outline" : "Sad Face")
+        overlayText.text = index == 0 ? NSLocalizedString("When you save an article to Accent, it will be listed here.", comment: "") : NSLocalizedString("No articles could be found at this time. Please try again later.", comment: "")
         tableView.reloadData()
     }
     
@@ -276,7 +281,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 tableView.endUpdates()
                 
                 UIView.animateWithDuration(0.25, animations: {
-                    self.defaultView.alpha = self.savedArticles.count == 0 ? 1 : 0
+                    self.overlayView.alpha = self.savedArticles.count == 0 ? 1 : 0
                 })
             case 2: // archive button
                 break
