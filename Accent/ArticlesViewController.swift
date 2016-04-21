@@ -18,6 +18,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var quizletButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var defaultView: UIView!
     @IBOutlet weak var bottomBar: AccentTabBar!
     
     private var articles: [Article] {
@@ -110,6 +111,8 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 })
             }
         }
+        
+        defaultView.alpha = bottomBar.selectedTab == 0 && savedArticles.count == 0 ? 1 : 0
     }
     
     override func viewDidLayoutSubviews() {
@@ -189,6 +192,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func updatedSelectedTab(index: Int) {
+        defaultView.alpha = index == 0 && savedArticles.count == 0 ? 1 : 0
         tableView.reloadData()
     }
     
@@ -267,13 +271,13 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
                 
-                if bottomBar.selectedTab == 0 {
-                    savedArticles.removeAtIndex(indexPath.row)
-                } else {
-                    browseArticles.removeAtIndex(indexPath.row)
-                }
+                savedArticles.removeAtIndex(indexPath.row)
                 
                 tableView.endUpdates()
+                
+                UIView.animateWithDuration(0.25, animations: {
+                    self.defaultView.alpha = self.savedArticles.count == 0 ? 1 : 0
+                })
             case 2: // archive button
                 break
             default:

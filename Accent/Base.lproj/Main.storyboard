@@ -132,6 +132,36 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="472"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K88-yh-kWi">
+                                <rect key="frame" x="0.0" y="64" width="600" height="472"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Home Outline" translatesAutoresizingMaskIntoConstraints="NO" id="Hgc-2T-HJx">
+                                        <rect key="frame" x="252" y="157" width="96" height="96"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Hgc-2T-HJx" secondAttribute="height" multiplier="1:1" id="1c0-u2-4Uy"/>
+                                            <constraint firstAttribute="width" constant="96" id="5sH-Ze-5XZ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you save an article to Accent, it will be listed here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNS-zb-7Yf">
+                                        <rect key="frame" x="140" y="275" width="320" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="NPW-Kf-AlB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="WNS-zb-7Yf" firstAttribute="centerX" secondItem="K88-yh-kWi" secondAttribute="centerX" id="7it-op-a2h"/>
+                                    <constraint firstItem="WNS-zb-7Yf" firstAttribute="top" secondItem="Hgc-2T-HJx" secondAttribute="bottom" constant="22" id="SZm-U5-y4g"/>
+                                    <constraint firstItem="Hgc-2T-HJx" firstAttribute="centerX" secondItem="K88-yh-kWi" secondAttribute="centerX" id="W8g-DG-e6k"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WNS-zb-7Yf" secondAttribute="trailing" constant="32" id="hBh-k3-1ZU"/>
+                                    <constraint firstItem="WNS-zb-7Yf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K88-yh-kWi" secondAttribute="leading" constant="32" id="uYu-km-BEH"/>
+                                    <constraint firstItem="Hgc-2T-HJx" firstAttribute="centerY" secondItem="K88-yh-kWi" secondAttribute="centerY" constant="-31" id="w60-GZ-S36"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqh-dc-cYR">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                 <subviews>
@@ -195,18 +225,23 @@
                         <constraints>
                             <constraint firstItem="Erp-b1-34q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2Im-lu-RG2"/>
                             <constraint firstItem="qqh-dc-cYR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4eZ-lO-oM8"/>
+                            <constraint firstItem="phs-bR-sUf" firstAttribute="top" secondItem="K88-yh-kWi" secondAttribute="bottom" id="5FE-Oi-0bz"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="phs-bR-sUf" secondAttribute="bottom" id="9r3-ew-hxV"/>
                             <constraint firstAttribute="trailing" secondItem="phs-bR-sUf" secondAttribute="trailing" id="H8U-ff-vH7"/>
                             <constraint firstItem="phs-bR-sUf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JW1-6E-MEw"/>
+                            <constraint firstAttribute="trailing" secondItem="K88-yh-kWi" secondAttribute="trailing" id="Pzl-mz-VhK"/>
                             <constraint firstItem="Erp-b1-34q" firstAttribute="top" secondItem="qqh-dc-cYR" secondAttribute="bottom" id="Vdk-Im-vDE"/>
                             <constraint firstAttribute="trailing" secondItem="Erp-b1-34q" secondAttribute="trailing" id="Vvw-5P-sER"/>
                             <constraint firstItem="phs-bR-sUf" firstAttribute="top" secondItem="Erp-b1-34q" secondAttribute="bottom" id="YTr-XO-FaO"/>
                             <constraint firstAttribute="trailing" secondItem="qqh-dc-cYR" secondAttribute="trailing" id="a38-UB-83g"/>
                             <constraint firstItem="qqh-dc-cYR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bjx-UQ-bjR"/>
+                            <constraint firstItem="K88-yh-kWi" firstAttribute="top" secondItem="qqh-dc-cYR" secondAttribute="bottom" id="icO-z8-bk2"/>
+                            <constraint firstItem="K88-yh-kWi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="y0k-MJ-v63"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bottomBar" destination="phs-bR-sUf" id="bqT-ZE-nmp"/>
+                        <outlet property="defaultView" destination="K88-yh-kWi" id="ylq-h7-hGG"/>
                         <outlet property="quizletButton" destination="ya2-an-QDw" id="vTY-OY-AIV"/>
                         <outlet property="settingsButton" destination="4Fu-96-8CV" id="tDp-XO-pQ4"/>
                         <outlet property="tableView" destination="Erp-b1-34q" id="H1W-T7-h4e"/>
@@ -515,6 +550,7 @@
     <resources>
         <image name="Back" width="24" height="24"/>
         <image name="Close" width="32" height="32"/>
+        <image name="Home Outline" width="120" height="120"/>
         <image name="Quizlet" width="37" height="48"/>
         <image name="Settings" width="32" height="32"/>
         <image name="Speech" width="32" height="32"/>
