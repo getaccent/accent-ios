@@ -1,0 +1,49 @@
+/* 
+  Localizable.strings
+  Accent
+
+  Created by Jack Cook on 4/20/16.
+  Copyright © 2016 Tiny Pixels. All rights reserved.
+*/
+
+"Accent Feedback" = "Accent 反馈";
+
+"Article" = "文章";
+
+"Articles" = "文章";
+
+"Browse" = "浏览";
+
+"Continue" = "继续";
+
+"Continue Without Login" = "不登陆继续";
+
+"Don't worry, you can change this later" = "不用担心，以后你可以改变语言";
+
+"Home" = "主页";
+
+"Rate Accent" = "给Accent评分";
+
+"Saving for later..." = "存起来以后再看。。。;
+
+"Select a Language" = "选择一种语言";
+
+"Send Feedback" = "发送反馈";
+
+"Settings" = "设置";
+
+"Sign in with Phone Number" = "用手机号码登录";
+
+"Target Language" = "目标语言";
+
+"Version" = "版本";
+
+"Your global news source" = "您的全球新闻来源";
+
+/* Languages */
+
+"Chinese" = "简体中文";
+"English" = "英文";
+"French" = "法文";
+"Spanish" = "西班牙文";
+"Swedish" = "瑞典文";

@@ -22,6 +22,7 @@
 		EB037BEA1CB9E64F00CDB13E /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BE91CB9E64F00CDB13E /* Article.swift */; };
 		EB037BEC1CB9F0F500CDB13E /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB037BEB1CB9F0F500CDB13E /* Translation.swift */; };
 		EB04BAB61CC8307E00D6B005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB04BAB81CC8307E00D6B005 /* Localizable.strings */; };
+		EB04BAC11CC8472200D6B005 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB04BAB81CC8307E00D6B005 /* Localizable.strings */; };
 		EB334FAF1CB96434009A3985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB334FAE1CB96434009A3985 /* AppDelegate.swift */; };
 		EB334FB41CB96434009A3985 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB21CB96434009A3985 /* Main.storyboard */; };
 		EB334FB61CB96434009A3985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB334FB51CB96434009A3985 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		EB037BEB1CB9F0F500CDB13E /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		EB04BAB71CC8307E00D6B005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EB04BAB91CC8308600D6B005 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EB04BABA1CC83F6E00D6B005 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EB334FAB1CB96434009A3985 /* Accent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB334FAE1CB96434009A3985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB334FB31CB96434009A3985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				en,
 				Base,
 				fr,
+				"zh-Hans",
 			);
 			mainGroup = EB334FA21CB96434009A3985;
 			productRefGroup = EB334FAC1CB96434009A3985 /* Products */;
@@ -330,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB037BDE1CB9B8A200CDB13E /* MainInterface.storyboard in Resources */,
+				EB04BAC11CC8472200D6B005 /* Localizable.strings in Resources */,
 				EBBF22611CBA91CB00CDA5BB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,6 +476,7 @@
 			children = (
 				EB04BAB71CC8307E00D6B005 /* Base */,
 				EB04BAB91CC8308600D6B005 /* fr */,
+				EB04BABA1CC83F6E00D6B005 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -37,7 +37,7 @@ class ShareViewController: UIViewController {
         
         statusLabel = UILabel()
         statusLabel.font = UIFont.systemFontOfSize(15)
-        statusLabel.text = "Saving for later..."
+        statusLabel.text = NSLocalizedString("Saving for later...", comment: "saving the article to read for later")
         statusLabel.textAlignment = .Center
         statusLabel.textColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
         container.addSubview(statusLabel)
