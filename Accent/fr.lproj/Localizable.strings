@@ -16,7 +16,7 @@
 
 "Continue" = "Continuer";
 
-"Continue Without Login" = "Continuer Sans Connexion";
+"Continue Without Login" = "Continuer sans connexion";
 
 "Don't worry, you can change this later" = "Ne vous inquiétez pas, vous pouvez changer cela plus tard";
 
@@ -28,15 +28,15 @@
 
 "Saving for later..." = "Sauvegardant pour plus tard...";
 
-"Select a Language" = "Choisir une Langue";
+"Select a Language" = "Choisissez une langue";
 
 "Send Feedback" = "Commentaires";
 
 "Settings" = "Réglages";
 
-"Sign in with Phone Number" = "Connectez avec Numéro de Téléphone";
+"Sign in with Phone Number" = "Connectez avec numéro de téléphone";
 
-"Target Language" = "Langue Cible";
+"Target Language" = "Langue cible";
 
 "Version" = "Version";
 
@@ -46,7 +46,7 @@
 
 /* Languages */
 
-"Chinese" = "Chinois, Simplifié";
+"Chinese" = "Chinois, simplifié";
 "English" = "Anglais";
 "French" = "Français";
 "Spanish" = "Espagnol";

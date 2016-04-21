@@ -109,6 +109,7 @@
 		EBBA55A71CB9655C0082642D /* Quizlet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quizlet.swift; sourceTree = "<group>"; };
 		EBBA55A91CB9656C0082642D /* Accent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accent.swift; sourceTree = "<group>"; };
 		EBBF22601CBA91CB00CDA5BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EBF804D41CC97E7400E2BE02 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EBF868D91CBEE9AE00C9A15E /* AudioBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,6 +316,7 @@
 				Base,
 				fr,
 				"zh-Hans",
+				es,
 			);
 			mainGroup = EB334FA21CB96434009A3985;
 			productRefGroup = EB334FAC1CB96434009A3985 /* Products */;
@@ -477,6 +479,7 @@
 				EB04BAB71CC8307E00D6B005 /* Base */,
 				EB04BAB91CC8308600D6B005 /* fr */,
 				EB04BABA1CC83F6E00D6B005 /* zh-Hans */,
+				EBF804D41CC97E7400E2BE02 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
