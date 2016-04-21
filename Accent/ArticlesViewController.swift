@@ -93,7 +93,11 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                     
                     self.savedArticles.append(article)
                     
-                    dispatch_async(dispatch_get_main_queue(), { 
+                    dispatch_async(dispatch_get_main_queue(), {
+                        UIView.animateWithDuration(0.5, animations: {
+                            self.overlayView.alpha = 0
+                        })
+                        
                         self.tableView.reloadData()
                     })
                     
