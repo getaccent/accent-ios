@@ -277,6 +277,13 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                     return true
                 }
                 
+                let article = savedArticles[indexPath.row]
+                
+                let realm = try! Realm()
+                try! realm.write {
+                    realm.delete(article)
+                }
+                
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
                 
@@ -303,6 +310,11 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 let article = browseArticles[indexPath.row]
                 savedArticles.append(article)
+                
+                let realm = try! Realm()
+                try! realm.write {
+                    realm.add(article)
+                }
                 
                 cell.refreshButtons(true)
                 
