@@ -22,6 +22,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
     private var articleTitle: UILabel!
     private var imageView: UIImageView!
     private var textView: ArticleTextView!
+    private var backTextView: ArticleTextView!
     
     private var translateView: UIView!
     private var translateLabel: UILabel!
@@ -100,10 +101,12 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         
         if textView == nil {
             textView = ArticleTextView(delegate: self)
+            textView.backgroundColor = UIColor.clearColor()
             textView.editable = false
             textView.font = UIFont.systemFontOfSize(16)
             textView.scrollEnabled = false
             textView.text = article.text
+            
             scrollView.addSubview(textView)
             
             let paragraphStyle = NSMutableParagraphStyle()
@@ -117,6 +120,19 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         textView.frame = CGRectMake(margin, imageView.frame.origin.y + imageView.frame.size.height + margin * 0.625, scrollView.bounds.width - margin * 2, textViewHeight)
         
         scrollView.contentSize = CGSizeMake(scrollView.bounds.width, textView.frame.origin.y + textView.frame.size.height + margin)
+        
+        if backTextView == nil {
+            backTextView = ArticleTextView(delegate: self)
+            backTextView.editable = textView.editable
+            backTextView.selectable = false
+            backTextView.font = textView.font
+            backTextView.scrollEnabled = textView.scrollEnabled
+            backTextView.attributedText = textView.attributedText
+            backTextView.textColor = UIColor.whiteColor()
+            
+            scrollView.insertSubview(backTextView, belowSubview: textView)
+        }
+        backTextView.frame = textView.frame
         
         if translateView == nil {
             translateView = UIView()
@@ -199,16 +215,17 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
     }
     
     func updatedSpeechRange(range: NSRange) {
-        let attributedString = NSMutableAttributedString(string: textView.text)
+        let attributedString = NSMutableAttributedString(string: backTextView.text)
         
         attributedString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.accentBlueColor(), range: range)
-        attributedString.addAttribute(NSFontAttributeName, value: textView.font!, range: NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(NSFontAttributeName, value: backTextView.font!, range: NSMakeRange(0, attributedString.length))
+//        attributedString.addAttribute(NSForegroundColorAttributeName, value: view.backgroundColor ?? UIColor.whiteColor(), range: NSMakeRange(0, attributedString.length))
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
-        textView.attributedText = attributedString
+        backTextView.attributedText = attributedString
     }
     
     override func canBecomeFirstResponder() -> Bool {

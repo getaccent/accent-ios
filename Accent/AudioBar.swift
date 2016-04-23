@@ -23,7 +23,10 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
     
     private var synthesizer: AVSpeechSynthesizer!
     private var currentLocation = 0
+    private var currentFullLocation = 0
     private var offsetLocation = 0
+    
+    private var speedPressNum = 0
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -81,8 +84,8 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
             if synthesizer.paused {
                 synthesizer.continueSpeaking()
             } else {
-                let utterance = utteranceWithRate(currentRate())
-                synthesizer.speakUtterance(utterance)
+                let utterance = self.utteranceWithRate(self.currentRate())
+                self.synthesizer.speakUtterance(utterance)
             }
         }
     }
@@ -111,7 +114,14 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
         
         synthesizer.stopSpeakingAtBoundary(.Immediate)
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1) * Int64(NSEC_PER_SEC)), dispatch_get_main_queue()) { 
+        speedPressNum += 1
+        let num = speedPressNum
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5) * Int64(NSEC_PER_SEC)), dispatch_get_main_queue()) {
+            guard self.speedPressNum == num else {
+                return
+            }
+            
             let utterance = self.utteranceWithRate(self.currentRate())
             self.synthesizer.speakUtterance(utterance)
         }
@@ -128,9 +138,10 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
     }
     
     private func utteranceWithRate(rate: Float) -> AVSpeechUtterance {
+        offsetLocation += currentLocation
+        
         var string = article.text
-        string = (string as NSString).substringWithRange(NSMakeRange(currentLocation, string.characters.count - currentLocation))
-        offsetLocation = currentLocation
+        string = (string as NSString).substringWithRange(NSMakeRange(offsetLocation, string.characters.count - offsetLocation))
         
         let utterance = AVSpeechUtterance(string: string)
         utterance.rate = rate
