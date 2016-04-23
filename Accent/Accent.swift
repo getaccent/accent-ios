@@ -12,7 +12,7 @@ import SwiftyJSON
 
 public class Accent {
     
-    let baseUrl = "http://45.55.202.8"
+    let baseUrl = "http://api.getaccent.io"
     
     private var savedTranslations = [String: String]()
     private var requestsMade = [String]()
@@ -40,7 +40,7 @@ public class Accent {
             return
         }
         
-        guard let urlString = "\(baseUrl)/unsave?num=\(phoneNumber)&url=\(realArticleURL)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(realArticleURL)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             return
         }
         
@@ -101,7 +101,7 @@ public class Accent {
     }
     
     func getSavedArticles(completion: (articles: [Article]) -> Void) {
-        guard let phoneNumber = phoneNumber, url = NSURL(string: "\(baseUrl)/saved?num=\(phoneNumber)") else {
+        guard let phoneNumber = phoneNumber, url = NSURL(string: "\(baseUrl)/save?num=\(phoneNumber)") else {
             return
         }
         
@@ -208,7 +208,7 @@ public class Accent {
         }
         
         let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = "PUT"
         
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: sessionConfig)
