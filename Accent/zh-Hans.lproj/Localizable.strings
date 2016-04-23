@@ -6,7 +6,7 @@
   Copyright © 2016 Tiny Pixels. All rights reserved.
 */
 
-"Accent Feedback" = "Accent反馈";
+"Accent Feedback" = "Accent应用程序反馈";
 
 "Article" = "文章";
 
@@ -18,17 +18,17 @@
 
 "Continue Without Login" = "不登陆继续";
 
-"Don't worry, you can change this later" = "不用担心，以后你可以改变语言";
+"Don't worry, you can change this later" = "不用担心，你可以稍后更改";
 
 "Home" = "主页";
 
-"No articles could be found at this time. Please try again later." = "没有文章在此，请之后再试";
+"No articles could be found at this time. Please try again later." = "此时没有这篇文章，请稍后再试";
 
 "Rate Accent" = "给Accent评分";
 
 "Saving for later..." = "存起来以后再看。。。";
 
-"Select a Language" = "选择一种语言";
+"Select a Language" = "选择语言";
 
 "Send Feedback" = "发送反馈";
 
@@ -40,7 +40,7 @@
 
 "Version" = "版本";
 
-"When you save an article to Accent, it will be listed here." = "当你保存文章到Accent里，它们会显示在这里";
+"When you save an article to Accent, it will be listed here." = "当你将文章保存至Accent的时候，将会列于此处";
 
 "Your global news source" = "您的全球新闻来源";
 

@@ -98,6 +98,7 @@
 		EB334FB81CB96434009A3985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB334FBA1CB96434009A3985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB34979D1CC9B96500A1BF6F /* la */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = la; path = Localizable.strings; sourceTree = "<group>"; };
+		EB351AA91CCB105700F0ECD5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EB4A422D1CBC7E0B004EF565 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EB4A422F1CBC8CE5004EF565 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		EB4A42311CBC8D59004EF565 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -329,6 +330,7 @@
 				"zh-Hans",
 				es,
 				la,
+				"zh-Hant",
 			);
 			mainGroup = EB334FA21CB96434009A3985;
 			productRefGroup = EB334FAC1CB96434009A3985 /* Products */;
@@ -493,6 +495,7 @@
 				EB04BAB91CC8308600D6B005 /* fr */,
 				EB04BABA1CC83F6E00D6B005 /* zh-Hans */,
 				EBF804D41CC97E7400E2BE02 /* es */,
+				EB351AA91CCB105700F0ECD5 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

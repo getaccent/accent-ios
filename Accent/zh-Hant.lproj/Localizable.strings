@@ -1,0 +1,53 @@
+/* 
+  Localizable.strings
+  Accent
+
+  Created by Jack Cook on 4/20/16.
+  Copyright © 2016 Tiny Pixels. All rights reserved.
+*/
+
+"Accent Feedback" = "Accent應用程式反饋";
+
+"Article" = "文章";
+
+"Articles" = "文章";
+
+"Browse" = "瀏覽";
+
+"Continue" = "繼續";
+
+"Continue Without Login" = "不登錄繼續";
+
+"Don't worry, you can change this later" = "不用擔心，你可以稍後更改";
+
+"Home" = "主頁";
+
+"No articles could be found at this time. Please try again later." = "此時沒有這篇文章，請稍候再試";
+
+"Rate Accent" = "給Accent評分";
+
+"Saving for later..." = "存起來以後再看。。。";
+
+"Select a Language" = "選擇語言";
+
+"Send Feedback" = "發送反饋";
+
+"Settings" = "設置";
+
+"Sign in with Phone Number" = "用手機號碼登陸";
+
+"Target Language" = "目標語言";
+
+"Version" = "版本";
+
+"When you save an article to Accent, it will be listed here." = "當你將文章保存至Accent的時後，將會列於此處";
+
+"Your global news source" = "您的全球新聞來源";
+
+/* Languages */
+
+"Chinese" = "簡體中文";
+"English" = "英文";
+"French" = "法文";
+"Spanish" = "西班牙文";
+"Swedish" = "瑞典文";
