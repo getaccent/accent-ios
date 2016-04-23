@@ -23,6 +23,26 @@ public class Accent {
         return Static.instance
     }
     
+    func deleteSavedArticle(article: Article) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(article)
+        }
+        
+        guard let urlString = "\(baseUrl)/unsave?url=\(article.articleUrl)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+            return
+        }
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "DELETE"
+        
+        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: sessionConfig)
+        
+        let task = session.dataTaskWithRequest(request)
+        task.resume()
+    }
+    
     func getArticleThumbnail(article: Article, completion: (image: UIImage?) -> Void) {
         guard let imgurl = article.imageUrl else {
             return
@@ -60,6 +80,11 @@ public class Accent {
         }
         
         task.resume()
+    }
+    
+    func getLocalArticles() -> [Article] {
+        let realm = try! Realm()
+        return Array(realm.objects(Article))
     }
     
     func getSavedArticles(phoneNumber: String, completion: (articles: [Article]) -> Void) {
@@ -181,8 +206,13 @@ public class Accent {
         task.resume()
     }
     
-    func saveArticle(phoneNumber: String, url: String, completion: (success: Bool) -> Void) {
-        guard let urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(url)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+    func saveArticle(phoneNumber: String?, article: Article, completion: (success: Bool) -> Void) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(article)
+        }
+        
+        guard let phoneNumber = phoneNumber, urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(article.articleUrl)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             return
         }
         

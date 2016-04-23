@@ -8,7 +8,6 @@
 
 import DigitsKit
 import MGSwipeTableCell
-import RealmSwift
 import UIKit
 
 class ArticlesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AccentTabBarDelegate, MGSwipeTableCellDelegate {
@@ -36,8 +35,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         navigationController?.navigationBarHidden = true
         
-        let realm = try! Realm()
-        let articles = realm.objects(Article)
+        let articles = Accent.sharedInstance.getLocalArticles()
         
         for article in articles {
             savedArticles.append(article)
@@ -279,10 +277,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 let article = savedArticles[indexPath.row]
                 
-                let realm = try! Realm()
-                try! realm.write {
-                    realm.delete(article)
-                }
+                Accent.sharedInstance.deleteSavedArticle(article)
                 
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
@@ -311,18 +306,13 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 let article = browseArticles[indexPath.row]
                 savedArticles.append(article)
                 
-                let realm = try! Realm()
-                try! realm.write {
-                    realm.add(article)
-                }
-                
                 cell.refreshButtons(true)
                 
-                if let phoneNumber = Digits.sharedInstance().session()?.phoneNumber {
-                    Accent.sharedInstance.saveArticle(phoneNumber, url: article.articleUrl, completion: { (success) in
-                        print("saved")
-                    })
-                }
+                let phoneNumber = Digits.sharedInstance().session()?.phoneNumber
+                
+                Accent.sharedInstance.saveArticle(phoneNumber, article: article, completion: { (success) in
+                    print("saved")
+                })
             default:
                 break
             }
