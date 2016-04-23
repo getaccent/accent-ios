@@ -11,7 +11,7 @@ import SwiftyJSON
 
 public class Accent {
     
-    let baseUrl = "http://45.55.202.8:81"
+    let baseUrl = "http://45.55.202.8"
     
     private var savedTranslations = [String: String]()
     private var requestsMade = [String]()
@@ -29,7 +29,7 @@ public class Accent {
             realm.delete(article)
         }
         
-        guard let urlString = "\(baseUrl)/unsave?url=\(article.articleUrl)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let urlString = "\(baseUrl)/unsave?url=\(article.url)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             return
         }
         
@@ -44,11 +44,11 @@ public class Accent {
     }
     
     func getArticleThumbnail(article: Article, completion: (image: UIImage?) -> Void) {
-        guard let imgurl = article.imageUrl else {
+        if article.image == "" {
             return
         }
         
-        if let image = imageCache[imgurl] {
+        if let image = imageCache[article.image] {
             dispatch_async(dispatch_get_main_queue(), {
                 completion(image: image)
             })
@@ -56,9 +56,11 @@ public class Accent {
             return
         }
         
-        guard let url = NSURL(string: imgurl) else {
+        guard let url = article.imageURL else {
             return
         }
+        
+        let storedURL = article.image
         
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
@@ -66,13 +68,13 @@ public class Accent {
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: sessionConfig)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, erro) in
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
             guard let data = data else {
                 return
             }
             
             let image = UIImage(data: data)
-            imageCache[imgurl] = image
+            imageCache[storedURL] = image
             
             dispatch_async(dispatch_get_main_queue(), {
                 completion(image: image)
@@ -139,25 +141,12 @@ public class Accent {
             }
             
             let json = JSON(data: data, error: nil)
+            let article = Article.createFromJSON(json)
+            completion(article: article)
             
-            if let url = json["url"].string,
-                title = json["title"].string,
-                text = json["text"].string {
-                    let image = json["image"].string
-                    let article = Article()
-                    article.articleUrl = url
-                    article.imageUrl = image
-                    article.text = text
-                    article.title = title
-                
-                    completion(article: article)
-                
-                    dispatch_async(dispatch_get_main_queue(), { 
-                        let realm = try! Realm()
-                        try! realm.write {
-                            realm.add(article)
-                        }
-                    })
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(article)
             }
         }
         
@@ -185,18 +174,8 @@ public class Accent {
             
             if let articles = json["articles"].array {
                 for article in articles {
-                    if let url = article["url"].string,
-                        title = article["title"].string,
-                        text = article["text"].string {
-                            let image = article["image"].string
-                            let article = Article()
-                            article.articleUrl = url
-                            article.imageUrl = image
-                            article.text = text
-                            article.title = title
-                        
-                            retrievedArticles.append(article)
-                    }
+                    let article = Article.createFromJSON(article)
+                    retrievedArticles.append(article)
                 }
             }
             
@@ -212,7 +191,7 @@ public class Accent {
             realm.add(article)
         }
         
-        guard let phoneNumber = phoneNumber, urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(article.articleUrl)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let phoneNumber = phoneNumber, urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(article.url)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             return
         }
         

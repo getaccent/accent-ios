@@ -35,10 +35,9 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         navigationController?.navigationBarHidden = true
         
-        let articles = Accent.sharedInstance.getLocalArticles()
-        
-        for article in articles {
-            savedArticles.append(article)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.savedArticles = Accent.sharedInstance.getLocalArticles()
+            self.reloadTableView()
         }
         
         Accent.sharedInstance.retrieveArticles { (articles) in
@@ -47,10 +46,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             self.browseArticles = articles
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.tableView.reloadData()
-            })
+            self.reloadTableView()
         }
         
         quizletButton.setImage(quizletButton.imageForState(.Normal)?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
@@ -92,11 +88,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                     self.savedArticles.append(article)
                     
                     dispatch_async(dispatch_get_main_queue(), {
-                        UIView.animateWithDuration(0.5, animations: {
-                            self.overlayView.alpha = 0
-                        })
-                        
-                        self.tableView.reloadData()
+                        self.reloadTableView()
                     })
                     
                     guard var toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") else {
@@ -182,7 +174,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let article = articles[indexPath.row]
         
-        let cell = NSBundle.mainBundle().loadNibNamed(UIDevice.currentDevice().userInterfaceIdiom == .Phone ? (indexPath.row % 5 == 0 ? (article.imageUrl == nil ? "NoImageArticleCell" : "LargeArticleCell") : (article.imageUrl == nil ? "NoImageArticleCell" : "ArticleCell")) : (article.imageUrl == nil ? "PadNoImageArticleCell" : "PadArticleCell"), owner: self, options: nil)[0] as! ArticleCell
+        let cell = NSBundle.mainBundle().loadNibNamed(UIDevice.currentDevice().userInterfaceIdiom == .Phone ? (indexPath.row % 5 == 0 ? (article.image == "" ? "NoImageArticleCell" : "LargeArticleCell") : (article.image == "" ? "NoImageArticleCell" : "ArticleCell")) : (article.image == "" ? "PadNoImageArticleCell" : "PadArticleCell"), owner: self, options: nil)[0] as! ArticleCell
         cell.configure(articles[indexPath.row])
         cell.delegate = self
         
@@ -196,11 +188,21 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         performSegueWithIdentifier("articleSegue", sender: nil)
     }
     
+    func reloadTableView() {
+        dispatch_async(dispatch_get_main_queue()) {
+            UIView.animateWithDuration(0.25) {
+                self.overlayView.alpha = (self.bottomBar.selectedTab == 0 && self.savedArticles.count == 0) || (self.bottomBar.selectedTab == 1 && self.browseArticles.count == 0) ? 1 : 0
+            }
+            
+            self.overlayImage.image = UIImage(named: self.bottomBar.selectedTab == 0 ? "Home Outline" : "Sad Face")
+            self.overlayText.text = self.bottomBar.selectedTab == 0 ? NSLocalizedString("When you save an article to Accent, it will be listed here.", comment: "") : NSLocalizedString("No articles could be found at this time. Please try again later.", comment: "")
+            
+            self.tableView.reloadData()
+        }
+    }
+    
     func updatedSelectedTab(index: Int) {
-        overlayView.alpha = (index == 0 && savedArticles.count == 0) || (index == 1 && browseArticles.count == 0) ? 1 : 0
-        overlayImage.image = UIImage(named: index == 0 ? "Home Outline" : "Sad Face")
-        overlayText.text = index == 0 ? NSLocalizedString("When you save an article to Accent, it will be listed here.", comment: "") : NSLocalizedString("No articles could be found at this time. Please try again later.", comment: "")
-        tableView.reloadData()
+        reloadTableView()
     }
     
     func iconize(image: UIImage) -> UIImage {
@@ -258,7 +260,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         func shareButton() {
-            guard let articleUrl = (cell as? ArticleCell)?.article?.articleUrl else {
+            guard let articleUrl = (cell as? ArticleCell)?.article?.url else {
                 return
             }
             

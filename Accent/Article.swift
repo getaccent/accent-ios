@@ -6,40 +6,54 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
+import SwiftyJSON
 import RealmSwift
 
 class Article: Object {
     
-    dynamic var url: String = ""
+    dynamic var surl: String = ""
     dynamic var title: String = ""
     dynamic var image: String = ""
     dynamic var text: String = ""
-    dynamic var authors: String = ""
-    dynamic var date: Int = 0
-    dynamic var featured: Int = 0
-    dynamic var language: String = ""
+    dynamic var sauthors: String = ""
+    dynamic var sdate: Int = 0
+    dynamic var sfeatured: Int = 0
+    dynamic var slanguage: String = ""
     
-    func getURL() -> NSURL? {
-        return NSURL(string: url)
+    var url: NSURL? {
+        return NSURL(string: surl)
     }
     
-    func getImageURL() -> NSURL? {
+    var imageURL: NSURL? {
         return NSURL(string: image)
     }
     
-    func getAuthors() -> [String]? {
-        return authors.componentsSeparatedByString(",")
+    var authors: [String]? {
+        return sauthors.componentsSeparatedByString(",")
     }
     
-    func getDate() -> NSDate? {
-        return NSDate(timeIntervalSince1970: NSTimeInterval(date))
+    var date: NSDate? {
+        return NSDate(timeIntervalSince1970: NSTimeInterval(sdate))
     }
     
-    func getFeatured() -> Bool {
-        return featured == 1
+    var featured: Bool {
+        return sfeatured == 1
     }
     
-    func getLanguage() -> Language? {
-        return Language.languageFromCode(language)
+    var language: Language? {
+        return Language.languageFromCode(slanguage)
+    }
+    
+    class func createFromJSON(json: JSON) -> Article {
+        let article = Article()
+        article.surl = json["url"].string ?? ""
+        article.title = json["title"].string ?? ""
+        article.image = json["image"].string ?? ""
+        article.text = json["text"].string ?? ""
+        article.sauthors = json["authors"].string ?? ""
+        article.sdate = json["date"].int ?? 0
+        article.sfeatured = json["featured"].int ?? 0
+        article.slanguage = json["language"].string ?? ""
+        return article
     }
 }

@@ -95,7 +95,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         }
         
         let imageWidth = scrollView.bounds.width - (UIDevice.currentDevice().userInterfaceIdiom == .Pad ? margin * 6 : 0)
-        if article.imageUrl == "" {
+        if article.image == "" {
             imageView.frame = CGRectMake(0, articleTitle.frame.origin.y + articleTitle.frame.size.height, imageWidth, 0)
         } else {
             imageView.frame = CGRectMake((scrollView.bounds.width - imageWidth) / 2, articleTitle.frame.origin.y + articleTitle.frame.size.height + margin,  imageWidth, imageWidth * (9/16))
