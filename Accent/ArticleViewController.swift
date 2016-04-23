@@ -36,15 +36,8 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         
         navigationController?.navigationBarHidden = true
         
-        imageView = UIImageView()
-        scrollView.addSubview(imageView)
-        
         bottomBar.article = article
         bottomBar.delegate = self
-        
-        Accent.sharedInstance.getArticleThumbnail(article) { (image) in
-            self.imageView.image = image
-        }
         
         let articlesText = NSLocalizedString("Article", comment: "news article")
         topBarLabel.text = articlesText
@@ -91,6 +84,15 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         
         let articleTitleHeight = (articleTitle.text! as NSString).boundingRectWithSize(CGSizeMake(scrollView.bounds.width - margin * 2, CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: articleTitle.font], context: nil).height
         articleTitle.frame = CGRectMake(margin, margin, scrollView.bounds.width - margin * 2, articleTitleHeight)
+        
+        if imageView == nil {
+            imageView = UIImageView()
+            scrollView.addSubview(imageView)
+            
+            Accent.sharedInstance.getArticleThumbnail(article) { (image) in
+                self.imageView.image = image
+            }
+        }
         
         let imageWidth = scrollView.bounds.width - (UIDevice.currentDevice().userInterfaceIdiom == .Pad ? margin * 6 : 0)
         if article.imageUrl == "" {
@@ -205,6 +207,8 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         
         bottomConstraint.constant = audio ? 0 : -56
         
+        backTextView.attributedText = textView.attributedText
+        
         UIView.animateWithDuration(0.25) {
             self.view.layoutIfNeeded()
         }
@@ -219,7 +223,6 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         
         attributedString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.accentBlueColor(), range: range)
         attributedString.addAttribute(NSFontAttributeName, value: backTextView.font!, range: NSMakeRange(0, attributedString.length))
-//        attributedString.addAttribute(NSForegroundColorAttributeName, value: view.backgroundColor ?? UIColor.whiteColor(), range: NSMakeRange(0, attributedString.length))
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4

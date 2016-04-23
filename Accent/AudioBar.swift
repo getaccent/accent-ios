@@ -31,10 +31,10 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        synthesizer = AVSpeechSynthesizer()
-        synthesizer.delegate = self
-        
-        synthesizer.pauseSpeakingAtBoundary(.Immediate)
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.synthesizer = AVSpeechSynthesizer()
+            self.synthesizer.delegate = self
+        }
     }
     
     override func layoutSubviews() {
@@ -47,7 +47,7 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
             addSubview(closeButton)
         }
         let closeSize = CGSizeMake(28, 28)
-        closeButton.frame = CGRectMake(16, (bounds.height - closeSize.height) / 2, closeSize.width, closeSize.height)
+        closeButton.frame = CGRectMake(0, (bounds.height - (closeSize.height + 32)) / 2, closeSize.width + 32, closeSize.height + 32)
         
         if toggleButton == nil {
             toggleButton = UIButton()
@@ -72,6 +72,7 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
     }
     
     internal func closeButtonPressed(sender: UIButton) {
+        synthesizer.stopSpeakingAtBoundary(.Immediate)
         delegate?.hiding()
     }
     
