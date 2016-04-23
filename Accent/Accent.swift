@@ -24,12 +24,14 @@ public class Accent {
     }
     
     func deleteSavedArticle(article: Article) {
+        let articleURL = article.url
+        
         let realm = try! Realm()
         try! realm.write {
             realm.delete(article)
         }
         
-        guard let urlString = "\(baseUrl)/unsave?url=\(article.url)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let realArticleURL = articleURL, urlString = "\(baseUrl)/unsave?url=\(realArticleURL)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             return
         }
         

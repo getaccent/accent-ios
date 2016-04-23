@@ -35,10 +35,8 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         navigationController?.navigationBarHidden = true
         
-        dispatch_async(dispatch_get_main_queue()) {
-            self.savedArticles = Accent.sharedInstance.getLocalArticles()
-            self.reloadTableView()
-        }
+        self.savedArticles = Accent.sharedInstance.getLocalArticles()
+        self.reloadTableView(false)
         
         Accent.sharedInstance.retrieveArticles { (articles) in
             guard let articles = articles else {
@@ -46,7 +44,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             self.browseArticles = articles
-            self.reloadTableView()
+            self.reloadTableView(true)
         }
         
         quizletButton.setImage(quizletButton.imageForState(.Normal)?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
@@ -86,10 +84,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                     }
                     
                     self.savedArticles.append(article)
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.reloadTableView()
-                    })
+                    self.reloadTableView(true)
                     
                     guard var toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") else {
                         return
@@ -107,9 +102,6 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 })
             }
         }
-        
-        overlayView.alpha = bottomBar.selectedTab == 0 && savedArticles.count == 0 ? 1 : 0
-        overlayText.text = NSLocalizedString("When you save an article to Accent, it will be listed here.", comment: "")
     }
     
     override func viewDidLayoutSubviews() {
@@ -188,9 +180,9 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         performSegueWithIdentifier("articleSegue", sender: nil)
     }
     
-    func reloadTableView() {
+    func reloadTableView(animated: Bool) {
         dispatch_async(dispatch_get_main_queue()) {
-            UIView.animateWithDuration(0.25) {
+            UIView.animateWithDuration(animated ? 0.25 : 0) {
                 self.overlayView.alpha = (self.bottomBar.selectedTab == 0 && self.savedArticles.count == 0) || (self.bottomBar.selectedTab == 1 && self.browseArticles.count == 0) ? 1 : 0
             }
             
@@ -202,7 +194,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func updatedSelectedTab(index: Int) {
-        reloadTableView()
+        reloadTableView(false)
     }
     
     func iconize(image: UIImage) -> UIImage {
@@ -279,14 +271,14 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 let article = savedArticles[indexPath.row]
                 
-                Accent.sharedInstance.deleteSavedArticle(article)
-                
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
                 
                 savedArticles.removeAtIndex(indexPath.row)
                 
                 tableView.endUpdates()
+                
+                Accent.sharedInstance.deleteSavedArticle(article)
                 
                 UIView.animateWithDuration(0.25, animations: {
                     self.overlayView.alpha = self.savedArticles.count == 0 ? 1 : 0
