@@ -149,13 +149,13 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.translateLabel.text = translation
+                    self.translateLabel.text = translation.translation
                 })
                 
                 if Quizlet.sharedInstance.setId > 0 {
-                    Quizlet.sharedInstance.addTermToSet(text, translation: translation)
+                    Quizlet.sharedInstance.addTermToSet(translation.term, translation: translation.translation)
                 } else {
-                    self.terms[text] = translation
+                    self.terms[translation.term] = translation.translation
                 }
             }
         }

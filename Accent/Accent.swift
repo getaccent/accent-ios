@@ -204,17 +204,19 @@ public class Accent {
         task.resume()
     }
     
-    func translateTerm(term: String, completion: (translation: String?) -> Void) {
+    func translateTerm(term: String, completion: (translation: Translation?) -> Void) {
         guard !requestsMade.contains(term), let language = Language.savedLanguage() else {
             return
         }
         
+        let term = term.stringByReplacingOccurrencesOfString("\n", withString: " ")
+        
         do {
-            let predicateTerm = term.stringByReplacingOccurrencesOfString("\n", withString: " ").stringByReplacingOccurrencesOfString("'", withString: "")
+            let predicate = NSPredicate(format: "term = %@ AND target = %@", term, language.getCode())
             
             let realm = try Realm()
-            for term in realm.objects(Translation).filter("term = '\(predicateTerm)' AND target = '\(language.getCode())'") {
-                completion(translation: term.translation)
+            for translation in realm.objects(Translation).filter(predicate) {
+                completion(translation: translation)
                 return
             }
         } catch {}
@@ -233,6 +235,13 @@ public class Accent {
         requestsMade.append(term)
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            for (idx, t) in self.requestsMade.enumerate() {
+                if term == t {
+                    self.requestsMade.removeAtIndex(idx)
+                    break
+                }
+            }
+            
             guard let data = data else {
                 completion(translation: nil)
                 return
@@ -241,9 +250,8 @@ public class Accent {
             let json = JSON(data: data, error: nil)
             let translation = json["translation"].string
             
-            completion(translation: translation)
-            
             guard let translatedTerm = translation else {
+                completion(translation: nil)
                 return
             }
             
@@ -252,6 +260,8 @@ public class Accent {
                 translation.term = term
                 translation.translation = translatedTerm
                 translation.target = language.getCode()
+                
+                completion(translation: translation)
                 
                 let realm = try! Realm()
                 try! realm.write { 

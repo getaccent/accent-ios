@@ -427,6 +427,7 @@
                         <outlet property="bottomConstraint" destination="iM4-Tr-pBO" id="oMJ-aR-E0C"/>
                         <outlet property="scrollView" destination="fF1-4w-vkb" id="vb3-UH-Ki1"/>
                         <outlet property="topBar" destination="VXo-0E-MDS" id="GHe-qP-UBy"/>
+                        <outlet property="topBarLabel" destination="crW-c4-gNb" id="4b4-bz-g5s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6mP-nN-jBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
