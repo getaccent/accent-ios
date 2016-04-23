@@ -6,7 +6,6 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
-import DigitsKit
 import MGSwipeTableCell
 import UIKit
 
@@ -302,9 +301,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 cell.refreshButtons(true)
                 
-                let phoneNumber = Digits.sharedInstance().session()?.phoneNumber
-                
-                Accent.sharedInstance.saveArticle(phoneNumber, article: article, completion: { (success) in
+                Accent.sharedInstance.saveArticle(article, completion: { (success) in
                     print("saved")
                 })
             default:

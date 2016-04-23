@@ -6,6 +6,7 @@
 //  Copyright © 2016 Tiny Pixels. All rights reserved.
 //
 
+import DigitsKit
 import RealmSwift
 import SwiftyJSON
 
@@ -15,6 +16,10 @@ public class Accent {
     
     private var savedTranslations = [String: String]()
     private var requestsMade = [String]()
+    
+    private var phoneNumber: String? {
+        return Digits.sharedInstance().session()?.phoneNumber.stringByReplacingOccurrencesOfString("+", withString: "")
+    }
     
     public class var sharedInstance: Accent {
         struct Static {
@@ -31,7 +36,11 @@ public class Accent {
             realm.delete(article)
         }
         
-        guard let realArticleURL = articleURL, urlString = "\(baseUrl)/unsave?url=\(realArticleURL)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let realArticleURL = articleURL, phoneNumber = phoneNumber else {
+            return
+        }
+        
+        guard let urlString = "\(baseUrl)/unsave?num=\(phoneNumber)&url=\(realArticleURL)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             return
         }
         
@@ -91,8 +100,8 @@ public class Accent {
         return Array(realm.objects(Article))
     }
     
-    func getSavedArticles(phoneNumber: String, completion: (articles: [Article]) -> Void) {
-        guard let url = NSURL(string: "\(baseUrl)/saved?num=\(phoneNumber)") else {
+    func getSavedArticles(completion: (articles: [Article]) -> Void) {
+        guard let phoneNumber = phoneNumber, url = NSURL(string: "\(baseUrl)/saved?num=\(phoneNumber)") else {
             return
         }
         
@@ -109,17 +118,18 @@ public class Accent {
             
             let json = JSON(data: data, error: nil)
             
-            if let urls = json["entries"].array {
-                var toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve")
+            if let articles = json["articles"].array {
+                var retrievedArticles = [Article]()
                 
-                for url in urls {
-                    if let url = url["url"].string {
-                        toRetrieve?.append(url)
-                    }
+                for article in articles {
+                    let article = Article.createFromJSON(article)
+                    retrievedArticles.append(article)
                 }
                 
-                NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.setObject(toRetrieve, forKey: "AccentArticlesToRetrieve")
-                NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.synchronize()
+                let realm = try! Realm()
+                try! realm.write {
+                    realm.add(retrievedArticles)
+                }
             }
         }
         
@@ -187,7 +197,7 @@ public class Accent {
         task.resume()
     }
     
-    func saveArticle(phoneNumber: String?, article: Article, completion: (success: Bool) -> Void) {
+    func saveArticle(article: Article, completion: (success: Bool) -> Void) {
         let realm = try! Realm()
         try! realm.write {
             realm.add(article)
