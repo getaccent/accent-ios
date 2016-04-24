@@ -21,6 +21,8 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var overlayText: UILabel!
     @IBOutlet weak var bottomBar: AccentTabBar!
     
+    private var refreshControl: UIRefreshControl!
+    
     private var articles: [Article] {
         return bottomBar.selectedTab == 0 ? savedArticles : browseArticles
     }
@@ -34,8 +36,8 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         navigationController?.navigationBarHidden = true
         
-        self.savedArticles = Accent.sharedInstance.getLocalArticles()
-        self.reloadTableView(false)
+        savedArticles = Accent.sharedInstance.getLocalArticles()
+        reloadTableView(false)
         
         Accent.sharedInstance.retrieveArticles { (articles) in
             guard let articles = articles else {
@@ -65,6 +67,12 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.backgroundColor = UIColor.whiteColor()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
         
         updateSavedArticles()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateSavedArticles), name: AccentApplicationWillEnterForeground, object: nil)
@@ -181,7 +189,11 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func reloadTableView(animated: Bool) {
         dispatch_async(dispatch_get_main_queue()) {
-            UIView.animateWithDuration(animated ? 0.25 : 0) {
+            if animated {
+                UIView.animateWithDuration(0.25) {
+                    self.overlayView.alpha = (self.bottomBar.selectedTab == 0 && self.savedArticles.count == 0) || (self.bottomBar.selectedTab == 1 && self.browseArticles.count == 0) ? 1 : 0
+                }
+            } else {
                 self.overlayView.alpha = (self.bottomBar.selectedTab == 0 && self.savedArticles.count == 0) || (self.bottomBar.selectedTab == 1 && self.browseArticles.count == 0) ? 1 : 0
             }
             
@@ -189,6 +201,37 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             self.overlayText.text = self.bottomBar.selectedTab == 0 ? NSLocalizedString("When you save an article to Accent, it will be listed here.", comment: "") : NSLocalizedString("No articles could be found at this time. Please try again later.", comment: "")
             
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
+    func refresh(control: UIRefreshControl) {
+        if bottomBar.selectedTab == 0 {
+            Accent.sharedInstance.getSavedArticles { (articles) in
+                guard let articles = articles else {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.refreshControl.endRefreshing()
+                    })
+                    
+                    return
+                }
+                
+                self.savedArticles = articles
+                self.reloadTableView(true)
+            }
+        } else {
+            Accent.sharedInstance.retrieveArticles { (articles) in
+                guard let articles = articles else {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.refreshControl.endRefreshing()
+                    })
+                    
+                    return
+                }
+                
+                self.browseArticles = articles
+                self.reloadTableView(true)
+            }
         }
     }
     

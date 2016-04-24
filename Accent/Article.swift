@@ -11,6 +11,7 @@ import RealmSwift
 
 class Article: Object {
     
+    dynamic var id: Int = 0
     dynamic var surl: String = ""
     dynamic var title: String = ""
     dynamic var image: String = ""
@@ -19,6 +20,10 @@ class Article: Object {
     dynamic var sdate: Int = 0
     dynamic var sfeatured: Int = 0
     dynamic var slanguage: String = ""
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
     
     var url: NSURL? {
         return NSURL(string: surl)
@@ -46,6 +51,7 @@ class Article: Object {
     
     class func createFromJSON(json: JSON) -> Article {
         let article = Article()
+        article.id = json["id"].int ?? -1
         article.surl = json["url"].string ?? ""
         article.title = json["title"].string ?? ""
         article.image = json["image"].string ?? ""

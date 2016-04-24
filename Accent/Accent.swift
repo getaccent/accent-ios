@@ -100,7 +100,7 @@ public class Accent {
         return Array(realm.objects(Article))
     }
     
-    func getSavedArticles(completion: (articles: [Article]) -> Void) {
+    func getSavedArticles(completion: (articles: [Article]?) -> Void) {
         guard let phoneNumber = phoneNumber, url = NSURL(string: "\(baseUrl)/save?num=\(phoneNumber)") else {
             return
         }
@@ -113,6 +113,7 @@ public class Accent {
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             guard let data = data else {
+                completion(articles: nil)
                 return
             }
             
@@ -126,10 +127,18 @@ public class Accent {
                     retrievedArticles.append(article)
                 }
                 
-                let realm = try! Realm()
-                try! realm.write {
-                    realm.add(retrievedArticles)
-                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    let realm = try! Realm()
+                    try! realm.write {
+                        for article in retrievedArticles {
+                            realm.create(Article.self, value: article, update: true)
+                        }
+                    }
+                })
+                
+                completion(articles: retrievedArticles)
+            } else {
+                completion(articles: nil)
             }
         }
         
@@ -203,7 +212,7 @@ public class Accent {
             realm.add(article)
         }
         
-        guard let phoneNumber = phoneNumber, urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(article.url)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let phoneNumber = phoneNumber, aurl = article.url?.absoluteString, urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(aurl)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             return
         }
         
