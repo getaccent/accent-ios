@@ -131,8 +131,8 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 let url = NSURL(string: "https://quizlet.com/\(setId)/")!
                 Quizlet.sharedInstance.openSetWithURL(self, url: url)
             } else {
-                let controller = UIAlertController(title: "No Set", message: "No sets have been created on your Quizlet account. Translate some words to create one automatically!", preferredStyle: .Alert)
-                let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                let controller = UIAlertController(title: NSLocalizedString("No Set", comment: ""), message: NSLocalizedString("No sets have been created on your Quizlet account. Translate some words to create one automatically!", comment: ""), preferredStyle: .Alert)
+                let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: nil)
                 
                 controller.addAction(action)
                 presentViewController(controller, animated: true, completion: nil)
