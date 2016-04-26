@@ -8,9 +8,9 @@
 
 "Accent Feedback" = "Accent反応";
 
-"Article" = "冠詞";
+"Article" = "記事";
 
-"Articles" = "冠詞";
+"Articles" = "記事";
 
 "Browse" = "閲覧する";
 
@@ -28,27 +28,27 @@
 
 "No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "Quizletアカウントにセットが作成されていません。自動的にセットが作成されるように、単語の翻訳をしてください!";
 
-"OK" = "OK";
+"OK" = "了解";
 
-"Accentの評価をする" = "Accent";
+"Rate Accent" = "Accentの評価をする";
 
-"保存中。。。" = "Saving for later...";
+"Saving for later..." = "保存中。。。";
 
-"言語を選ぶ" = "Select a Language";
+"Select a Language" = "言語を選ぶ";
 
-"フィードバックを送る" = "Send Feedback";
+"Send Feedback" = "フィードバックを送る";
 
-"設定" = "Settings";
+"Settings" = "設定";
 
-"電話番号でサインインする" = "Sign in with Phone Number";
+"Sign in with Phone Number" = "電話番号でサインインする";
 
-"対象言語" = "Target Language";
+"Target Language" = "対象言語";
 
-"バージョン" = "Version";
+"Version" = "バージョン";
 
-"アクセントに記事を保存すると、ここに載ります。" = "When you save an article to Accent, it will be listed here.";
+"When you save an article to Accent, it will be listed here." = "アクセントに記事を保存すると、ここに載ります。";
 
-"グローバルなニュース情報源" = "Your global news source";
+"Your global news source" = "グローバルなニュース情報源";
 
 /* Languages */
 
