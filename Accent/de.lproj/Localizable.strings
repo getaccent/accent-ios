@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Accent
+
+  Created by Jack Cook on 4/20/16.
+  Copyright © 2016 Tiny Pixels. All rights reserved.
+*/
+
+"Accent Feedback" = "Accent Feedback";
+
+"Article" = "Der Artikel";
+
+"Articles" = "Die Artikel";
+
+"Browse" = "Browse";
+
+"Continue" = "Weiter";
+
+"Continue Without Login" = "Weiter ohne Anmeldung";
+
+"Don't worry, you can change this later" = "Keine Sorge, du kannst es später ändern";
+
+"Home" = "Home";
+
+"No articles could be found at this time. Please try again later." = "Es konnten keine Artikel gefunden werden. Bitte versuche es später.";
+
+"No Set" = "";
+
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "";
+
+"OK" = "";
+
+"Rate Accent" = "Bewerte Accent";
+
+"Saving for later..." = "";
+
+"Select a Language" = "Bitte wähle eine Sprache";
+
+"Send Feedback" = "";
+
+"Settings" = "Einstellungen";
+
+"Sign in with Phone Number" = "Anmeldung mit Telefonnummer";
+
+"Target Language" = "Fremdsprache";
+
+"Version" = "Version";
+
+"When you save an article to Accent, it will be listed here." = "Wenn du einen Artikel zur Leseliste hunzufügst, wird er hier gespeichert."";
+
+"Your global news source" = "Dein globales Nachrichtenzentrum";
+
+/* Languages */
+
+"Chinese" = "Chinesisch (Vereinfacht)";
+"English" = "Englisch";
+"French" = "Französisch";
+"Spanish" = "Spanisch";
+"Swedish" = "Schwedisch";
