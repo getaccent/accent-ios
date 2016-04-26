@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Accent
+
+  Created by Jack Cook on 4/20/16.
+  Copyright © 2016 Tiny Pixels. All rights reserved.
+*/
+
+"Accent Feedback" = "Maklum balas Accent";
+
+"Article" = "Artikle";
+
+"Articles" = "Artikle-artikle";
+
+"Browse" = "Melayari";
+
+"Continue" = "Teruskan";
+
+"Continue Without Login" = "Teruskan tanpa Login";
+
+"Don't worry, you can change this later" = "Jangan risau, anda boleh menukarkan kemudian";
+
+"Home" = "Home";
+
+"No articles could be found at this time. Please try again later." = "";
+
+"No Set" = "";
+
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "";
+
+"OK" = "";
+
+"Rate Accent" = "Kadar Accent";
+
+"Saving for later..." = "Menyimpankan untuk kemudian...";
+
+"Select a Language" = "Memilih bahasa";
+
+"Send Feedback" = "";
+
+"Settings" = "Tetapan";
+
+"Sign in with Phone Number" = "Log masuk dengan nombor telefon";
+
+"Target Language" = "Bahasa sasaran";
+
+"Version" = "Verdi";
+
+"When you save an article to Accent, it will be listed here." = "";
+
+"Your global news source" = "Sumber berita global anda";
+
+/* Languages */
+
+"Chinese" = "Cina, Ringkas";
+"English" = "Inggeris";
+"French" = "perancis";
+"Spanish" = "Sepanyol";
+"Swedish" = "sweden";
