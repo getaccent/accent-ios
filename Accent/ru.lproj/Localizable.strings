@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Accent
+
+  Created by Jack Cook on 4/20/16.
+  Copyright © 2016 Tiny Pixels. All rights reserved.
+*/
+
+"Accent Feedback" = "Accent Обратная связь";
+
+"Article" = "Статья";
+
+"Articles" = "Статьи";
+
+"Browse" = "Обзор";
+
+"Continue" = "Продолжить";
+
+"Continue Without Login" = "Продолжить без Логин";
+
+"Don't worry, you can change this later" = "Не волнуйтесь, вы можете изменить это позже";
+
+"Home" = "Главная";
+
+"No articles could be found at this time. Please try again later." = "Никакие статьи не могут быть найдены в это время. Пожалуйста, повторите попытку позже.";
+
+"No Set" = "";
+
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "";
+
+"OK" = "";
+
+"Rate Accent" = "Дать рейтинг Accent";
+
+"Saving for later..." = "Сохранение для последующего...";
+
+"Select a Language" = "Выберите язык";
+
+"Send Feedback" = "";
+
+"Settings" = "Настройки";
+
+"Sign in with Phone Number" = "Вход с номером телефона";
+
+"Target Language" = "Язык перевода";
+
+"Version" = "Версия";
+
+"When you save an article to Accent, it will be listed here." = "При сохранении статьи в Accent, она будет указана здесь.";
+
+"Your global news source" = "Ваш глобальный источник новостей";
+
+/* Languages */
+
+"Chinese" = "Chinese, Simplified";
+"English" = "English";
+"French" = "French";
+"Spanish" = "Spanish";
+"Swedish" = "Swedish";
