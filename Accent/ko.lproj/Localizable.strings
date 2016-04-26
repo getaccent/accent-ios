@@ -22,21 +22,21 @@
 
 "Home" = "홈";
 
-"No articles could be found at this time. Please try again later." = "";
+"No articles could be found at this time. Please try again later." = "이번에 기사를 찾을 수 없습니다. 나중에 다시 시도하세요.";
 
 "No Set" = "세트 없음";
 
-"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "No sets have been created on your Quizlet account. Translate some words to create one automatically!";
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "Quizlet 계정에 세트가 생성되지 않았습니다. 자동으로 생성하려면 몇몇 단어를 번역하세요!";
 
 "OK" = "그래";
 
-"Rate Accent" = "";
+"Rate Accent" = "Accent 평가";
 
 "Saving for later..." = "나중을 위해 저장 중...";
 
 "Select a Language" = "언어를 선택하세요";
 
-"Send Feedback" = "";
+"Send Feedback" = "의견 보내기";
 
 "Settings" = "설정";
 
