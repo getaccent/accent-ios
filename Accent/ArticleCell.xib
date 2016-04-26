@@ -70,6 +70,7 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="leading" secondItem="cpZ-Yf-ckH" secondAttribute="trailing" constant="16" id="DRd-j9-DpI"/>
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.333" id="Dsj-nT-zco"/>
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="leading" secondItem="s8g-zd-mUk" secondAttribute="trailing" constant="16" id="EhP-Es-lHw"/>
+                <constraint firstItem="cpZ-Yf-ckH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mkf-RG-xpY" secondAttribute="trailing" constant="16" id="Emt-Hb-PQH"/>
                 <constraint firstAttribute="bottom" secondItem="BcP-Aj-wG1" secondAttribute="bottom" constant="16" id="MV9-Al-WHp"/>
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Mvl-fB-5HL"/>
                 <constraint firstItem="BcP-Aj-wG1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="N7y-H3-bv3"/>
@@ -100,6 +101,7 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
             </variation>
             <connections>
                 <outlet property="articleImage" destination="BcP-Aj-wG1" id="XK9-ry-pxH"/>
+                <outlet property="authorLabel" destination="Mkf-RG-xpY" id="5qo-L5-8VP"/>
                 <outlet property="firstLineLabel" destination="s8g-zd-mUk" id="IdX-N7-uGh"/>
                 <outlet property="timeLabel" destination="cpZ-Yf-ckH" id="WRf-xb-Cde"/>
                 <outlet property="titleLabel" destination="DVm-CX-d8k" id="keF-UO-9pC"/>

@@ -46,6 +46,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="RcM-Uf-fq9" secondAttribute="trailing" constant="16" id="82L-sd-hzZ"/>
+                <constraint firstItem="U6R-80-qVW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JjH-8N-dZt" secondAttribute="trailing" constant="16" id="8qb-Ce-hfp"/>
                 <constraint firstAttribute="trailing" secondItem="NhX-Fq-U7t" secondAttribute="trailing" constant="16" id="8tn-7c-kgK"/>
                 <constraint firstItem="U6R-80-qVW" firstAttribute="height" secondItem="JjH-8N-dZt" secondAttribute="height" id="9nk-XJ-0ul"/>
                 <constraint firstAttribute="trailing" secondItem="U6R-80-qVW" secondAttribute="trailing" constant="16" id="JXr-2c-CRj"/>
@@ -67,6 +68,7 @@
             </variation>
             <connections>
                 <outlet property="articleImage" destination="RcM-Uf-fq9" id="VII-7Z-Gfl"/>
+                <outlet property="authorLabel" destination="JjH-8N-dZt" id="hgK-7u-wM0"/>
                 <outlet property="timeLabel" destination="U6R-80-qVW" id="8ee-Jc-JYI"/>
                 <outlet property="titleLabel" destination="NhX-Fq-U7t" id="Gss-5P-Iqo"/>
             </connections>

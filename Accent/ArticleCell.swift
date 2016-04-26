@@ -17,24 +17,45 @@ class ArticleCell: MGSwipeTableCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var firstLineLabel: UILabel?
+    @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var articleImage: UIImageView?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let hour = Int(arc4random_uniform(9)) + 1
-        timeLabel.text = "\(hour)h"
+        timeLabel.text = ""
     }
     
     func configure(article: Article) {
         self.article = article
         
         titleLabel.text = article.title
-        firstLineLabel?.text = article.text
+        
+        var text = article.text
+        
+        while text.containsString("\n") {
+            text = text.stringByReplacingOccurrencesOfString("\n", withString: "")
+        }
+        
+        firstLineLabel?.text = text
         
         Accent.sharedInstance.getArticleThumbnail(article) { (image) in
             self.articleImage?.image = image
         }
+        
+        var parts = [String]()
+        
+        if let domain = article.url?.host?.stringByReplacingOccurrencesOfString("www.", withString: "") {
+            parts.append(domain)
+        }
+        
+        if let authors = article.authors where authors.count > 0 {
+            if authors[0] != "" {
+                parts.append(authors.joinWithSeparator(", "))
+            }
+        }
+        
+        authorLabel.text = parts.joinWithSeparator(" • ")
     }
 }

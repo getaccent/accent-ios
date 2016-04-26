@@ -65,6 +65,7 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Izz-yi-7fO" secondAttribute="bottom" constant="16" id="AZg-Qv-0wu"/>
+                <constraint firstItem="zFx-Kj-dcy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KED-79-67K" secondAttribute="trailing" constant="16" id="Aew-qH-RRp"/>
                 <constraint firstItem="Izz-yi-7fO" firstAttribute="top" secondItem="7EO-T7-ahM" secondAttribute="top" constant="12" id="CCf-Hg-bQJ"/>
                 <constraint firstItem="J1Z-Tw-oc5" firstAttribute="top" secondItem="7EO-T7-ahM" secondAttribute="top" constant="32" id="DUc-En-AQ1"/>
                 <constraint firstItem="KED-79-67K" firstAttribute="leading" secondItem="7EO-T7-ahM" secondAttribute="leading" constant="32" id="I1y-Wv-k3m"/>
@@ -100,6 +101,7 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
             </variation>
             <connections>
                 <outlet property="articleImage" destination="Izz-yi-7fO" id="neM-Au-Nmd"/>
+                <outlet property="authorLabel" destination="KED-79-67K" id="RYR-UF-LO1"/>
                 <outlet property="firstLineLabel" destination="spp-X1-BOh" id="KQ9-s3-9aa"/>
                 <outlet property="timeLabel" destination="zFx-Kj-dcy" id="HTq-dr-bGo"/>
                 <outlet property="titleLabel" destination="J1Z-Tw-oc5" id="TKS-e1-hNO"/>

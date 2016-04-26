@@ -67,6 +67,7 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
                 <constraint firstItem="9ir-E0-vgq" firstAttribute="leading" secondItem="YCr-OM-0Q1" secondAttribute="leading" constant="16" id="aaL-eb-laG"/>
                 <constraint firstAttribute="bottom" secondItem="Xtp-8p-g9T" secondAttribute="bottom" constant="16" id="dIm-jQ-tBL"/>
                 <constraint firstAttribute="trailing" secondItem="9ir-E0-vgq" secondAttribute="trailing" constant="16" id="pVs-qs-5Fj"/>
+                <constraint firstItem="f0v-c1-TbW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xtp-8p-g9T" secondAttribute="trailing" constant="16" id="w2F-RN-Yre"/>
                 <constraint firstAttribute="bottom" secondItem="f0v-c1-TbW" secondAttribute="bottom" constant="16" id="xYc-aX-ClJ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -78,6 +79,7 @@ En savoir plus sur http://www.lemonde.fr/attaques-a-paris/article/2016/04/01/a-p
                 </mask>
             </variation>
             <connections>
+                <outlet property="authorLabel" destination="Xtp-8p-g9T" id="KFM-bw-Cag"/>
                 <outlet property="firstLineLabel" destination="9ir-E0-vgq" id="aCo-3b-eW6"/>
                 <outlet property="timeLabel" destination="f0v-c1-TbW" id="QPf-gB-ThY"/>
                 <outlet property="titleLabel" destination="O2p-HX-nym" id="OXW-Ut-lqz"/>

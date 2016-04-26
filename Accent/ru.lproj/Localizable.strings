@@ -24,11 +24,11 @@
 
 "No articles could be found at this time. Please try again later." = "Никакие статьи не могут быть найдены в это время. Пожалуйста, повторите попытку позже.";
 
-"No Set" = "";
+"No Set" = "Нет набора слов";
 
-"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "";
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "Не одного набора слов не было создано в вашем счетy Quizlet. переведите несколько слов, чтобы набор автоматически создавать!";
 
-"OK" = "";
+"OK" = "ОК";
 
 "Rate Accent" = "Дать рейтинг Accent";
 
@@ -36,7 +36,7 @@
 
 "Select a Language" = "Выберите язык";
 
-"Send Feedback" = "";
+"Send Feedback" = "Отправить отзыв";
 
 "Settings" = "Настройки";
 
