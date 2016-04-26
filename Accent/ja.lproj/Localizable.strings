@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Accent
+
+  Created by Jack Cook on 4/20/16.
+  Copyright © 2016 Tiny Pixels. All rights reserved.
+*/
+
+"Accent Feedback" = "Accent反応";
+
+"Article" = "冠詞";
+
+"Articles" = "冠詞";
+
+"Browse" = "閲覧する";
+
+"Continue" = "続ける";
+
+"Continue Without Login" = "ログインしないで続ける";
+
+"Don't worry, you can change this later" = "後で変更できますので、心配しないでください";
+
+"Home" = "ホーム";
+
+"No articles could be found at this time. Please try again later." = "現在、記事がありませんので、後で試してください。";
+
+"No Set" = "セットがありません";
+
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "Quizletアカウントにセットが作成されていません。自動的にセットが作成されるように、単語の翻訳をしてください!";
+
+"OK" = "OK";
+
+"Accentの評価をする" = "Accent";
+
+"保存中。。。" = "Saving for later...";
+
+"言語を選ぶ" = "Select a Language";
+
+"フィードバックを送る" = "Send Feedback";
+
+"設定" = "Settings";
+
+"電話番号でサインインする" = "Sign in with Phone Number";
+
+"対象言語" = "Target Language";
+
+"バージョン" = "Version";
+
+"アクセントに記事を保存すると、ここに載ります。" = "When you save an article to Accent, it will be listed here.";
+
+"グローバルなニュース情報源" = "Your global news source";
+
+/* Languages */
+
+"Chinese" = "中国語（簡体字）";
+"English" = "英語";
+"French" = "フランス語";
+"Spanish" = "スペイン語";
+"Swedish" = "スウェーデン語";

@@ -103,6 +103,7 @@
 		EB6870C21CCFD0A600B5A677 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EB7901BA1CC719A200A7186E /* PadArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PadArticleCell.xib; sourceTree = "<group>"; };
 		EB7901BC1CC71B1000A7186E /* PadNoImageArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PadNoImageArticleCell.xib; sourceTree = "<group>"; };
+		EB9A73B21CCFE201004D61C4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EBABE43B1CCFA83B0018B8B8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EBABE43C1CCFAE230018B8B8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EBBA559B1CB964EC0082642D /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
@@ -327,6 +328,7 @@
 				de,
 				ru,
 				ko,
+				ja,
 			);
 			mainGroup = EB334FA21CB96434009A3985;
 			productRefGroup = EB334FAC1CB96434009A3985 /* Products */;
@@ -495,6 +497,7 @@
 				EBABE43B1CCFA83B0018B8B8 /* de */,
 				EBABE43C1CCFAE230018B8B8 /* ru */,
 				EB6870C21CCFD0A600B5A677 /* ko */,
+				EB9A73B21CCFE201004D61C4 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
