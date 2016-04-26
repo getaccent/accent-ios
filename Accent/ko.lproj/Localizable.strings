@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Accent
+
+  Created by Jack Cook on 4/20/16.
+  Copyright © 2016 Tiny Pixels. All rights reserved.
+*/
+
+"Accent Feedback" = "Accent 피드백";
+
+"Article" = "기사";
+
+"Articles" = "기사";
+
+"Browse" = "검색";
+
+"Continue" = "계속";
+
+"Continue Without Login" = "로그인하지 않고 계속";
+
+"Don't worry, you can change this later" = "걱정 마세요. 나중에 변경할 수 있습니다";
+
+"Home" = "홈";
+
+"No articles could be found at this time. Please try again later." = "";
+
+"No Set" = "세트 없음";
+
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "No sets have been created on your Quizlet account. Translate some words to create one automatically!";
+
+"OK" = "그래";
+
+"Rate Accent" = "";
+
+"Saving for later..." = "나중을 위해 저장 중...";
+
+"Select a Language" = "언어를 선택하세요";
+
+"Send Feedback" = "";
+
+"Settings" = "설정";
+
+"Sign in with Phone Number" = "전화번호로 로그인";
+
+"Target Language" = "대상 언어";
+
+"Version" = "버전";
+
+"When you save an article to Accent, it will be listed here." = "Accent에 기사를 저장하면, 여기에 표시됩니다.";
+
+"Your global news source" = "당신의 글로벌 뉴스 출처";
+
+/* Languages */
+
+"Chinese" = "중국어(간체)";
+"English" = "영어";
+"French" = "프랑스어";
+"Spanish" = "스페인어";
+"Swedish" = "스웨덴어";
