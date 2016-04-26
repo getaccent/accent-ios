@@ -34,6 +34,11 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {}
+        
         navigationController?.navigationBarHidden = true
         
         bottomBar.article = article
@@ -45,6 +50,11 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
+            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {}
         
         if Quizlet.sharedInstance.setId == 0 && terms.count > 2 {
             guard let _ = Language.savedLanguage() else {
@@ -208,6 +218,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         bottomConstraint.constant = audio ? 0 : -56
         
         backTextView.attributedText = textView.attributedText
+        backTextView.textColor = UIColor.whiteColor()
         
         UIView.animateWithDuration(0.25) {
             self.view.layoutIfNeeded()
@@ -229,6 +240,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         backTextView.attributedText = attributedString
+        backTextView.textColor = UIColor.whiteColor()
     }
     
     override func canBecomeFirstResponder() -> Bool {
