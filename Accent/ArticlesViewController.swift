@@ -344,9 +344,9 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                 
                 cell.refreshButtons(true)
                 
-                Accent.sharedInstance.saveArticle(article, completion: { (success) in
+                Accent.sharedInstance.saveArticle(article) { (success) in
                     print("saved")
-                })
+                }
             default:
                 break
             }

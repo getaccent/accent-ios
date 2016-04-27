@@ -22,11 +22,11 @@
 
 "Home" = "Accueil";
 
-"No articles could be found at this time. Please try again later." = "Pas d'articles a pu être trouvée à ce moment. Veuillez réessayer plus tard.";
+"No articles could be found at this time. Please try again later." = "Aucun article a pu être trouvé en ce moment. Veuillez réessayer plus tard.";
 
-"No Set" = "Pas de collection";
+"No Set" = "Aucun ensemble";
 
-"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "Pas de collections ont été créés sur votre compte Quizlet. Traduire des mots pour créer un automatiquement!";
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "Des collections n'ont pas été créés sur votre compte Quizlet. Traduisez des mots pour créer un automatiquement!";
 
 "OK" = "OK";
 
@@ -40,7 +40,7 @@
 
 "Settings" = "Réglages";
 
-"Sign in with Phone Number" = "Connectez avec numéro de téléphone";
+"Sign in with Phone Number" = "Connectez avec un numéro de téléphone";
 
 "Target Language" = "Langue cible";
 
@@ -52,8 +52,14 @@
 
 /* Languages */
 
-"Chinese" = "Chinois, simplifié";
 "English" = "Anglais";
 "French" = "Français";
+"German" = "Allemand";
+"Italian" = "Italien";
+"Japanese" = "Japonais";
+"Korean" = "Coréen";
+"Russian" = "Russe";
+"SChinese" = "chinois, simplifié";
 "Spanish" = "Espagnol";
 "Swedish" = "Suédois";
+"TChinese" = "chinois, traditionnel";

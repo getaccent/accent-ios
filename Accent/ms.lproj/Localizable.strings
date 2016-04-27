@@ -52,8 +52,14 @@
 
 /* Languages */
 
-"Chinese" = "Cina, Ringkas";
 "English" = "Inggeris";
 "French" = "perancis";
+"German" = "jerman";
+"Italian" = "itali";
+"Japanese" = "jepun";
+"Korean" = "korea";
+"Russian" = "rusia";
+"SChinese" = "Cina, Ringkas";
 "Spanish" = "Sepanyol";
 "Swedish" = "sweden";
+"TChinese" = "Cina, Tradisional";

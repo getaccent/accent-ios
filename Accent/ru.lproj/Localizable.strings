@@ -52,8 +52,14 @@
 
 /* Languages */
 
-"Chinese" = "Chinese, Simplified";
-"English" = "English";
-"French" = "French";
-"Spanish" = "Spanish";
-"Swedish" = "Swedish";
+"English" = "Английский";
+"French" = "Французский";
+"German" = "Немецкий";
+"Italian" = "Итальянский";
+"Japanese" = "Японский";
+"Korean" = "Корейский";
+"Russian" = "Русский";
+"SChinese" = "Упрощенный китайский";
+"Spanish" = "Испанский";
+"Swedish" = "Шведский";
+"TChinese" = "Традиционный китайский";

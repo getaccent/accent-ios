@@ -52,8 +52,14 @@
 
 /* Languages */
 
-"Chinese" = "簡體中文";
 "English" = "英文";
 "French" = "法文";
+"German" = "德文";
+"Italian" = "義大利文";
+"Japanese" = "日文";
+"Korean" = "韓文";
+"Russian" = "俄文";
+"SChinese" = "簡體中文";
 "Spanish" = "西班牙文";
 "Swedish" = "瑞典文";
+"TChinese" = "繁體中文";
