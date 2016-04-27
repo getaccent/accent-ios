@@ -234,8 +234,15 @@ public class Accent {
         task.resume()
     }
     
-    func translateTerm(term: String, completion: (translation: Translation?) -> Void) {
+    private var wordCache = [String: String]()
+    
+    func translateTerm(term: String, completion: (translation: Any?) -> Void) {
         guard !requestsMade.contains(term), let source = Language.savedLanguage() else {
+            return
+        }
+        
+        if let translation = wordCache[term] {
+            completion(translation: translation)
             return
         }
         
@@ -248,6 +255,7 @@ public class Accent {
             let realm = try Realm()
             for translation in realm.objects(Translation).filter(predicate) {
                 completion(translation: translation)
+                wordCache[translation.term] = translation.translation
                 return
             }
         } catch {}
@@ -285,6 +293,8 @@ public class Accent {
                 completion(translation: nil)
                 return
             }
+            
+            self.wordCache[term] = translatedTerm
             
             dispatch_async(dispatch_get_main_queue(), {
                 let translation = Translation()
