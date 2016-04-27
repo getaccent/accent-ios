@@ -16,6 +16,7 @@ class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var noticeLabel: UILabel!
     
+    private var languages = [Language]()
     private var selectedLanguage = Language.Spanish
     
     override func viewDidLoad() {
@@ -34,6 +35,13 @@ class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         pickerView.dataSource = self
         pickerView.delegate = self
+        
+        for i in 0...10 where i != Language.getPrimaryLanguage().rawValue {
+            print(i)
+            if let language = Language(rawValue: i) {
+                languages.append(language)
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,22 +74,14 @@ class LanguageViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
+        return languages.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard let language = Language(rawValue: row) else {
-            return "Unknown"
-        }
-        
-        return language.description
+        return languages[row].description
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard let language = Language(rawValue: row) else {
-            return
-        }
-        
-        selectedLanguage = language
+        selectedLanguage = languages[row]
     }
 }
