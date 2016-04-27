@@ -235,14 +235,15 @@ public class Accent {
     }
     
     func translateTerm(term: String, completion: (translation: Translation?) -> Void) {
-        guard !requestsMade.contains(term), let language = Language.savedLanguage() else {
+        guard !requestsMade.contains(term), let source = Language.savedLanguage() else {
             return
         }
         
+        let target = Language.getPrimaryLanguage()
         let term = term.stringByReplacingOccurrencesOfString("\n", withString: " ")
         
         do {
-            let predicate = NSPredicate(format: "term = %@ AND target = %@", term, language.getCode())
+            let predicate = NSPredicate(format: "term = %@ AND source = %@ AND target = %@", term, source.getCode(), target.getCode())
             
             let realm = try Realm()
             for translation in realm.objects(Translation).filter(predicate) {
@@ -251,7 +252,7 @@ public class Accent {
             }
         } catch {}
         
-        guard let urlString = "\(baseUrl)/translate?term=\(term)&lang=\(language.getCode())".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let urlString = "\(baseUrl)/translate?term=\(term)&lang=\(source.getCode())&target=\(target.getCode())".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
             completion(translation: nil)
             return
         }
@@ -289,7 +290,8 @@ public class Accent {
                 let translation = Translation()
                 translation.term = term
                 translation.translation = translatedTerm
-                translation.target = language.getCode()
+                translation.source = source.getCode()
+                translation.target = Language.getPrimaryLanguage().getCode()
                 
                 completion(translation: translation)
                 

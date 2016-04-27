@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  Accent
-
-  Created by Jack Cook on 4/20/16.
-  Copyright © 2016 Tiny Pixels. All rights reserved.
-*/
+/*
+ Localizable.strings
+ Accent
+ 
+ Created by Jack Cook on 4/20/16.
+ Copyright © 2016 Tiny Pixels. All rights reserved.
+ */
 
 "Accent Feedback" = "Accent Feedback";
 
@@ -24,19 +24,19 @@
 
 "No articles could be found at this time. Please try again later." = "Es konnten keine Artikel gefunden werden. Bitte versuche es später.";
 
-"No Set" = "";
+"No Set" = "Kein Set vorhanden";
 
-"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "";
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "Es sind noch keine Sets auf deinem Quizlet account vorhanden. Übersetze ein paar Worte um automatisch eins zu erstellen!";
 
-"OK" = "";
+"OK" = "OK";
 
 "Rate Accent" = "Bewerte Accent";
 
-"Saving for later..." = "";
+"Saving for later..." = "Speichern...";
 
 "Select a Language" = "Bitte wähle eine Sprache";
 
-"Send Feedback" = "";
+"Send Feedback" = "Feedback senden";
 
 "Settings" = "Einstellungen";
 

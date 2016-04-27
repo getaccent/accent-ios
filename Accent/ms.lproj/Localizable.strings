@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  Accent
-
-  Created by Jack Cook on 4/20/16.
-  Copyright © 2016 Tiny Pixels. All rights reserved.
-*/
+/*
+ Localizable.strings
+ Accent
+ 
+ Created by Jack Cook on 4/20/16.
+ Copyright © 2016 Tiny Pixels. All rights reserved.
+ */
 
 "Accent Feedback" = "Maklum balas Accent";
 
@@ -22,21 +22,21 @@
 
 "Home" = "Home";
 
-"No articles could be found at this time. Please try again later." = "";
+"No articles could be found at this time. Please try again later." = "Tiada artikel boleh didapati pada masa ini. Sila cuba sebentar lagi.";
 
-"No Set" = "";
+"No Set" = "Tiada kumpulan kata-kata";
 
-"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "";
+"No sets have been created on your Quizlet account. Translate some words to create one automatically!" = "Tiada kumpulan kata-kata dalam akaun Quizlet. Menterjemahkan beberapa kata-kata untuk mencipta satu secara automatik!";
 
-"OK" = "";
+"OK" = "OK";
 
 "Rate Accent" = "Kadar Accent";
 
-"Saving for later..." = "Menyimpankan untuk kemudian...";
+"Saving for later..." = "Menyimpankan...";
 
 "Select a Language" = "Memilih bahasa";
 
-"Send Feedback" = "";
+"Send Feedback" = "Hantar maklum balas";
 
 "Settings" = "Tetapan";
 
@@ -46,7 +46,7 @@
 
 "Version" = "Verdi";
 
-"When you save an article to Accent, it will be listed here." = "";
+"When you save an article to Accent, it will be listed here." = "Apabila anda menyimpankan seauatu artikle ke dalam Accent, ia akan di senaraikan di sini.";
 
 "Your global news source" = "Sumber berita global anda";
 

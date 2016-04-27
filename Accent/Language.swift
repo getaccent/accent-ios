@@ -94,6 +94,27 @@ enum Language: Int {
         }
     }
     
+    static func getPrimaryLanguage() -> Language {
+        guard let language = NSLocale.currentLocale().objectForKey(NSLocaleLanguageCode) as? String else {
+            return .English
+        }
+        
+        switch language {
+        case "en": return .English
+        case "es": return .Spanish
+        case "fr": return .French
+        case "de": return .German
+        case "zh": return .SChinese
+        case "zh-Hant": return .TChinese
+        case "ja": return .Japanese
+        case "it": return .Italian
+        case "ko": return .Korean
+        case "sv": return .Swedish
+        case "ru": return .Russian
+        default: return .English
+        }
+    }
+    
     static func savedLanguage() -> Language? {
         return Language.languageFromCode(NSUserDefaults.standardUserDefaults().stringForKey("AccentLanguage"))
     }

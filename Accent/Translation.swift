@@ -12,5 +12,6 @@ class Translation: Object {
     
     dynamic var term: String = ""
     dynamic var translation: String = ""
+    dynamic var source: String = ""
     dynamic var target: String = ""
 }
