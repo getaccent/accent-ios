@@ -14,7 +14,7 @@ class ArticleTextView: UITextView, UIGestureRecognizerDelegate {
     private var longPressRecognizer: UILongPressGestureRecognizer!
     
     init(delegate: ArticleTextViewDelegate?) {
-        super.init(frame: CGRectZero, textContainer: nil)
+        super.init(frame: CGRect.zero, textContainer: nil)
         
         articleDelegate = delegate
         
@@ -27,24 +27,24 @@ class ArticleTextView: UITextView, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal func longPress(gestureRecognizer: UILongPressGestureRecognizer) {
+    internal func longPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         guard let superview = superview?.superview else {
             return
         }
         
-        let point = gestureRecognizer.locationInView(superview)
-        articleDelegate?.longTouchReceived(point, state: gestureRecognizer.state, text: (text as NSString).substringWithRange(selectedRange))
+        let point = gestureRecognizer.location(in: superview)
+        articleDelegate?.longTouchReceived(point, state: gestureRecognizer.state, text: (text as NSString).substring(with: selectedRange))
     }
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
-    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return false
     }
 }
 
 protocol ArticleTextViewDelegate {
-    func longTouchReceived(point: CGPoint, state: UIGestureRecognizerState, text: String)
+    func longTouchReceived(_ point: CGPoint, state: UIGestureRecognizerState, text: String)
 }

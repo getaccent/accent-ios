@@ -39,7 +39,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {}
         
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         
         bottomBar.article = article
         bottomBar.delegate = self
@@ -48,7 +48,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         topBarLabel.text = articlesText
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         do {
@@ -65,35 +65,35 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         }
     }
     
-    let margin: CGFloat = UIDevice.currentDevice().userInterfaceIdiom == .Pad ? 32 : 16
+    let margin: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 32 : 16
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         let topShadowPath = UIBezierPath(rect: topBar.bounds)
         topBar.layer.masksToBounds = false
-        topBar.layer.shadowColor = UIColor.blackColor().CGColor
-        topBar.layer.shadowOffset = CGSizeMake(0, 1)
+        topBar.layer.shadowColor = UIColor.black.cgColor
+        topBar.layer.shadowOffset = CGSize(width: 0, height: 1)
         topBar.layer.shadowOpacity = 0.15
-        topBar.layer.shadowPath = topShadowPath.CGPath
+        topBar.layer.shadowPath = topShadowPath.cgPath
         
         let bottomShadowPath = UIBezierPath(rect: bottomBar.bounds)
         bottomBar.layer.masksToBounds = false
-        bottomBar.layer.shadowColor = UIColor.blackColor().CGColor
-        bottomBar.layer.shadowOffset = CGSizeMake(0, -1)
+        bottomBar.layer.shadowColor = UIColor.black.cgColor
+        bottomBar.layer.shadowOffset = CGSize(width: 0, height: -1)
         bottomBar.layer.shadowOpacity = 0.15
-        bottomBar.layer.shadowPath = bottomShadowPath.CGPath
+        bottomBar.layer.shadowPath = bottomShadowPath.cgPath
         
         if articleTitle == nil {
             articleTitle = UILabel()
-            articleTitle.font = UIFont.systemFontOfSize(22, weight: UIFontWeightSemibold)
+            articleTitle.font = UIFont.systemFont(ofSize: 22, weight: UIFontWeightSemibold)
             articleTitle.numberOfLines = 0
             articleTitle.text = article.title
             scrollView.addSubview(articleTitle)
         }
         
-        let articleTitleHeight = (articleTitle.text! as NSString).boundingRectWithSize(CGSizeMake(scrollView.bounds.width - margin * 2, CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: articleTitle.font], context: nil).height
-        articleTitle.frame = CGRectMake(margin, margin, scrollView.bounds.width - margin * 2, articleTitleHeight)
+        let articleTitleHeight = (articleTitle.text! as NSString).boundingRect(with: CGSize(width: scrollView.bounds.width - margin * 2, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: articleTitle.font], context: nil).height
+        articleTitle.frame = CGRect(x: margin, y: margin, width: scrollView.bounds.width - margin * 2, height: articleTitleHeight)
         
         if imageView == nil {
             imageView = UIImageView()
@@ -104,19 +104,19 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
             }
         }
         
-        let imageWidth = scrollView.bounds.width - (UIDevice.currentDevice().userInterfaceIdiom == .Pad ? margin * 6 : 0)
+        let imageWidth = scrollView.bounds.width - (UIDevice.current.userInterfaceIdiom == .pad ? margin * 6 : 0)
         if article.image == "" {
-            imageView.frame = CGRectMake(0, articleTitle.frame.origin.y + articleTitle.frame.size.height, imageWidth, 0)
+            imageView.frame = CGRect(x: 0, y: articleTitle.frame.origin.y + articleTitle.frame.size.height, width: imageWidth, height: 0)
         } else {
-            imageView.frame = CGRectMake((scrollView.bounds.width - imageWidth) / 2, articleTitle.frame.origin.y + articleTitle.frame.size.height + margin,  imageWidth, imageWidth * (9/16))
+            imageView.frame = CGRect(x: (scrollView.bounds.width - imageWidth) / 2, y: articleTitle.frame.origin.y + articleTitle.frame.size.height + margin,  width: imageWidth, height: imageWidth * (9/16))
         }
         
         if textView == nil {
             textView = ArticleTextView(delegate: self)
-            textView.backgroundColor = UIColor.clearColor()
-            textView.editable = false
-            textView.font = UIFont.systemFontOfSize(16)
-            textView.scrollEnabled = false
+            textView.backgroundColor = UIColor.clear
+            textView.isEditable = false
+            textView.font = UIFont.systemFont(ofSize: 16)
+            textView.isScrollEnabled = false
             textView.text = article.text
             
             scrollView.addSubview(textView)
@@ -124,23 +124,23 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 4
             
-            let attributes = [NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName: textView.font!]
+            let attributes = [NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName: textView.font!] as [String : Any]
             textView.attributedText = NSAttributedString(string: textView.text, attributes: attributes)
         }
         
-        let textViewHeight = textView.sizeThatFits(CGSizeMake(scrollView.bounds.width - margin * 2, CGFloat.max)).height
-        textView.frame = CGRectMake(margin, imageView.frame.origin.y + imageView.frame.size.height + margin * 0.625, scrollView.bounds.width - margin * 2, textViewHeight)
+        let textViewHeight = textView.sizeThatFits(CGSize(width: scrollView.bounds.width - margin * 2, height: CGFloat.greatestFiniteMagnitude)).height
+        textView.frame = CGRect(x: margin, y: imageView.frame.origin.y + imageView.frame.size.height + margin * 0.625, width: scrollView.bounds.width - margin * 2, height: textViewHeight)
         
-        scrollView.contentSize = CGSizeMake(scrollView.bounds.width, textView.frame.origin.y + textView.frame.size.height + margin)
+        scrollView.contentSize = CGSize(width: scrollView.bounds.width, height: textView.frame.origin.y + textView.frame.size.height + margin)
         
         if backTextView == nil {
             backTextView = ArticleTextView(delegate: self)
-            backTextView.editable = textView.editable
-            backTextView.selectable = false
+            backTextView.isEditable = textView.isEditable
+            backTextView.isSelectable = false
             backTextView.font = textView.font
-            backTextView.scrollEnabled = textView.scrollEnabled
+            backTextView.isScrollEnabled = textView.isScrollEnabled
             backTextView.attributedText = textView.attributedText
-            backTextView.textColor = UIColor.whiteColor()
+            backTextView.textColor = UIColor.white
             
             scrollView.insertSubview(backTextView, belowSubview: textView)
         }
@@ -153,24 +153,24 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
             translateView.layer.cornerRadius = 8
             view.addSubview(translateView)
         }
-        translateView.frame = CGRectMake(margin, 80, view.bounds.width - margin * 2, 36)
+        translateView.frame = CGRect(x: margin, y: 80, width: view.bounds.width - margin * 2, height: 36)
         
         if translateLabel == nil {
             translateLabel = UILabel()
-            translateLabel.font = UIFont.systemFontOfSize(16, weight: UIFontWeightSemibold)
+            translateLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightSemibold)
             translateLabel.text = ""
-            translateLabel.textAlignment = .Center
-            translateLabel.textColor = UIColor.whiteColor()
+            translateLabel.textAlignment = .center
+            translateLabel.textColor = UIColor.white
             translateView.addSubview(translateLabel)
         }
-        translateLabel.frame = CGRectMake(margin, 4, translateView.frame.size.width - margin * 2, 28)
+        translateLabel.frame = CGRect(x: margin, y: 4, width: translateView.frame.size.width - margin * 2, height: 28)
     }
     
-    func longTouchReceived(point: CGPoint, state: UIGestureRecognizerState, text: String) {
+    func longTouchReceived(_ point: CGPoint, state: UIGestureRecognizerState, text: String) {
         func moveTranslationView() {
-            translateView.frame = CGRectMake(margin, point.y - 96 - translateView.frame.size.height, translateView.frame.size.width, translateView.frame.size.height)
+            translateView.frame = CGRect(x: margin, y: point.y - 96 - translateView.frame.size.height, width: translateView.frame.size.width, height: translateView.frame.size.height)
             
-            let text = (textView.text as NSString).substringWithRange(textView.selectedRange)
+            let text = (textView.text as NSString).substring(with: textView.selectedRange)
             Accent.sharedInstance.translateTerm(text) { (translation) in
                 guard let translation = translation else {
                     return
@@ -184,9 +184,9 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
                     word = translation.translation
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async {
                     self.translateLabel.text = word
-                })
+                }
                 
                 if Quizlet.sharedInstance.setId > 0 {
                     Quizlet.sharedInstance.addTermToSet(text, translation: word)
@@ -197,18 +197,18 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         }
         
         switch state {
-        case .Began:
-            UIView.animateWithDuration(0.25, animations: {
+        case .began:
+            UIView.animate(withDuration: 0.25) {
                 self.translateView.alpha = 1
                 moveTranslationView()
-            })
-        case .Changed:
+            }
+        case .changed:
             moveTranslationView()
-        case .Ended:
-            UIView.animateWithDuration(0.25, animations: {
+        case .ended:
+            UIView.animate(withDuration: 0.25) {
                 self.translateView.alpha = 0
-                self.translateView.frame = CGRectMake(self.margin, 80, self.view.bounds.width - self.margin * 2, 36)
-            })
+                self.translateView.frame = CGRect(x: self.margin, y: 80, width: self.view.bounds.width - self.margin * 2, height: 36)
+            }
             
             becomeFirstResponder()
         default:
@@ -216,19 +216,19 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         }
     }
     
-    @IBAction func backButtonPressed(sender: UIButton) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        let _ = navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func speechButtonPressed(sender: UIButton?) {
+    @IBAction func speechButtonPressed(_ sender: UIButton?) {
         audio = !audio
         
         bottomConstraint.constant = audio ? 0 : -56
         
         backTextView.attributedText = textView.attributedText
-        backTextView.textColor = UIColor.whiteColor()
+        backTextView.textColor = UIColor.white
         
-        UIView.animateWithDuration(0.25) {
+        UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
     }
@@ -237,7 +237,7 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         speechButtonPressed(nil)
     }
     
-    func updatedSpeechRange(range: NSRange) {
+    func updatedSpeechRange(_ range: NSRange) {
         let attributedString = NSMutableAttributedString(string: backTextView.text)
         
         attributedString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.accentBlueColor(), range: range)
@@ -248,14 +248,14 @@ class ArticleViewController: UIViewController, ArticleTextViewDelegate, AudioBar
         attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         backTextView.attributedText = attributedString
-        backTextView.textColor = UIColor.whiteColor()
+        backTextView.textColor = UIColor.white
     }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         return true
     }
     
-    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return false
     }
 }

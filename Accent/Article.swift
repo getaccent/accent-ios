@@ -25,20 +25,20 @@ class Article: Object {
         return "id"
     }
     
-    var url: NSURL? {
-        return NSURL(string: surl)
+    var url: URL? {
+        return URL(string: surl)
     }
     
-    var imageURL: NSURL? {
-        return NSURL(string: image)
+    var imageURL: URL? {
+        return URL(string: image)
     }
     
     var authors: [String]? {
-        return sauthors.componentsSeparatedByString(",")
+        return sauthors.components(separatedBy: ",")
     }
     
     var date: NSDate? {
-        return NSDate(timeIntervalSince1970: NSTimeInterval(sdate))
+        return NSDate(timeIntervalSince1970: TimeInterval(sdate))
     }
     
     var featured: Bool {
@@ -49,7 +49,7 @@ class Article: Object {
         return Language.languageFromCode(slanguage)
     }
     
-    class func createFromJSON(json: JSON) -> Article {
+    class func createFromJSON(_ json: JSON) -> Article {
         let article = Article()
         article.id = json["id"].int ?? -1
         article.surl = json["url"].string ?? ""

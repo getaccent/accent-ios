@@ -11,7 +11,7 @@ import UIKit
 
 class DeviceInfo {
     
-    class func deviceData() -> NSData? {
+    class func deviceData() -> Data? {
         var data = [String]()
         
         data.append("App Version: \(appVersion())\n")
@@ -23,12 +23,12 @@ class DeviceInfo {
         data.append("Timezone: \(timezoneName())")
         data.append("Connection Status: \(connectionStatus())")
         
-        return NSArray(array: data).componentsJoinedByString("\n").dataUsingEncoding(NSUTF8StringEncoding)
+        return NSArray(array: data).componentsJoined(by: "\n").data(using: String.Encoding.utf8)
     }
     
     class func appVersion() -> String {
-        if let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String,
-            build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String {
+        if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
+            let build = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String {
             return "\(version) (\(build))"
         }
         
@@ -40,7 +40,7 @@ class DeviceInfo {
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
         return machineMirror.children.reduce("") { (identifier, element) in
-            guard let value = element.value as? Int8 where value != 0 else {
+            guard let value = element.value as? Int8, value != 0 else {
                 return identifier
             }
             
@@ -49,19 +49,19 @@ class DeviceInfo {
     }
     
     class func iosVersion() -> String {
-        return UIDevice.currentDevice().systemVersion
+        return UIDevice.current.systemVersion
     }
     
     class func languageData() -> String {
-        if let language = NSLocale.preferredLanguages().first {
+        if let language = Locale.preferredLanguages.first {
             var result = ""
             
-            let components = NSLocale.componentsFromLocaleIdentifier(language)
+            let components = Locale.components(fromIdentifier: language)
             if let languageCode = components["kCFLocaleLanguageCodeKey"] {
                 result += "\(languageCode) "
             }
             
-            if let displayName = NSLocale(localeIdentifier: language).displayNameForKey(NSLocaleIdentifier, value: language) {
+            if let displayName = (Locale(identifier: language) as NSLocale).displayName(forKey: NSLocale.Key.identifier, value: language) {
                 result += "(\(displayName))"
             }
             
@@ -74,7 +74,7 @@ class DeviceInfo {
     class func carrierName() -> String {
         let netInfo = CTTelephonyNetworkInfo()
         if let carrier = netInfo.subscriberCellularProvider,
-            name = carrier.carrierName {
+            let name = carrier.carrierName {
             return name
         }
         
@@ -82,8 +82,8 @@ class DeviceInfo {
     }
     
     class func timezoneName() -> String {
-        let timeZone = NSTimeZone.localTimeZone()
-        return timeZone.name
+        let timeZone = TimeZone.autoupdatingCurrent
+        return timeZone.identifier
     }
     
     class func connectionStatus() -> String {

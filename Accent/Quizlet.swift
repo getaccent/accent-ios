@@ -24,21 +24,21 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
     
     public var accessToken: String? {
         get {
-            return NSUserDefaults.standardUserDefaults().stringForKey("QuizletAccessToken")
+            return UserDefaults.standard.string(forKey: "QuizletAccessToken")
         }
         
         set(newValue) {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "QuizletAccessToken")
+            UserDefaults.standard.set(newValue, forKey: "QuizletAccessToken")
         }
     }
     
     public var setId: Int {
         get {
-            return NSUserDefaults.standardUserDefaults().integerForKey("QuizletSetID")
+            return UserDefaults.standard.integer(forKey: "QuizletSetID")
         }
         
         set(newValue) {
-            NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "QuizletSetID")
+            UserDefaults.standard.set(newValue, forKey: "QuizletSetID")
         }
     }
     
@@ -47,7 +47,7 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
     private var safariViewController: UIViewController?
     private var state: String?
     
-    func addTermToSet(term: String, translation: String) {
+    func addTermToSet(_ term: String, translation: String) {
         guard !addedTerms.contains(term) else {
             return
         }
@@ -58,19 +58,19 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
             return
         }
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
-        guard let url = NSURL(string: "https://api.quizlet.com/2.0/sets/\(setId)") else {
+        guard let url = URL(string: "https://api.quizlet.com/2.0/sets/\(setId)") else {
             return
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 return
             }
@@ -80,7 +80,7 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
             var storedTerms = [String: String]()
             if let retrievedTerms = json["terms"].array {
                 for datum in retrievedTerms {
-                    if let term = datum["term"].string, translation = datum["definition"].string {
+                    if let term = datum["term"].string, let translation = datum["definition"].string {
                         storedTerms[term] = translation
                     }
                 }
@@ -90,55 +90,56 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
                 return
             }
             
-            guard let urlString = "https://api.quizlet.com/2.0/sets/\(self.setId)/terms?term=\(term)&definition=\(translation)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+            guard let urlString = "https://api.quizlet.com/2.0/sets/\(self.setId)/terms?term=\(term)&definition=\(translation)".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed), let url = URL(string: urlString) else {
                 return
             }
             
-            let request = NSMutableURLRequest(URL: url)
-            request.HTTPMethod = "POST"
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
             
             request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             
-            let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            let task = session.dataTask(with: request) { (data, response, error) in
                 guard let _ = data else {
                     return
                 }
-            })
+            }
+            
             task.resume()
         }
         
         task.resume()
     }
     
-    func beginAuthorization(viewController: UIViewController) {
-        state = NSUUID().UUIDString
+    func beginAuthorization(_ viewController: UIViewController) {
+        state = UUID().uuidString
         
-        guard let url = NSURL(string: "https://quizlet.com/authorize?response_type=code&client_id=\(clientId)&scope=read&state=\(state!)&scope=write_set%20read") else {
+        guard let url = URL(string: "https://quizlet.com/authorize?response_type=code&client_id=\(clientId)&scope=read&state=\(state!)&scope=write_set%20read") else {
             return
         }
         
         if #available(iOS 9.0, *) {
-            safariViewController = SFSafariViewController(URL: url)
-            viewController.presentViewController(safariViewController!, animated: true, completion: nil)
+            safariViewController = SFSafariViewController(url: url)
+            viewController.present(safariViewController!, animated: true, completion: nil)
         } else {
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url)
         }
     }
     
-    func createSet(words: [String: String], completion: (url: NSURL?) -> Void) {
+    func createSet(_ words: [String: String], completion: @escaping (_ url: URL?) -> Void) {
         guard let accessToken = accessToken else {
             return
         }
         
-        let url = NSURL(string: "https://api.quizlet.com/2.0/sets")!
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        let url = URL(string: "https://api.quizlet.com/2.0/sets")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
         
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
         var bodyParameters = [
             "lang_terms": "fr",
@@ -146,64 +147,64 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
             "title": "Article Words"
         ]
         
-        for (idx, (term, definition)) in words.enumerate() {
-            bodyParameters["terms[]\(idx)"] = term
-            bodyParameters["definitions[]\(idx)"] = definition
+        for (idx, word) in words.enumerated() {
+            bodyParameters["terms[]\(idx)"] = word.key
+            bodyParameters["definitions[]\(idx)"] = word.value
         }
         
         var parts = [String]()
         for (key, value) in bodyParameters {
             let part = NSString(format: "%@=%@",
-                                String(key).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!,
-                                String(value).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)
+                                String(key).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!,
+                                String(value).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)
             parts.append(part as String)
         }
         
-        var bodyString = parts.joinWithSeparator("&")
+        var bodyString = parts.joined(separator: "&")
         
         for i in 0..<words.count {
-            bodyString = bodyString.stringByReplacingOccurrencesOfString("terms[]\(i)", withString: "terms[]")
-            bodyString = bodyString.stringByReplacingOccurrencesOfString("definitions[]\(i)", withString: "definitions[]")
+            bodyString = bodyString.replacingOccurrences(of: "terms[]\(i)", with: "terms[]")
+            bodyString = bodyString.replacingOccurrences(of: "definitions[]\(i)", with: "definitions[]")
         }
         
-        request.HTTPBody = bodyString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+        request.httpBody = bodyString.data(using: String.Encoding.utf8, allowLossyConversion: true)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 return
             }
             
             let json = JSON(data: data, error: nil)
             
-            guard let url = json["url"].string, id = json["id"].int, quizletUrl = NSURL(string: "https://quizlet.com\(url)") else {
+            guard let url = json["url"].string, let id = json["id"].int, let quizletUrl = URL(string: "https://quizlet.com\(url)") else {
                 return
             }
             
             self.setId = id
             
-            completion(url: quizletUrl)
+            completion(quizletUrl)
         }
         
         task.resume()
     }
     
-    func handleAuthorizationResponse(url: NSURL) {
-        safariViewController?.dismissViewControllerAnimated(true, completion: nil)
+    func handleAuthorizationResponse(_ url: URL) {
+        safariViewController?.dismiss(animated: true, completion: nil)
         
         var params = [String: String]()
         
-        guard let paramsArray = url.query?.componentsSeparatedByString("&") else {
+        guard let paramsArray = url.query?.components(separatedBy: "&") else {
             return
         }
         
         for param in paramsArray {
-            let components = param.componentsSeparatedByString("=")
+            let components = param.components(separatedBy: "=")
             let key = components[0], value = components[1]
             
             params[key] = value
         }
         
-        guard let code = params["code"], state = params["state"], sentState = self.state else {
+        guard let code = params["code"], let state = params["state"], let sentState = self.state else {
             return
         }
         
@@ -214,29 +215,29 @@ public class Quizlet: NSObject, SFSafariViewControllerDelegate {
         requestTokenWithCode(code)
     }
     
-    func openSetWithURL(viewController: UIViewController, url: NSURL) {
+    func openSetWithURL(_ viewController: UIViewController, url: URL) {
         if #available(iOS 9.0, *) {
-            let svc = SFSafariViewController(URL: url)
-            viewController.presentViewController(svc, animated: true, completion: nil)
+            let svc = SFSafariViewController(url: url)
+            viewController.present(svc, animated: true, completion: nil)
         } else {
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url)
         }
     }
     
-    func requestTokenWithCode(code: String) {
-        guard let url = NSURL(string: "https://api.quizlet.com/oauth/token?grant_type=authorization_code&code=\(code)") else {
+    func requestTokenWithCode(_ code: String) {
+        guard let url = URL(string: "https://api.quizlet.com/oauth/token?grant_type=authorization_code&code=\(code)") else {
             return
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
         
         request.addValue("Basic \(authToken)", forHTTPHeaderField: "Authorization")
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 return
             }

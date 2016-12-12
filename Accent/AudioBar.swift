@@ -31,7 +31,7 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        dispatch_async(dispatch_get_main_queue()) { 
+        DispatchQueue.main.async { 
             self.synthesizer = AVSpeechSynthesizer()
             self.synthesizer.delegate = self
         }
@@ -42,56 +42,56 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
         
         if closeButton == nil {
             closeButton = UIButton()
-            closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), forControlEvents: .TouchUpInside)
-            closeButton.setImage(UIImage(named: "Close"), forState: .Normal)
+            closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
+            closeButton.setImage(UIImage(named: "Close"), for: .normal)
             addSubview(closeButton)
         }
-        let closeSize = CGSizeMake(28, 28)
-        closeButton.frame = CGRectMake(0, (bounds.height - (closeSize.height + 32)) / 2, closeSize.width + 32, closeSize.height + 32)
+        let closeSize = CGSize(width: 28, height: 28)
+        closeButton.frame = CGRect(x: 0, y: (bounds.height - (closeSize.height + 32)) / 2, width: closeSize.width + 32, height: closeSize.height + 32)
         
         if toggleButton == nil {
             toggleButton = UIButton()
-            toggleButton.addTarget(self, action: #selector(toggleButtonPressed(_:)), forControlEvents: .TouchUpInside)
-            toggleButton.setImage(UIImage(named: "Play"), forState: .Normal)
+            toggleButton.addTarget(self, action: #selector(toggleButtonPressed(_:)), for: .touchUpInside)
+            toggleButton.setImage(UIImage(named: "Play"), for: .normal)
             addSubview(toggleButton)
         }
-        let toggleSize = CGSizeMake(28, 28)
-        toggleButton.frame = CGRectMake((bounds.width - toggleSize.width) / 2, (bounds.height - toggleSize.height) / 2, toggleSize.width, toggleSize.height)
+        let toggleSize = CGSize(width: 28, height: 28)
+        toggleButton.frame = CGRect(x: (bounds.width - toggleSize.width) / 2, y: (bounds.height - toggleSize.height) / 2, width: toggleSize.width, height: toggleSize.height)
         
         if speedButton == nil {
             speedButton = UIButton()
-            speedButton.addTarget(self, action: #selector(speedButtonPressed(_:)), forControlEvents: .TouchUpInside)
-            speedButton.contentHorizontalAlignment = .Right
-            speedButton.setTitle("1.0x", forState: .Normal)
-            speedButton.setTitleColor(UIColor.accentDarkColor(), forState: .Normal)
-            speedButton.titleLabel?.font = UIFont.systemFontOfSize(18)
+            speedButton.addTarget(self, action: #selector(speedButtonPressed(_:)), for: .touchUpInside)
+            speedButton.contentHorizontalAlignment = .right
+            speedButton.setTitle("1.0x", for: .normal)
+            speedButton.setTitleColor(UIColor.accentDarkColor(), for: .normal)
+            speedButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
             addSubview(speedButton)
         }
-        let speedSize = CGSizeMake(40, 36)
-        speedButton.frame = CGRectMake(bounds.width - speedSize.width - 20, (bounds.height - speedSize.height) / 2, speedSize.width, speedSize.height)
+        let speedSize = CGSize(width: 40, height: 36)
+        speedButton.frame = CGRect(x: bounds.width - speedSize.width - 20, y: (bounds.height - speedSize.height) / 2, width: speedSize.width, height: speedSize.height)
     }
     
-    internal func closeButtonPressed(sender: UIButton) {
-        synthesizer.stopSpeakingAtBoundary(.Immediate)
+    internal func closeButtonPressed(_ sender: UIButton) {
+        synthesizer.stopSpeaking(at: .immediate)
         delegate?.hiding()
     }
     
-    internal func toggleButtonPressed(sender: UIButton) {
+    internal func toggleButtonPressed(_ sender: UIButton) {
         paused = !paused
         
         if paused {
-            synthesizer.pauseSpeakingAtBoundary(.Immediate)
+            synthesizer.pauseSpeaking(at: .immediate)
         } else {
-            if synthesizer.paused {
+            if synthesizer.isPaused {
                 synthesizer.continueSpeaking()
             } else {
                 let utterance = self.utteranceWithRate(self.currentRate())
-                self.synthesizer.speakUtterance(utterance)
+                self.synthesizer.speak(utterance)
             }
         }
     }
     
-    internal func speedButtonPressed(sender: UIButton) {
+    internal func speedButtonPressed(_ sender: UIButton) {
         currentSpeed += currentSpeed == 3 ? -3 : 1
         
         var title = "1.0x"
@@ -107,24 +107,24 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
             title = ".5x"
         }
         
-        speedButton.setTitle(title, forState: .Normal)
+        speedButton.setTitle(title, for: .normal)
         
-        guard !synthesizer.paused else {
+        guard !synthesizer.isPaused else {
             return
         }
         
-        synthesizer.stopSpeakingAtBoundary(.Immediate)
+        synthesizer.stopSpeaking(at: .immediate)
         
         speedPressNum += 1
         let num = speedPressNum
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5) * Int64(NSEC_PER_SEC)), dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             guard self.speedPressNum == num else {
                 return
             }
             
             let utterance = self.utteranceWithRate(self.currentRate())
-            self.synthesizer.speakUtterance(utterance)
+            self.synthesizer.speak(utterance)
         }
     }
     
@@ -138,11 +138,11 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
         }
     }
     
-    private func utteranceWithRate(rate: Float) -> AVSpeechUtterance {
+    private func utteranceWithRate(_ rate: Float) -> AVSpeechUtterance {
         offsetLocation += currentLocation
         
         var string = article.text
-        string = (string as NSString).substringWithRange(NSMakeRange(offsetLocation, string.characters.count - offsetLocation))
+        string = (string as NSString).substring(with: NSMakeRange(offsetLocation, string.characters.count - offsetLocation))
         
         let utterance = AVSpeechUtterance(string: string)
         utterance.rate = rate
@@ -151,24 +151,24 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
         return utterance
     }
     
-    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didContinueSpeechUtterance utterance: AVSpeechUtterance) {
-        toggleButton.setImage(UIImage(named: "Pause"), forState: .Normal)
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
+        toggleButton.setImage(UIImage(named: "Pause"), for: .normal)
     }
     
-    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
-        toggleButton.setImage(UIImage(named: "Play"), forState: .Normal)
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        toggleButton.setImage(UIImage(named: "Play"), for: .normal)
         currentLocation = 0
     }
     
-    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didPauseSpeechUtterance utterance: AVSpeechUtterance) {
-        toggleButton.setImage(UIImage(named: "Play"), forState: .Normal)
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
+        toggleButton.setImage(UIImage(named: "Play"), for: .normal)
     }
     
-    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didStartSpeechUtterance utterance: AVSpeechUtterance) {
-        toggleButton.setImage(UIImage(named: "Pause"), forState: .Normal)
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        toggleButton.setImage(UIImage(named: "Pause"), for: .normal)
     }
     
-    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         currentLocation = characterRange.location
         delegate?.updatedSpeechRange(NSMakeRange(offsetLocation + currentLocation, characterRange.length))
     }
@@ -176,5 +176,5 @@ class AudioBar: UIView, AVSpeechSynthesizerDelegate {
 
 protocol AudioBarDelegate {
     func hiding()
-    func updatedSpeechRange(range: NSRange)
+    func updatedSpeechRange(_ range: NSRange)
 }

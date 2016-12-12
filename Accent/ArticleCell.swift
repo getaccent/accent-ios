@@ -27,15 +27,15 @@ class ArticleCell: MGSwipeTableCell {
         timeLabel.text = ""
     }
     
-    func configure(article: Article) {
+    func configure(_ article: Article) {
         self.article = article
         
         titleLabel.text = article.title
         
         var text = article.text
         
-        while text.containsString("\n") {
-            text = text.stringByReplacingOccurrencesOfString("\n", withString: "")
+        while text.contains("\n") {
+            text = text.replacingOccurrences(of: "\n", with: "")
         }
         
         firstLineLabel?.text = text
@@ -46,16 +46,16 @@ class ArticleCell: MGSwipeTableCell {
         
         var parts = [String]()
         
-        if let domain = article.url?.host?.stringByReplacingOccurrencesOfString("www.", withString: "") {
+        if let domain = article.url?.host?.replacingOccurrences(of: "www.", with: "") {
             parts.append(domain)
         }
         
-        if let authors = article.authors where authors.count > 0 {
+        if let authors = article.authors, authors.count > 0 {
             if authors[0] != "" {
-                parts.append(authors.joinWithSeparator(", "))
+                parts.append(authors.joined(separator: ", "))
             }
         }
         
-        authorLabel.text = parts.joinWithSeparator(" • ")
+        authorLabel.text = parts.joined(separator: " • ")
     }
 }

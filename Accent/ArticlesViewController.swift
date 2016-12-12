@@ -34,7 +34,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         
         savedArticles = Accent.sharedInstance.getLocalArticles()
         reloadTableView(false)
@@ -48,10 +48,10 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             self.reloadTableView(true)
         }
         
-        quizletButton.setImage(quizletButton.imageForState(.Normal)?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        quizletButton.setImage(quizletButton.image(for: .normal)?.withRenderingMode(.alwaysTemplate), for: .normal)
         quizletButton.tintColor = UIColor.accentDarkColor()
         
-        settingsButton.setImage(settingsButton.imageForState(.Normal)?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        settingsButton.setImage(settingsButton.image(for: .normal)?.withRenderingMode(.alwaysTemplate), for: .normal)
         settingsButton.tintColor = UIColor.accentDarkColor()
         
         bottomBar.delegate = self
@@ -68,23 +68,23 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = UIColor.white
         
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
         updateSavedArticles()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateSavedArticles), name: AccentApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateSavedArticles), name: NSNotification.Name(rawValue: AccentApplicationWillEnterForeground), object: nil)
     }
     
     func updateSavedArticles() {
-        guard let toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") else {
+        guard let toRetrieve = UserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArray(forKey: "AccentArticlesToRetrieve") else {
             return
         }
         
         for urlString in toRetrieve {
-            if let url = NSURL(string: urlString) {
+            if let url = URL(string: urlString) {
                 Accent.sharedInstance.parseArticle(url, completion: { (article) in
                     guard let article = article else {
                         return
@@ -93,19 +93,19 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
                     self.savedArticles.append(article)
                     self.reloadTableView(true)
                     
-                    guard var toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") else {
+                    guard var toRetrieve = UserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArray(forKey: "AccentArticlesToRetrieve") else {
                         return
                     }
                     
                     var idx = 0
                     
-                    for (i, articleUrl) in toRetrieve.enumerate() where articleUrl == url.absoluteString {
+                    for (i, articleUrl) in toRetrieve.enumerated() where articleUrl == url.absoluteString {
                         idx = i
                         break
                     }
                     
-                    toRetrieve.removeAtIndex(idx)
-                    NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.setObject(toRetrieve, forKey: "AccentArticlesToRetrieve")
+                    toRetrieve.remove(at: idx)
+                    UserDefaults(suiteName: "group.io.tinypixels.Accent")?.set(toRetrieve, forKey: "AccentArticlesToRetrieve")
                 })
             }
         }
@@ -116,81 +116,81 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let topShadowPath = UIBezierPath(rect: topBar.bounds)
         topBar.layer.masksToBounds = false
-        topBar.layer.shadowColor = UIColor.blackColor().CGColor
-        topBar.layer.shadowOffset = CGSizeMake(0, 1)
+        topBar.layer.shadowColor = UIColor.black.cgColor
+        topBar.layer.shadowOffset = CGSize(width: 0, height: 1)
         topBar.layer.shadowOpacity = 0.15
-        topBar.layer.shadowPath = topShadowPath.CGPath
+        topBar.layer.shadowPath = topShadowPath.cgPath
         
         let bottomShadowPath = UIBezierPath(rect: bottomBar.bounds)
         bottomBar.layer.masksToBounds = false
-        bottomBar.layer.shadowColor = UIColor.blackColor().CGColor
-        bottomBar.layer.shadowOffset = CGSizeMake(0, -1)
+        bottomBar.layer.shadowColor = UIColor.black.cgColor
+        bottomBar.layer.shadowOffset = CGSize(width: 0, height: -1)
         bottomBar.layer.shadowOpacity = 0.15
-        bottomBar.layer.shadowPath = bottomShadowPath.CGPath
+        bottomBar.layer.shadowPath = bottomShadowPath.cgPath
     }
     
-    @IBAction func quizletButtonPressed(sender: UIButton) {
+    @IBAction func quizletButtonPressed(_ sender: UIButton) {
         if Quizlet.sharedInstance.accessToken == nil {
             Quizlet.sharedInstance.beginAuthorization(self)
         } else {
             let setId = Quizlet.sharedInstance.setId
             
             if setId > 0 {
-                let url = NSURL(string: "https://quizlet.com/\(setId)/")!
+                let url = URL(string: "https://quizlet.com/\(setId)/")!
                 Quizlet.sharedInstance.openSetWithURL(self, url: url)
             } else {
-                let controller = UIAlertController(title: NSLocalizedString("No Set", comment: ""), message: NSLocalizedString("No sets have been created on your Quizlet account. Translate some words to create one automatically!", comment: ""), preferredStyle: .Alert)
-                let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: nil)
+                let controller = UIAlertController(title: NSLocalizedString("No Set", comment: ""), message: NSLocalizedString("No sets have been created on your Quizlet account. Translate some words to create one automatically!", comment: ""), preferredStyle: .alert)
+                let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
                 
                 controller.addAction(action)
-                presentViewController(controller, animated: true, completion: nil)
+                present(controller, animated: true, completion: nil)
             }
         }
     }
     
-    @IBAction func settingsButtonPressed(sender: UIButton) {
-        performSegueWithIdentifier("settingsSegue", sender: self)
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "settingsSegue", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let avc = segue.destinationViewController as? ArticleViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let avc = segue.destination as? ArticleViewController {
             avc.article = articleToSend
         }
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIDevice.currentDevice().userInterfaceIdiom == .Phone ? (indexPath.row % 5 == 0 ? 312 : 136) : 192
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIDevice.current.userInterfaceIdiom == .phone ? (indexPath.row % 5 == 0 ? 312 : 136) : 192
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let article = articles[indexPath.row]
         
-        let cell = NSBundle.mainBundle().loadNibNamed(UIDevice.currentDevice().userInterfaceIdiom == .Phone ? (indexPath.row % 5 == 0 ? (article.image == "" ? "NoImageArticleCell" : "LargeArticleCell") : (article.image == "" ? "NoImageArticleCell" : "ArticleCell")) : (article.image == "" ? "PadNoImageArticleCell" : "PadArticleCell"), owner: self, options: nil)[0] as! ArticleCell
+        let cell = Bundle.main.loadNibNamed(UIDevice.current.userInterfaceIdiom == .phone ? (indexPath.row % 5 == 0 ? (article.image == "" ? "NoImageArticleCell" : "LargeArticleCell") : (article.image == "" ? "NoImageArticleCell" : "ArticleCell")) : (article.image == "" ? "PadNoImageArticleCell" : "PadArticleCell"), owner: self, options: nil)?[0] as! ArticleCell
         cell.configure(articles[indexPath.row])
         cell.delegate = self
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         articleToSend = articles[indexPath.row]
-        performSegueWithIdentifier("articleSegue", sender: nil)
+        performSegue(withIdentifier: "articleSegue", sender: nil)
     }
     
-    func reloadTableView(animated: Bool) {
-        dispatch_async(dispatch_get_main_queue()) {
+    func reloadTableView(_ animated: Bool) {
+        DispatchQueue.main.async {
             if animated {
-                UIView.animateWithDuration(0.25) {
+                UIView.animate(withDuration: 0.25) {
                     self.overlayView.alpha = (self.bottomBar.selectedTab == 0 && self.savedArticles.count == 0) || (self.bottomBar.selectedTab == 1 && self.browseArticles.count == 0) ? 1 : 0
                 }
             } else {
@@ -205,13 +205,13 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func refresh(control: UIRefreshControl) {
+    func refresh(_ control: UIRefreshControl) {
         if bottomBar.selectedTab == 0 {
             Accent.sharedInstance.getSavedArticles { (articles) in
                 guard let articles = articles else {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async {
                         self.refreshControl.endRefreshing()
-                    })
+                    }
                     
                     return
                 }
@@ -222,9 +222,9 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             Accent.sharedInstance.retrieveArticles { (articles) in
                 guard let articles = articles else {
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async {
                         self.refreshControl.endRefreshing()
-                    })
+                    }
                     
                     return
                 }
@@ -235,38 +235,37 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func updatedSelectedTab(index: Int) {
+    func updatedSelectedTab(_ index: Int) {
         reloadTableView(false)
     }
     
-    func iconize(image: UIImage) -> UIImage {
+    func iconize(_ image: UIImage) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
         
         let context = UIGraphicsGetCurrentContext()
         UIColor.accentDarkColor().setFill()
         
-        CGContextTranslateCTM(context, 0, image.size.height)
-        CGContextScaleCTM(context, 1, -1)
-        CGContextClipToMask(context, CGRectMake(0, 0, image.size.width, image.size.height), image.CGImage)
-        CGContextFillRect(context, CGRectMake(0, 0, image.size.width, image.size.height))
+        context?.translateBy(x: 0, y: image.size.height)
+        context?.scaleBy(x: 1, y: -1)
+        context?.clip(to: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height), mask: image.cgImage!)
+        context?.fill(CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
-    func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+    func swipeTableCell(_ cell: MGSwipeTableCell, canSwipe direction: MGSwipeDirection) -> Bool {
         return true
     }
     
-    func swipeTableCell(cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
+    private func swipeTableCell(_ cell: MGSwipeTableCell!, swipeButtonsForDirection direction: MGSwipeDirection, swipeSettings: MGSwipeSettings!, expansionSettings: MGSwipeExpansionSettings!) -> [AnyObject]! {
         var buttons = [MGSwipeButton]()
         
-        func createButton(imageName: String) -> MGSwipeButton {
-            let button = MGSwipeButton(title: "", icon: iconize(UIImage(named: imageName)!), backgroundColor: UIColor.whiteColor())
+        func createButton(_ imageName: String) {
+            let button = MGSwipeButton(title: "", icon: iconize(UIImage(named: imageName)!), backgroundColor: UIColor.white)
             buttons.append(button)
-            return button
         }
         
         if bottomBar.selectedTab == 0 {
@@ -277,7 +276,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             createButton("Share")
             
             if let article = (cell as? ArticleCell)?.article {
-                if savedArticles.indexOf({ $0 == article }) == nil {
+                if savedArticles.index(where: { $0 == article }) == nil {
                     createButton("Save")
                 }
             } else {
@@ -286,20 +285,20 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         for button in buttons {
-            button.buttonWidth = UIScreen.mainScreen().bounds.width / CGFloat(buttons.count)
+            button.buttonWidth = UIScreen.main.bounds.width / CGFloat(buttons.count)
         }
         
         return buttons
     }
     
-    func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+    func swipeTableCell(_ cell: MGSwipeTableCell, tappedButtonAt index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         func shareButton() {
             guard let articleUrl = (cell as? ArticleCell)?.article?.url else {
                 return
             }
             
             let activityController = UIActivityViewController(activityItems: [articleUrl], applicationActivities: nil)
-            self.presentViewController(activityController, animated: true, completion: nil)
+            self.present(activityController, animated: true, completion: nil)
         }
         
         if bottomBar.selectedTab == 0 {
@@ -307,22 +306,22 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             case 0: // share button
                 shareButton()
             case 1: // delete button
-                guard let indexPath = tableView.indexPathForCell(cell) else {
+                guard let indexPath = tableView.indexPath(for: cell) else {
                     return true
                 }
                 
                 let article = savedArticles[indexPath.row]
                 
                 tableView.beginUpdates()
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+                tableView.deleteRows(at: [indexPath], with: .right)
                 
-                savedArticles.removeAtIndex(indexPath.row)
+                savedArticles.remove(at: indexPath.row)
                 
                 tableView.endUpdates()
                 
                 Accent.sharedInstance.deleteSavedArticle(article)
                 
-                UIView.animateWithDuration(0.25, animations: {
+                UIView.animate(withDuration: 0.25, animations: {
                     self.overlayView.alpha = self.savedArticles.count == 0 ? 1 : 0
                 })
             case 2: // archive button
@@ -335,7 +334,7 @@ class ArticlesViewController: UIViewController, UITableViewDataSource, UITableVi
             case 0: // share button
                 shareButton()
             case 1: // save button
-                guard let indexPath = tableView.indexPathForCell(cell) else {
+                guard let indexPath = tableView.indexPath(for: cell) else {
                     return true
                 }
                 

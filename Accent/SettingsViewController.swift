@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -29,7 +29,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         topBarLabel.text = settingsText
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
@@ -40,17 +40,17 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let topShadowPath = UIBezierPath(rect: topBar.bounds)
         topBar.layer.masksToBounds = false
-        topBar.layer.shadowColor = UIColor.blackColor().CGColor
-        topBar.layer.shadowOffset = CGSizeMake(0, 1)
+        topBar.layer.shadowColor = UIColor.black.cgColor
+        topBar.layer.shadowOffset = CGSize(width: 0, height: 1)
         topBar.layer.shadowOpacity = 0.15
-        topBar.layer.shadowPath = topShadowPath.CGPath
+        topBar.layer.shadowPath = topShadowPath.cgPath
     }
     
-    @IBAction func closeButtonPressed(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
         case 1: return 3
@@ -58,50 +58,50 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            let cell = UITableViewCell(style: .Value1, reuseIdentifier: "LanguageCell")
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: "LanguageCell")
             
             cell.textLabel?.text = NSLocalizedString("Target Language", comment: "language being learned")
             cell.textLabel?.textColor = UIColor.accentDarkColor()
             cell.detailTextLabel?.text = Language.savedLanguage()?.getName()
             
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             
             return cell
         case (1, 0):
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: "FeedbackCell")
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "FeedbackCell")
             
             cell.textLabel?.text = NSLocalizedString("Send Feedback", comment: "send feedback")
             cell.textLabel?.textColor = UIColor.accentDarkColor()
             
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             
             return cell
         case (1, 1):
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: "RateCell")
+            let cell = UITableViewCell(style: .default, reuseIdentifier: "RateCell")
             
             cell.textLabel?.text = NSLocalizedString("Rate Accent", comment: "rate accent on the app store")
             cell.textLabel?.textColor = UIColor.accentDarkColor()
             
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             
             return cell
         case (1, 2):
-            let cell = UITableViewCell(style: .Value1, reuseIdentifier: "VersionCell")
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: "VersionCell")
             
             cell.textLabel?.text = NSLocalizedString("Version", comment: "app version")
             cell.textLabel?.textColor = UIColor.accentDarkColor()
             
             var versionString = ""
             
-            if let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String,
-                build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String {
+            if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
+                let build = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String {
                 versionString = "\(version) (\(build))"
             }
             
@@ -114,12 +114,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            performSegueWithIdentifier("languageSegue", sender: self)
+            performSegue(withIdentifier: "languageSegue", sender: self)
         case (1, 0):
             let controller = MFMailComposeViewController()
             controller.mailComposeDelegate = self
@@ -128,19 +128,19 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
             controller.setSubject(NSLocalizedString("Accent Feedback", comment: "feedback about accent"))
             
             if let data = DeviceInfo.deviceData() {
-                controller.addAttachmentData(data, mimeType: "text/plain", fileName: "device_information.txt")
+                controller.addAttachmentData(data as Data, mimeType: "text/plain", fileName: "device_information.txt")
             }
             
-            presentViewController(controller, animated: true, completion: nil)
+            present(controller, animated: true, completion: nil)
         case (1, 1):
-            let url = NSURL(string: "itms-apps://itunes.apple.com/app/id1102643624")!
-            UIApplication.sharedApplication().openURL(url)
+            let url = URL(string: "itms-apps://itunes.apple.com/app/id1102643624")!
+            UIApplication.shared.openURL(url)
         default:
             break
         }
     }
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

@@ -18,7 +18,7 @@ public class Accent {
     private var requestsMade = [String]()
     
     private var phoneNumber: String? {
-        return Digits.sharedInstance().session()?.phoneNumber.stringByReplacingOccurrencesOfString("+", withString: "")
+        return Digits.sharedInstance().session()?.phoneNumber.replacingOccurrences(of: "+", with: "")
     }
     
     public class var sharedInstance: Accent {
@@ -28,7 +28,7 @@ public class Accent {
         return Static.instance
     }
     
-    func deleteSavedArticle(article: Article) {
+    func deleteSavedArticle(_ article: Article) {
         let articleURL = article.url
         
         let realm = try! Realm()
@@ -36,33 +36,33 @@ public class Accent {
             realm.delete(article)
         }
         
-        guard let realArticleURL = articleURL, phoneNumber = phoneNumber else {
+        guard let realArticleURL = articleURL, let phoneNumber = phoneNumber else {
             return
         }
         
-        guard let urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(realArticleURL)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(realArticleURL)".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed), let url = URL(string: urlString) else {
             return
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "DELETE"
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
-        let task = session.dataTaskWithRequest(request)
+        let task = session.dataTask(with: request)
         task.resume()
     }
     
-    func getArticleThumbnail(article: Article, completion: (image: UIImage?) -> Void) {
+    func getArticleThumbnail(_ article: Article, completion: @escaping (_ image: UIImage?) -> Void) {
         if article.image == "" {
             return
         }
         
         if let image = imageCache[article.image] {
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(image: image)
-            })
+            DispatchQueue.main.async {
+                completion(image)
+            }
             
             return
         }
@@ -73,13 +73,13 @@ public class Accent {
         
         let storedURL = article.image
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 return
             }
@@ -87,9 +87,9 @@ public class Accent {
             let image = UIImage(data: data)
             imageCache[storedURL] = image
             
-            dispatch_async(dispatch_get_main_queue(), {
-                completion(image: image)
-            })
+            DispatchQueue.main.async {
+                completion(image)
+            }
         }
         
         task.resume()
@@ -97,23 +97,23 @@ public class Accent {
     
     func getLocalArticles() -> [Article] {
         let realm = try! Realm()
-        return Array(realm.objects(Article))
+        return Array(realm.objects(Article.self))
     }
     
-    func getSavedArticles(completion: (articles: [Article]?) -> Void) {
-        guard let phoneNumber = phoneNumber, url = NSURL(string: "\(baseUrl)/save?num=\(phoneNumber)") else {
+    func getSavedArticles(_ completion: @escaping (_ articles: [Article]?) -> Void) {
+        guard let phoneNumber = phoneNumber, let url = URL(string: "\(baseUrl)/save?num=\(phoneNumber)") else {
             return
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
-                completion(articles: nil)
+                completion(nil)
                 return
             }
             
@@ -127,43 +127,43 @@ public class Accent {
                     retrievedArticles.append(article)
                 }
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async {
                     let realm = try! Realm()
                     try! realm.write {
                         for article in retrievedArticles {
                             realm.create(Article.self, value: article, update: true)
                         }
                     }
-                })
+                }
                 
-                completion(articles: retrievedArticles)
+                completion(retrievedArticles)
             } else {
-                completion(articles: nil)
+                completion(nil)
             }
         }
         
         task.resume()
     }
     
-    func parseArticle(url: NSURL, completion: (article: Article?) -> Void) {
-        guard let urlString = "\(baseUrl)/parse?url=\(url.absoluteString)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+    func parseArticle(_ url: URL, completion: @escaping (_ article: Article?) -> Void) {
+        guard let urlString = "\(baseUrl)/parse?url=\(url.absoluteString)".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed), let url = URL(string: urlString) else {
             return
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 return
             }
             
             let json = JSON(data: data, error: nil)
             let article = Article.createFromJSON(json)
-            completion(article: article)
+            completion(article)
             
             let realm = try! Realm()
             try! realm.write {
@@ -174,18 +174,18 @@ public class Accent {
         task.resume()
     }
     
-    func retrieveArticles(completion: (articles: [Article]?) -> Void) {
-        guard let language = Language.savedLanguage(), url = NSURL(string: "\(baseUrl)/articles?lang=\(language.getCode())") else {
+    func retrieveArticles(_ completion: @escaping (_ articles: [Article]?) -> Void) {
+        guard let language = Language.savedLanguage(), let url = URL(string: "\(baseUrl)/articles?lang=\(language.getCode())") else {
             return
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 return
             }
@@ -200,35 +200,35 @@ public class Accent {
                 }
             }
             
-            completion(articles: retrievedArticles)
+            completion(retrievedArticles)
         }
         
         task.resume()
     }
     
-    func saveArticle(article: Article, completion: (success: Bool) -> Void) {
+    func saveArticle(_ article: Article, completion: @escaping (_ success: Bool) -> Void) {
         let realm = try! Realm()
         try! realm.write {
             realm.add(article)
         }
         
-        guard let phoneNumber = phoneNumber, aurl = article.url?.absoluteString, urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(aurl)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
+        guard let phoneNumber = phoneNumber, let aurl = article.url?.absoluteString, let urlString = "\(baseUrl)/save?num=\(phoneNumber)&url=\(aurl)".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed), let url = URL(string: urlString) else {
             return
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "PUT"
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+        let task = session.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 return
             }
             
             let json = JSON(data: data, error: nil)
-            completion(success: json["success"].bool ?? false)
+            completion(json["success"].bool ?? false)
         }
         
         task.resume()
@@ -236,53 +236,53 @@ public class Accent {
     
     private var wordCache = [String: String]()
     
-    func translateTerm(term: String, completion: (translation: Any?) -> Void) {
+    func translateTerm(_ term: String, completion: @escaping (_ translation: Any?) -> Void) {
         guard !requestsMade.contains(term), let source = Language.savedLanguage() else {
             return
         }
         
         if let translation = wordCache[term] {
-            completion(translation: translation)
+            completion(translation)
             return
         }
         
         let target = Language.getPrimaryLanguage()
-        let term = term.stringByReplacingOccurrencesOfString("\n", withString: " ")
+        let term = term.replacingOccurrences(of: "\n", with: " ")
         
         do {
             let predicate = NSPredicate(format: "term = %@ AND source = %@ AND target = %@", term, source.getCode(), target.getCode())
             
             let realm = try Realm()
-            for translation in realm.objects(Translation).filter(predicate) {
-                completion(translation: translation)
+            for translation in realm.objects(Translation.self).filter(predicate) {
+                completion(translation)
                 wordCache[translation.term] = translation.translation
                 return
             }
         } catch {}
         
-        guard let urlString = "\(baseUrl)/translate?term=\(term)&lang=\(source.getCode())&target=\(target.getCode())".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()), url = NSURL(string: urlString) else {
-            completion(translation: nil)
+        guard let urlString = "\(baseUrl)/translate?term=\(term)&lang=\(source.getCode())&target=\(target.getCode())".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed), let url = URL(string: urlString) else {
+            completion(nil)
             return
         }
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig)
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
         
         requestsMade.append(term)
         
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
-            for (idx, t) in self.requestsMade.enumerate() {
+        let task = session.dataTask(with: request) { (data, response, error) in
+            for (idx, t) in self.requestsMade.enumerated() {
                 if term == t {
-                    self.requestsMade.removeAtIndex(idx)
+                    self.requestsMade.remove(at: idx)
                     break
                 }
             }
             
             guard let data = data else {
-                completion(translation: nil)
+                completion(nil)
                 return
             }
             
@@ -290,26 +290,26 @@ public class Accent {
             let translation = json["translation"].string
             
             guard let translatedTerm = translation else {
-                completion(translation: nil)
+                completion(nil)
                 return
             }
             
             self.wordCache[term] = translatedTerm
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async {
                 let translation = Translation()
                 translation.term = term
                 translation.translation = translatedTerm
                 translation.source = source.getCode()
                 translation.target = Language.getPrimaryLanguage().getCode()
                 
-                completion(translation: translation)
+                completion(translation)
                 
                 let realm = try! Realm()
                 try! realm.write { 
                     realm.add(translation)
                 }
-            })
+            }
         }
         
         task.resume()

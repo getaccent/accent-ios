@@ -16,17 +16,17 @@ class AccentTabView: UIView {
     var tab: AccentTab!
     
     init(tab: AccentTab) {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
         self.tab = tab
         
         nameLabel = UILabel()
-        nameLabel.font = UIFont.systemFontOfSize(12, weight: UIFontWeightMedium)
+        nameLabel.font = UIFont.systemFont(ofSize: 12, weight: UIFontWeightMedium)
         nameLabel.text = tab.name
         nameLabel.textColor = UIColor.accentDarkColor()
         
         imageView = UIImageView(image: tab.image)
-        imageView.image = tab.image.imageWithRenderingMode(.AlwaysTemplate)
+        imageView.image = tab.image.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor.accentDarkColor()
     }
     
@@ -41,12 +41,12 @@ class AccentTabView: UIView {
             addSubview(nameLabel)
         }
         nameLabel.sizeToFit()
-        nameLabel.frame = CGRectMake((bounds.width - nameLabel.bounds.width) / 2, bounds.height - nameLabel.bounds.height - 8, nameLabel.bounds.width, nameLabel.bounds.height)
+        nameLabel.frame = CGRect(x: (bounds.width - nameLabel.bounds.width) / 2, y: bounds.height - nameLabel.bounds.height - 8, width: nameLabel.bounds.width, height: nameLabel.bounds.height)
         
         let imageWidth = nameLabel.frame.origin.y - 14
         if imageView.superview == nil {
             addSubview(imageView)
         }
-        imageView.frame = CGRectMake((bounds.width - imageWidth) / 2, 10, imageWidth, imageWidth)
+        imageView.frame = CGRect(x: (bounds.width - imageWidth) / 2, y: 10, width: imageWidth, height: imageWidth)
     }
 }

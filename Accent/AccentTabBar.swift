@@ -26,27 +26,27 @@ class AccentTabBar: UIView {
         
         var x: CGFloat = 0
         for tab in tabViews {
-            tab.frame = CGRectMake(x, 0, tabWidth, bounds.height)
+            tab.frame = CGRect(x: x, y: 0, width: tabWidth, height: bounds.height)
             x += tabWidth
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         
         guard let touch = touches.first else {
             return
         }
         
-        let point = touch.locationInView(self)
+        let point = touch.location(in: self)
         
-        for (idx, tab) in tabViews.enumerate() where CGRectContainsPoint(tab.frame, point) {
+        for (idx, tab) in tabViews.enumerated() where tab.frame.contains(point) {
             selectTab(idx)
             break
         }
     }
     
-    func selectTab(idx: Int) {
+    func selectTab(_ idx: Int) {
         for tab in tabViews {
             tab.imageView.tintColor = UIColor.accentGrayColor()
             tab.nameLabel.textColor = UIColor.accentGrayColor()
@@ -59,7 +59,7 @@ class AccentTabBar: UIView {
         delegate?.updatedSelectedTab(idx)
     }
     
-    func updateTabs(tabs: [AccentTab]) {
+    func updateTabs(_ tabs: [AccentTab]) {
         for tabView in tabViews {
             tabView.removeFromSuperview()
         }
@@ -76,7 +76,7 @@ class AccentTabBar: UIView {
 }
 
 protocol AccentTabBarDelegate {
-    func updatedSelectedTab(index: Int)
+    func updatedSelectedTab(_ index: Int)
 }
 
 struct AccentTab {

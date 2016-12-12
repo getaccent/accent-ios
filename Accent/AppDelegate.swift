@@ -18,14 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self, Digits.self])
         
-        NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.setObject(NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve") ?? [String](), forKey: "AccentArticlesToRetrieve")
+        UserDefaults(suiteName: "group.io.tinypixels.Accent")?.set(UserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArray(forKey: "AccentArticlesToRetrieve") ?? [String](), forKey: "AccentArticlesToRetrieve")
         
         if Language.savedLanguage() != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let avc = storyboard.instantiateViewControllerWithIdentifier("ArticlesViewController") as! ArticlesViewController
+            let avc = storyboard.instantiateViewController(withIdentifier: "ArticlesViewController") as! ArticlesViewController
             
             let navController = UINavigationController()
             window?.rootViewController = navController
@@ -36,19 +36,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applicationWillEnterForeground(application: UIApplication) {
-        NSNotificationCenter.defaultCenter().postNotificationName(AccentApplicationWillEnterForeground, object: nil)
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AccentApplicationWillEnterForeground), object: nil)
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         guard let host = url.host else {
             return true
         }
         
         switch host {
         case "auth":
-            if let component = url.pathComponents?[1] {
-                switch component {
+            if url.pathComponents.count > 0 {
+                switch url.pathComponents[1] {
                 case "quizlet":
                     Quizlet.sharedInstance.handleAuthorizationResponse(url)
                 default:

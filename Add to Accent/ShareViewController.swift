@@ -31,44 +31,44 @@ class ShareViewController: UIViewController {
         container.layer.cornerRadius = 8
         view.addSubview(container)
         
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityIndicator.startAnimating()
         container.addSubview(activityIndicator)
         
         statusLabel = UILabel()
-        statusLabel.font = UIFont.systemFontOfSize(15)
+        statusLabel.font = UIFont.systemFont(ofSize: 15)
         statusLabel.text = NSLocalizedString("Saving for later...", comment: "saving the article to read for later")
-        statusLabel.textAlignment = .Center
+        statusLabel.textAlignment = .center
         statusLabel.textColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
         container.addSubview(statusLabel)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animateWithDuration(0.25, animations: {
+        UIView.animate(withDuration: 0.25, animations: {
             self.overlay.alpha = 1
             self.container.alpha = 1
-        }, completion: { (bool) -> Void in
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1) * Int64(NSEC_PER_SEC)), dispatch_get_main_queue()) {
+        }, completion: { (bool) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.dismiss()
             }
         })
         
-        guard let item = extensionContext?.inputItems[0] as? NSExtensionItem, attachment = item.attachments?[0] as? NSItemProvider else {
+        guard let item = extensionContext?.inputItems[0] as? NSExtensionItem, let attachment = item.attachments?[0] as? NSItemProvider else {
             return
         }
         
         if attachment.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
-            attachment.loadItemForTypeIdentifier(kUTTypeURL as String, options: nil, completionHandler: { (data, error) in
-                guard let url = data as? NSURL else {
+            attachment.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil, completionHandler: { (data, error) in
+                guard let url = data as? URL else {
                     return
                 }
                 
-                var toRetrieve = NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArrayForKey("AccentArticlesToRetrieve")
+                var toRetrieve = UserDefaults(suiteName: "group.io.tinypixels.Accent")?.stringArray(forKey: "AccentArticlesToRetrieve")
                 toRetrieve?.append(url.absoluteString)
-                NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.setObject(toRetrieve, forKey: "AccentArticlesToRetrieve")
-                NSUserDefaults(suiteName: "group.io.tinypixels.Accent")?.synchronize()
+                UserDefaults(suiteName: "group.io.tinypixels.Accent")?.set(toRetrieve, forKey: "AccentArticlesToRetrieve")
+                UserDefaults(suiteName: "group.io.tinypixels.Accent")?.synchronize()
             })
         }
     }
@@ -78,20 +78,20 @@ class ShareViewController: UIViewController {
         
         overlay.frame = view.bounds
         
-        container.frame = CGRectMake((view.bounds.width - 192) / 2, (view.bounds.height - 96) / 2, 192, 96)
+        container.frame = CGRect(x: (view.bounds.width - 192) / 2, y: (view.bounds.height - 96) / 2, width: 192, height: 96)
         
-        activityIndicator.frame = CGRectMake((container.bounds.width - activityIndicator.bounds.width) / 2, 24, activityIndicator.bounds.width, activityIndicator.bounds.height)
+        activityIndicator.frame = CGRect(x: (container.bounds.width - activityIndicator.bounds.width) / 2, y: 24, width: activityIndicator.bounds.width, height: activityIndicator.bounds.height)
         
         statusLabel.sizeToFit()
-        statusLabel.frame = CGRectMake(16, container.bounds.height - statusLabel.frame.size.height - 20, container.bounds.width - 32, statusLabel.frame.size.height)
+        statusLabel.frame = CGRect(x: 16, y: container.bounds.height - statusLabel.frame.size.height - 20, width: container.bounds.width - 32, height: statusLabel.frame.size.height)
     }
     
     func dismiss() {
-        UIView.animateWithDuration(0.25, animations: {
+        UIView.animate(withDuration: 0.25, animations: {
             self.overlay.alpha = 0
             self.container.alpha = 0
-        }, completion: { (bool) -> Void in
-            self.extensionContext?.completeRequestReturningItems(nil, completionHandler: nil)
+        }, completion: { (bool) in
+            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
         })
     }
 }

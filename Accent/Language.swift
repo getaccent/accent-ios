@@ -9,17 +9,17 @@
 import Foundation
 
 enum Language: Int {
-    case English = 0
-    case Spanish
-    case French
-    case German
-    case SChinese
-    case TChinese
-    case Japanese
-    case Italian
-    case Korean
-    case Swedish
-    case Russian
+    case english = 0
+    case spanish
+    case french
+    case german
+    case sChinese
+    case tChinese
+    case japanese
+    case italian
+    case korean
+    case swedish
+    case russian
     
     var description: String {
         return "\(getName()) (\(getLocalizedName()))"
@@ -27,98 +27,98 @@ enum Language: Int {
     
     func getName() -> String {
         switch self {
-        case .English: return NSLocalizedString("English", comment: "")
-        case .Spanish: return NSLocalizedString("Spanish", comment: "")
-        case .French: return NSLocalizedString("French", comment: "")
-        case .German: return NSLocalizedString("German", comment: "")
-        case .SChinese: return NSLocalizedString("SChinese", comment: "")
-        case .TChinese: return NSLocalizedString("TChinese", comment: "")
-        case .Japanese: return NSLocalizedString("Japanese", comment: "")
-        case .Italian: return NSLocalizedString("Italian", comment: "")
-        case .Korean: return NSLocalizedString("Korean", comment: "")
-        case .Swedish: return NSLocalizedString("Swedish", comment: "")
-        case .Russian: return NSLocalizedString("Russian", comment: "")
+        case .english: return NSLocalizedString("English", comment: "")
+        case .spanish: return NSLocalizedString("Spanish", comment: "")
+        case .french: return NSLocalizedString("French", comment: "")
+        case .german: return NSLocalizedString("German", comment: "")
+        case .sChinese: return NSLocalizedString("SChinese", comment: "")
+        case .tChinese: return NSLocalizedString("TChinese", comment: "")
+        case .japanese: return NSLocalizedString("Japanese", comment: "")
+        case .italian: return NSLocalizedString("Italian", comment: "")
+        case .korean: return NSLocalizedString("Korean", comment: "")
+        case .swedish: return NSLocalizedString("Swedish", comment: "")
+        case .russian: return NSLocalizedString("Russian", comment: "")
         }
     }
     
     func getLocalizedName() -> String {
         switch self {
-        case .English: return "English"
-        case .Spanish: return "Español"
-        case .French: return "Français"
-        case .German: return "Deutsch"
-        case .SChinese: return "简体中文"
-        case .TChinese: return "繁體中文"
-        case .Japanese: return "日本語"
-        case .Italian: return "Italiano"
-        case .Korean: return "한국어"
-        case .Swedish: return "Svenska"
-        case .Russian: return "Русский"
+        case .english: return "English"
+        case .spanish: return "Español"
+        case .french: return "Français"
+        case .german: return "Deutsch"
+        case .sChinese: return "简体中文"
+        case .tChinese: return "繁體中文"
+        case .japanese: return "日本語"
+        case .italian: return "Italiano"
+        case .korean: return "한국어"
+        case .swedish: return "Svenska"
+        case .russian: return "Русский"
         }
     }
     
     func getCode() -> String {
         switch self {
-        case .English: return "en"
-        case .Spanish: return "es"
-        case .French: return "fr"
-        case .German: return "de"
-        case .SChinese: return "zh-CN"
-        case .TChinese: return "zh-TW"
-        case .Japanese: return "ja"
-        case .Italian: return "it"
-        case .Korean: return "ko"
-        case .Swedish: return "sv"
-        case .Russian: return "ru"
+        case .english: return "en"
+        case .spanish: return "es"
+        case .french: return "fr"
+        case .german: return "de"
+        case .sChinese: return "zh-CN"
+        case .tChinese: return "zh-TW"
+        case .japanese: return "ja"
+        case .italian: return "it"
+        case .korean: return "ko"
+        case .swedish: return "sv"
+        case .russian: return "ru"
         }
     }
     
-    static func languageFromCode(code: String?) -> Language? {
+    static func languageFromCode(_ code: String?) -> Language? {
         guard let code = code else {
             return nil
         }
         
         switch code {
-        case Language.English.getCode(): return .English
-        case Language.Spanish.getCode(): return .Spanish
-        case Language.French.getCode(): return .French
-        case Language.German.getCode(): return .German
-        case Language.SChinese.getCode(): return .SChinese
-        case Language.TChinese.getCode(): return .TChinese
-        case Language.Japanese.getCode(): return .Japanese
-        case Language.Italian.getCode(): return .Italian
-        case Language.Korean.getCode(): return .Korean
-        case Language.Swedish.getCode(): return .Swedish
-        case Language.Russian.getCode(): return .Russian
+        case Language.english.getCode(): return .english
+        case Language.spanish.getCode(): return .spanish
+        case Language.french.getCode(): return .french
+        case Language.german.getCode(): return .german
+        case Language.sChinese.getCode(): return .sChinese
+        case Language.tChinese.getCode(): return .tChinese
+        case Language.japanese.getCode(): return .japanese
+        case Language.italian.getCode(): return .italian
+        case Language.korean.getCode(): return .korean
+        case Language.swedish.getCode(): return .swedish
+        case Language.russian.getCode(): return .russian
         default: return nil
         }
     }
     
     static func getPrimaryLanguage() -> Language {
-        guard let language = NSLocale.currentLocale().objectForKey(NSLocaleLanguageCode) as? String else {
-            return .English
+        guard let language = (Locale.current as NSLocale).object(forKey: NSLocale.Key.languageCode) as? String else {
+            return .english
         }
         
         switch language {
-        case "en": return .English
-        case "es": return .Spanish
-        case "fr": return .French
-        case "de": return .German
-        case "zh": return .SChinese
-        case "ja": return .Japanese
-        case "it": return .Italian
-        case "ko": return .Korean
-        case "sv": return .Swedish
-        case "ru": return .Russian
-        default: return .English
+        case "en": return .english
+        case "es": return .spanish
+        case "fr": return .french
+        case "de": return .german
+        case "zh": return .sChinese
+        case "ja": return .japanese
+        case "it": return .italian
+        case "ko": return .korean
+        case "sv": return .swedish
+        case "ru": return .russian
+        default: return .english
         }
     }
     
     static func savedLanguage() -> Language? {
-        return Language.languageFromCode(NSUserDefaults.standardUserDefaults().stringForKey("AccentLanguage"))
+        return Language.languageFromCode(UserDefaults.standard.string(forKey: "AccentLanguage"))
     }
     
-    static func saveLanguage(language: Language) {
-        NSUserDefaults.standardUserDefaults().setObject(language.getCode(), forKey: "AccentLanguage")
+    static func saveLanguage(_ language: Language) {
+        UserDefaults.standard.set(language.getCode(), forKey: "AccentLanguage")
     }
 }
