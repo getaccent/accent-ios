@@ -1,17 +1,17 @@
 PODS:
-  - Crashlytics (3.7.0):
+  - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
-  - Digits (2.0.2):
-    - TwitterCore (= 2.0.2)
-  - Fabric (1.6.7)
-  - MGSwipeTableCell (1.5.5)
-  - Realm (0.99.1):
-    - Realm/Headers (= 0.99.1)
-  - Realm/Headers (0.99.1)
-  - RealmSwift (0.99.1):
-    - Realm (= 0.99.1)
-  - SwiftyJSON (2.3.2)
-  - TwitterCore (2.0.2):
+  - Digits (2.7.0):
+    - TwitterCore (= 2.7.0)
+  - Fabric (1.6.11)
+  - MGSwipeTableCell (1.5.6)
+  - Realm (2.1.1):
+    - Realm/Headers (= 2.1.1)
+  - Realm/Headers (2.1.1)
+  - RealmSwift (2.1.1):
+    - Realm (= 2.1.1)
+  - SwiftyJSON (3.1.3)
+  - TwitterCore (2.7.0):
     - Fabric
 
 DEPENDENCIES:
@@ -19,18 +19,20 @@ DEPENDENCIES:
   - Digits
   - Fabric
   - MGSwipeTableCell (~> 1.5)
-  - RealmSwift (~> 0.98)
-  - SwiftyJSON (~> 2.3)
+  - RealmSwift (~> 2.1)
+  - SwiftyJSON (~> 3.1)
   - TwitterCore
 
 SPEC CHECKSUMS:
-  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
-  Digits: a5c8ddfed18d5e0496e9b6f459f0bca44de588db
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  MGSwipeTableCell: bafeb5f351124544c9364ecbdf24c7b06a37d340
-  Realm: 522a0cc8e1f8755ee56d7dc16ca0fc380d045766
-  RealmSwift: 1d9c4299ef5dbf575c5da09fc706ed726327cfa0
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  TwitterCore: 0f44d8980a6879d5205dcb4e010d15e643e56fa0
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Digits: 67a14dea7cd470b2438380a09371bcdadc50d94e
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
+  Realm: a55959c0b171a5fe5267406d17f314fec3cefaae
+  RealmSwift: 749fd955bf8d6471c21d218b9389a47aaeccfe3f
+  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 0231c3f93abb14ad69d639b34401bfa1f15c7f13
+
+COCOAPODS: 1.1.1
